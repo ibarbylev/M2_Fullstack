@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный материал про iframe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        iframe {
+            border: 2px solid #000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML-элемент &lt;iframe&gt;</h1>
+    <p>Тег <code>&lt;iframe&gt;</code> используется для встраивания другого веб-документа в текущую страницу.</p>
+
+    <h2>Основные атрибуты</h2>
+    <ul>
+        <li><strong>src</strong> – указывает URL-адрес загружаемого ресурса.</li>
+        <li><strong>width</strong> – задает ширину iframe.</li>
+        <li><strong>height</strong> – задает высоту iframe.</li>
+        <li><strong>frameborder</strong> – управляет отображением рамки (0 – убрать, 1 – показать).</li>
+        <li><strong>allowfullscreen</strong> – разрешает полноэкранный режим (требуется дополнительный JS скрипт).</li>
+        <li><strong>name</strong> – задает имя фрейма, используется при отправке форм.</li>
+        <li><strong>referrerpolicy</strong> – определяет, передавать ли реферер (т.е. можно ли встроенному сайту передавать данные вашего ресурса).</li>
+    </ul>
+
+    <h2>Примеры</h2>
+
+    <h3>Простое встраивание страницы</h3>
+    <iframe src="https://www.wikipedia.org/" width="600" height="400" allowfullscreen></iframe>
+
+    <h3>Видео с YouTube</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+
+    <h3>Встроенная Google Карта</h3>
+    <p>Обычная вставка url в источник фрейма <i>iframe src=""</i> даст ошибку. Необходимо заменить обычный url на embed-url: </p>
+        <ol>
+            <li>Открыть Google Maps → <a href="https://www.google.com/maps" target="_blank">https://www.google.com/maps.</a></li>
+            <li>Выбрать нужное место на карте.</li>
+            <li>Нажать "Поделиться" → "Копировать HTML-код"</li>
+            <li>Вставить полученный код в html страницу</li>
+        </ol>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23456.174992719756!2d23.3046016!3d42.70325760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbg!4v1740945474891!5m2!1sen!2sbg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</body>
+</html>
