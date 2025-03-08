@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фоновые цвета и изображения</title>
+    <link rel="stylesheet" href="css/style.css">
+        <style>
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .color-box {
+            width: 50px;
+            height: 50px;
+            margin: auto;
+        }
+        .img-box {
+            background-image: url('img/rose.jpeg');
+            background-size: cover; /* Чтобы изображение полностью покрывало фон */
+            background-position: center; /* Центрировать изображение */
+            background-repeat: no-repeat; /* Не повторять изображение */
+            background-color: rgba(255, 255, 255, 0.5); /* Белый полупрозрачный цвет */
+            background-blend-mode: overlay; /* Указанный цвет накладывается на изображение */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <a href="https://www.w3schools.com/cssref/css3_pr_background.php" target="_blank">
+               Фоновые цвета и изображения
+            </a>
+        </h1>
+        <p>Ниже представлен список некоторых популярных фонов и их цветовых кодов. Также указано, как они отображаются на экране.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Цвет</th>
+                    <th>HEX</th>
+                    <th>RGB</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Белый</td>
+                    <td>#FFFFFF</td>
+                    <td>rgb(255, 255, 255)</td>
+                    <td><div class="color-box" style="background-color: #FFFFFF;"></div></td>
+                </tr>
+                <tr>
+                    <td>Черный</td>
+                    <td>#000000</td>
+                    <td>rgb(0, 0, 0)</td>
+                    <td><div class="color-box" style="background-color: #000000;"></div></td>
+                </tr>
+                <tr>
+                    <td>Красный</td>
+                    <td>#FF0000</td>
+                    <td>rgb(255, 0, 0)</td>
+                    <td><div class="color-box" style="background-color: #FF0000;"></div></td>
+                </tr>
+                <tr>
+                    <td>Зеленый</td>
+                    <td>#008000</td>
+                    <td>rgb(0, 128, 0)</td>
+                    <td><div class="color-box" style="background-color: #008000;"></div></td>
+                </tr>
+                <tr>
+                    <td>Синий</td>
+                    <td>#0000FF</td>
+                    <td>rgb(0, 0, 255)</td>
+                    <td><div class="color-box" style="background-color: #0000FF;"></div></td>
+                </tr>
+                <tr>
+                    <td>Желтый</td>
+                    <td>#FFFF00</td>
+                    <td>rgb(255, 255, 0)</td>
+                    <td><div class="color-box" style="background-color: #FFFF00;"></div></td>
+                </tr>
+                <tr>
+                    <td>Серый</td>
+                    <td>#808080</td>
+                    <td>rgb(128, 128, 128)</td>
+                    <td><div class="color-box" style="background-color: #808080;"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="img-box" style="height: 800px;">
+            <br><br>
+            <p>Текст поверх фонового изображения</p>
+            <br><br>
+            <p>Текст поверх фонового изображения</p>
+            <br><br>
+            <p>Текст поверх фонового изображения</p>
+            <br><br>
+            <p>Текст поверх фонового изображения</p>
+            <br><br>
+            <p>Текст поверх фонового изображения</p>
+        </div>
+    </div>
+</body>
+</html>
