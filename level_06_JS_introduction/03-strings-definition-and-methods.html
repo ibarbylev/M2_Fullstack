@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Строки: определение и методы</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Строки: определение и методы</h1>
+
+        <h2>Способы создания строк:</h2>
+        <p>В JavaScript строки можно создавать несколькими способами:</p>
+
+        <ul>
+            <li><strong>Использование одинарных кавычек (''):</strong>
+                <pre>let str1 = 'Это строка';</pre>
+            </li>
+            <li><strong>Использование двойных кавычек (""):</strong>
+                <pre>let str2 = "Это тоже строка";</pre>
+            </li>
+            <li><strong>Использование обратных кавычек (``) — для многострочных строк и интерполяции:</strong>
+                <pre>let str3 = `Это многострочная
+строка, которая может
+содержать переносы строк.`;</pre>
+            </li>
+        </ul>
+
+        <p>В обратных кавычках также можно вставлять переменные:</p>
+        <pre>let name = "Иван";
+let str4 = `Привет, ${name}!`;</pre>
+
+        <h2>Методы строк:</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>length</td>
+                    <td>Возвращает длину строки.</td>
+                    <td><pre>"Hello".length → 5</pre></td>
+                </tr>
+                <tr>
+                    <td>toUpperCase()</td>
+                    <td>Преобразует строку в верхний регистр.</td>
+                    <td><pre>"hello".toUpperCase() → "HELLO"</pre></td>
+                </tr>
+                <tr>
+                    <td>toLowerCase()</td>
+                    <td>Преобразует строку в нижний регистр.</td>
+                    <td><pre>"HELLO".toLowerCase() → "hello"</pre></td>
+                </tr>
+                <tr>
+                    <td>charAt(index)</td>
+                    <td>Возвращает символ на указанной позиции.</td>
+                    <td><pre>"hello".charAt(1) → "e"</pre></td>
+                </tr>
+                <tr>
+                    <td>charCodeAt(index)</td>
+                    <td>Возвращает код символа на указанной позиции.</td>
+                    <td><pre>"hello".charCodeAt(1) → 101</pre></td>
+                </tr>
+                <tr>
+                    <td>includes(substring)</td>
+                    <td>Проверяет, содержит ли строка подстроку.</td>
+                    <td><pre>"hello world".includes("world") → true</pre></td>
+                </tr>
+                <tr>
+                    <td>startsWith(prefix)</td>
+                    <td>Проверяет, начинается ли строка с указанного префикса.</td>
+                    <td><pre>"hello".startsWith("he") → true</pre></td>
+                </tr>
+                <tr>
+                    <td>endsWith(suffix)</td>
+                    <td>Проверяет, заканчивается ли строка указанным суффиксом.</td>
+                    <td><pre>"hello".endsWith("lo") → true</pre></td>
+                </tr>
+                <tr>
+                    <td>indexOf(substring)</td>
+                    <td>Возвращает индекс первого вхождения подстроки. Если не найдено —1.</td>
+                    <td><pre>"hello".indexOf("e") → 1</pre></td>
+                </tr>
+                <tr>
+                    <td>lastIndexOf(substring)</td>
+                    <td>Возвращает индекс последнего вхождения подстроки. Если не найдено —1.</td>
+                    <td><pre>"hello".lastIndexOf("l") → 3</pre></td>
+                </tr>
+                <tr>
+                    <td>slice(start, end)</td>
+                    <td>Возвращает новый фрагмент строки от <code>start</code> до <code>end</code> (не включая <code>end</code>).</td>
+                    <td><pre>"hello".slice(1, 4) → "ell"</pre></td>
+                </tr>
+                <tr>
+                    <td>substring(start, end)</td>
+                    <td>Возвращает новый фрагмент строки, аналогично <code>slice</code>, но не принимает отрицательные индексы.</td>
+                    <td><pre>"hello".substring(1, 4) → "ell"</pre></td>
+                </tr>
+                <tr>
+                    <td>split(separator)</td>
+                    <td>Разделяет строку на массив по разделителю.</td>
+                    <td><pre>"apple,banana,orange".split(",") → ["apple", "banana", "orange"]</pre></td>
+                </tr>
+                <tr>
+                    <td>replace(searchValue, newValue)</td>
+                    <td>Заменяет первое вхождение подстроки или регулярное выражение в строке.</td>
+                    <td><pre>"hello world".replace("world", "everyone") → "hello everyone"</pre></td>
+                </tr>
+                <tr>
+                    <td>replaceAll(searchValue, newValue)</td>
+                    <td>Заменяет все вхождения подстроки.</td>
+                    <td><pre>"hello hello".replaceAll("hello", "hi") → "hi hi"</pre></td>
+                </tr>
+                <tr>
+                    <td>trim()</td>
+                    <td>Удаляет пробелы с начала и конца строки.</td>
+                    <td><pre>"  hello  ".trim() → "hello"</pre></td>
+                </tr>
+                <tr>
+                    <td>trimStart()</td>
+                    <td>Удаляет пробелы с начала строки.</td>
+                    <td><pre>"  hello".trimStart() → "hello"</pre></td>
+                </tr>
+                <tr>
+                    <td>trimEnd()</td>
+                    <td>Удаляет пробелы с конца строки.</td>
+                    <td><pre>"hello  ".trimEnd() → "hello"</pre></td>
+                </tr>
+                <tr>
+                    <td>padStart(targetLength, padString)</td>
+                    <td>Добавляет строки в начало, чтобы достичь заданной длины.</td>
+                    <td><pre>"5".padStart(3, "0") → "005"</pre></td>
+                </tr>
+                <tr>
+                    <td>padEnd(targetLength, padString)</td>
+                    <td>Добавляет строки в конец, чтобы достичь заданной длины.</td>
+                    <td><pre>"5".padEnd(3, "0") → "500"</pre></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Шаблоны строк:</h2>
+        <p>Шаблоны строк в JavaScript создаются с помощью <strong>обратных кавычек (``)</strong>. Они позволяют вставлять переменные и выражения непосредственно в строку, не используя конкатенацию.</p>
+
+        <p><strong>Интерполяция выражений:</strong></p>
+        <pre>let name = "Иван";
+let age = 30;
+let greeting = `Привет, ${name}! Тебе ${age} лет.`;
+console.log(greeting);  // Выведет: "Привет, Иван! Тебе 30 лет."</pre>
+
+        <p><strong>Многострочные строки:</strong></p>
+        <pre>let multiLine = `Это строка
+с несколькими
+строками.`;
+console.log(multiLine);
+// Выведет:
+// Это строка
+// с несколькими
+// строками.</pre>
+
+        <p>Шаблоны строк позволяют вставлять не только простые переменные, но и любые выражения:</p>
+        <pre>let result = `2 + 3 = ${2 + 3}`;
+console.log(result);  // Выведет: "2 + 3 = 5"</pre>
+    </div>
+    <script>
+    </script>
+</body>
+</html>
