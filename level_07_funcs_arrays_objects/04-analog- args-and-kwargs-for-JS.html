@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Как работают args и kwargs в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Как работают <code>args</code> и <code>kwargs</code> в JavaScript</h1>
+
+        <p>
+            В JavaScript аналогичные концепции Python для работы с переменным количеством аргументов и именованными параметрами реализуются с помощью оператора <code>...args</code> (rest-оператор) и объектов для именованных параметров.
+        </p>
+
+        <h2>1. Переменное количество аргументов: <code>args</code> (аналог <code>*args</code> в Python)</h2>
+        <p>
+            В JavaScript для работы с переменным количеством позиционных аргументов используется оператор <code>...</code> (три точки перед именем переменой), который собирает все переданные параметры в массив.
+        </p>
+        <pre><code>
+function sum(...args) {
+  return args.reduce((total, num) => total + num, 0);
+}
+
+console.log(sum(1, 2, 3, 4)); // 10
+        </code></pre>
+        <p>
+            Здесь <code>...args</code> позволяет функции принимать любое количество аргументов, и внутри функции они будут доступны как массив.
+        </p>
+
+        <h2>2. Именованные параметры: <code>kwargs</code> (аналог <code>**kwargs</code> в Python)</h2>
+        <p>
+            Для передачи именованных параметров в JavaScript обычно используют объекты. В функции можно извлекать эти параметры с помощью деструктуризации.
+        </p>
+        <pre><code>
+function greet({ name, age }) {
+  console.log(`Name: ${name}, Age: ${age}`);
+}
+
+greet({ name: 'Alice', age: 30 }); // Name: Alice, Age: 30
+        </code></pre>
+        <p>
+            В данном примере объект с именованными параметрами передается в функцию, и с помощью деструктуризации мы извлекаем значения <code>name</code> и <code>age</code>.
+        </p>
+
+        <h2>3. Пакетирование и распаковка именованных аргументов</h2>
+        <p>
+            В JavaScript можно комбинировать именованные параметры с другими аргументами. Для этого можно использовать как <code>rest</code>-оператор, так и деструктуризацию для извлечения значений.
+        </p>
+        <pre><code>
+function greet({ name, age }, ...extraInfo) {
+  console.log(`Name: ${name}, Age: ${age}`);
+  console.log('Extra Info:', extraInfo);
+}
+
+greet({ name: 'Alice', age: 30 }, 'Engineer', 'Likes coffee');
+// Name: Alice, Age: 30
+// Extra Info: ['Engineer', 'Likes coffee']
+        </code></pre>
+        <p>
+            В этом примере <code>...extraInfo</code> собирает все дополнительные аргументы в массив. Таким образом, можно передавать как именованные параметры, так и переменные значения.
+        </p>
+
+        <h2>4. Распаковка объекта с изменением значений</h2>
+        <p>
+            В JavaScript можно не только распаковывать параметры, но и изменять их при помощи деструктуризации.
+        </p>
+        <pre><code>
+const person = { name: 'Alice', age: 30 };
+
+// Распаковка с изменением значения
+const newPerson = { ...person, age: 35 };  // создаем новый объект с измененным age
+
+console.log(newPerson); // { name: 'Alice', age: 35 }
+        </code></pre>
+        <p>
+            Здесь мы создаём новый объект, изменяя одно из значений при распаковке оригинального объекта.
+        </p>
+
+        <h2>5. Итоги</h2>
+        <p>
+            В JavaScript аналогичные концепции работы с аргументами, как в Python, реализуются через:
+        </p>
+
+        <ul>
+            <li><code>...args</code> для работы с переменным количеством аргументов (аналог <code>*args</code> в Python).</li>
+            <li>Объекты для именованных аргументов (аналог <code>**kwargs</code> в Python).</li>
+            <li>Деструктуризация для извлечения значений из объектов и массивов.</li>
+        </ul>
+    </div>
+</body>
+</html>
