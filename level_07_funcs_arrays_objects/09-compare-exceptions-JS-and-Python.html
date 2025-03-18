@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Сравнение исключений в JS и Python</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Сравнение исключений в JS и Python</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Характеристика</th>
+                    <th>JavaScript</th>
+                    <th>Python</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Базовые исключения</td>
+                    <td>Error, TypeError, ReferenceError, SyntaxError, RangeError и другие</td>
+                    <td>Exception, TypeError, ReferenceError, SyntaxError, ValueError и другие</td>
+                </tr>
+                <tr>
+                    <td>Создание исключений</td>
+                    <td>throw new Error('Message')</td>
+                    <td>raise Exception('Message')</td>
+                </tr>
+                <tr>
+                    <td>Обработка исключений</td>
+                    <td>try { ... } catch (e) { ... } finally { ... }</td>
+                    <td>try: ... except Exception as e: ... finally: ...</td>
+                </tr>
+                <tr>
+                    <td>Перехват исключений</td>
+                    <td>В блоке catch можно указать переменную (например, catch (e)) для доступа</td>
+                    <td>В блоке except можно указать переменную (например, except Exception as e)</td>
+                </tr>
+                <tr>
+                    <td>Множественные перехваты</td>
+                    <td>Один catch для нескольких типов ошибок через проверку типа (instanceof)</td>
+                    <td>Можно указать несколько except для разных типов ошибок</td>
+                </tr>
+                <tr>
+                    <td>Собственные исключения</td>
+                    <td>Создаются через классы, например: class MyError extends Error { ... }</td>
+                    <td>Создаются через классы, например: class MyError(Exception): ...</td>
+                </tr>
+                <tr>
+                    <td>Печать стека ошибки</td>
+                    <td>console.error(e) или e.stack</td>
+                    <td>print(e) или traceback.print_exc()</td>
+                </tr>
+                <tr>
+                    <td>Обработка конкретных ошибок</td>
+                    <td>Для обработки конкретных типов ошибок используются операторы типа instanceof</td>
+                    <td>Для обработки конкретных типов ошибок используется указание типа в except</td>
+                </tr>
+                <tr>
+                    <td>Перехват ошибок асинхронно</td>
+                    <td>В промисах используется .catch()</td>
+                    <td>Используется try/except в асинхронных функциях с async/await</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</body>
+</html>
