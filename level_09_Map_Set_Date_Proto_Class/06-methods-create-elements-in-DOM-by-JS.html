@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Методы создания элементов в DOM с помощью JS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Методы создания элементов в DOM с помощью JS</h1>
+
+        <p>
+            Процесс создания элемента в DOM (Document Object Model) состоит из трёх основных этапов:
+        </p>
+        <ul>
+            <li><a href="#h2-1">1. Создание нового (пустого) элемента</a></li>
+            <li><a href="#h2-2">2. Наполнение нового элемента содержанием</a></li>
+            <li><a href="#h2-3">3. Вставка нового элемента в DOM</a></li>
+        </ul>
+
+        <p>Вот подробное описание каждого из них:</p>
+
+        <h2 id="h2-1">1. Создание нового (пустого) элемента</h2>
+
+        <p>
+            На первом этапе мы создаём сам элемент. Для этого используется метод <code>document.createElement()</code>. Этот метод создаёт новый элемент с заданным тегом, но он пока не имеет содержимого или атрибутов.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+        </code></pre>
+        <p>
+            На этом этапе divElement — это пустой элемент &lt;div&gt;, не имеющий атрибутов, стилей или вложенных элементов.
+        </p>
+
+
+        <h2 id="h2-2">2. Наполнение нового элемента содержанием</h2>
+
+        <p>
+            После создания элемента следующим шагом является его наполнение: можно добавлять атрибуты, текст, другие элементы и так далее.
+        </p>
+
+        <h3>Добавление атрибутов</h3>
+
+        <p>Чтобы добавить атрибуты, используется метод <code>setAttribute()</code>:</p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+divElement.setAttribute('class', 'my-class');
+divElement.setAttribute('id', 'unique-id');
+    </code></pre>
+
+        <p>Эти строки добавляют атрибуты class и id к элементу.</p>
+        <h3>Добавление текста</h3>
+
+        <p>Чтобы добавить текстовое содержимое, можно использовать свойство textContent или innerHTML:</p>
+        <h4>Пример:</h4>
+        <pre><code>
+divElement.textContent = 'Привет, мир!';
+        </code></pre>
+
+        <p>Это добавит текст «Привет, мир!» в элемент.</p>
+
+        <h3>Добавление вложенных элементов</h3>
+
+        <p>
+            Если элемент должен содержать другие элементы, можно создать их аналогичным образом и добавить их в родительский элемент с помощью <code>appendChild()</code>:
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+let spanElement = document.createElement('span');
+spanElement.textContent = 'Дополнительный текст';
+divElement.appendChild(spanElement);
+        </code></pre>
+
+        <p>Теперь элемент div будет содержать внутри себя элемент span.</p>
+
+        <h2 id="h2-3">3. Вставка нового элемента в DOM</h2>
+
+        <p>
+            Для размещения созданного элемента в DOM существует несколько методов, которые можно использовать в зависимости от того, где и как вы хотите вставить новый элемент. Рассмотрим различные способы вставки с примерами:
+        </p>
+
+        <h3>1. <code>appendChild()</code></h3>
+
+        <p>
+            Этот метод добавляет новый элемент в конец родительского элемента. Если элемент уже существует в DOM, он будет перемещён в новое место.
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+document.body.appendChild(divElement);  // Добавляет div в конец body
+        </code></pre>
+
+        <h3>2. <code>insertBefore()</code></h3>
+
+        <p>
+            Этот метод вставляет новый элемент перед указанным элементом в родительском контейнере. Он полезен, когда нужно вставить элемент в определённое место, а не в конец.
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+let referenceElement = document.getElementById('existingElement');
+document.body.insertBefore(divElement, referenceElement);  // Вставляет div перед existingElement
+        </code></pre>
+
+        <h3>3. <code>replaceChild()</code></h3>
+
+        <p>
+            Метод заменяет один элемент в DOM на другой. Это позволяет не просто вставить элемент, а заменить уже существующий.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+let existingElement = document.getElementById('oldElement');
+document.body.replaceChild(divElement, existingElement);  // Заменяет oldElement на div
+        </code></pre>
+
+        <h3>4. <code>prepend()</code></h3>
+
+        <p>
+            Метод <code>prepend()</code> добавляет новый элемент в начало родительского элемента. Это аналогично методу <code>appendChild()</code>, но вставка происходит в начало, а не в конец.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+document.body.prepend(divElement);  // Добавляет div в начало body
+        </code></pre>
+
+        <h3>5. <code>before()</code></h3>
+
+        <p>
+            Этот метод вставляет новый элемент перед указанным элементом, но в отличие от <code>insertBefore()</code>, его можно применять к любому элементу, а не только к родительскому элементу.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+let referenceElement = document.getElementById('existingElement');
+referenceElement.before(divElement);  // Вставляет div перед existingElement
+        </code></pre>
+
+        <h3>6. <code>after()</code></h3>
+
+        <p>
+            Метод <code>after()</code> вставляет новый элемент сразу после указанного элемента в DOM. Он работает как зеркальное отражение метода <code>before()</code>.
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+let referenceElement = document.getElementById('existingElement');
+referenceElement.after(divElement);  // Вставляет div после existingElement
+        </code></pre>
+
+        <h3>7. <code>innerHTML</code></h3>
+
+        <p>
+            Метод <code>innerHTML</code> позволяет вставить HTML-содержимое в элемент, заменив его текущее содержимое. Это не является «добавлением» элемента, а скорее заменой или вставкой в качестве HTML-разметки.
+        </p>
+
+
+<h4>Пример:</h4>
+        <pre><code>
+let divElement = '&lt;div class="my-class"&gt;Привет!&lt;/div&gt;';
+document.getElementById('container').innerHTML = divElement;  // Вставляет div в контейнер, заменяя его содержимое
+        </code></pre>
+
+        <h3>8. <code>insertAdjacentElement()</code></h3>
+
+        <p>
+            Метод <code>insertAdjacentElement(position, element)</code> позволяет вставить новый элемент в определённое место относительно другого элемента, без замены существующего содержимого. Он принимает два аргумента: позицию (<i>строка, указывающая, где должен быть вставлен новый элемент относительно указанного элемента</i>) и сам элемент, который нужно вставить в DOM. Возможные позиции: <code>"beforebegin"</code>, <code>"afterbegin"</code>, <code>"beforeend"</code>, <code>"afterend"</code>.
+        </p>
+
+        <h4>1. <code>"beforebegin"</code></h4>
+
+        <p>
+            Этот параметр вставляет новый элемент перед указанным элементом, то есть непосредственно перед ним в родительском контейнере.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+divElement.textContent = 'Новый элемент перед контейнером';
+
+let referenceElement = document.getElementById('container');
+referenceElement.insertAdjacentElement('beforebegin', divElement);
+            </code></pre>
+
+        <p>
+            В этом примере элемент div будет вставлен непосредственно перед элементом с id container.
+        </p>
+
+
+        <h4>Результат в HTML:</h4>
+        <pre><code>
+&lt;div&gt;Новый элемент перед контейнером&lt;/div&gt;
+&lt;div id="container"&gt;Контейнер&lt;/div&gt;
+        </code></pre>
+
+        <h4>2. <code>"afterbegin"</code></h4>
+
+        <p>
+            Этот параметр вставляет новый элемент в начало указанного элемента. То есть, он будет вставлен как первый дочерний элемент родителя, сразу после открытия тега родительского элемента.
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+divElement.textContent = 'Новый элемент в начале контейнера';
+
+let referenceElement = document.getElementById('container');
+referenceElement.insertAdjacentElement('afterbegin', divElement);
+        </code></pre>
+
+        <p>
+            В этом примере новый элемент будет вставлен в начало контейнера с id container.
+        </p>
+
+        <h4>Результат в HTML:</h4>
+        <pre><code>
+&lt;div id="container"&gt;
+    &lt;div&gt;Новый элемент в начале контейнера&lt;/div&gt;
+    Контейнер
+&lt;/div&gt;
+        </code></pre>
+
+        <h4><code>3."beforeend"</code></h4>
+
+        <p>
+            Этот параметр вставляет новый элемент в конец указанного элемента, то есть сразу перед закрывающим тегом родительского элемента. Это аналогично тому, как работает метод appendChild(), но с возможностью точной вставки относительно другого элемента.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+divElement.textContent = 'Новый элемент в конце контейнера';
+
+let referenceElement = document.getElementById('container');
+referenceElement.insertAdjacentElement('beforeend', divElement);
+        </code></pre>
+
+        <p>
+            В этом примере новый элемент будет вставлен в конец контейнера с id container.
+        </p>
+
+        <h4>Результат в HTML:</h4>
+        <pre><code>
+&lt;div id="container"&gt;
+    Контейнер
+    &lt;div&gt;Новый элемент в конце контейнера&lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+
+        <h4>4. <code>"afterend"</code></h4>
+
+        <p>
+            Этот параметр вставляет новый элемент сразу после указанного элемента, то есть непосредственно после него в родительском контейнере.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+divElement.textContent = 'Новый элемент после контейнера';
+
+let referenceElement = document.getElementById('container');
+referenceElement.insertAdjacentElement('afterend', divElement);
+        </code></pre>
+
+        <p>
+            В этом примере новый элемент будет вставлен после элемента с id container.
+        </p>
+
+        <h4>Результат в HTML:</h4>
+        <pre><code>
+&lt;div id="container"&gt;Контейнер&lt;/div&gt;
+&lt;div&gt;Новый элемент после контейнера&lt;/div&gt;
+        </code></pre>
+
+        <h3>Сравнение с другими методами вставки:</h3>
+
+        <p>
+            Метод <code>insertAdjacentElement()</code> отличается от других методов вставки тем, что он даёт больше контроля над точным местом вставки элемента относительно другого элемента. Он может быть полезен, когда нужно вставить элемент в определённую позицию внутри родительского элемента или вне его, не заменяя существующие элементы.
+        </p>
+
+        <p>
+            Вот как это выглядит по сравнению с методами, такими как <code>appendChild()</code> и <code>insertBefore()</code>: <br>
+            <code>appendChild()</code> добавляет новый элемент в конец родительского элемента.<br>
+            <code>insertBefore()</code> вставляет новый элемент перед указанным элементом.<br>
+            <code>insertAdjacentElement()</code> позволяет вставить элемент в различные позиции относительно указанного элемента, не заменяя его.
+        </p>
+        Преимущества insertAdjacentElement():
+        <ul>
+            <li>
+                Гибкость: Метод позволяет точно указать, куда именно вставить элемент, в отличие от других методов вставки, которые вставляют элемент только в начало или конец родителя.
+            </li>
+            <li>
+                Сохранение структуры: Вставка нового элемента не изменяет или не удаляет существующие дочерние элементы (кроме изменения их порядка), что делает его удобным для динамического обновления содержимого.
+            </li>
+        </ul>
+        <p>
+            Метод <code> insertAdjacentElement()</code>  очень полезен для сложных интерфейсов, где важно вставить элементы в определённые позиции без удаления или замены других элементов.
+        </p>
+
+        <h3>9. <code>insertAdjacentHTML()</code></h3>
+
+        <p>
+            Метод <code>insertAdjacentHTML()</code> позволяет вставить HTML-код в определённое место в DOM. Это похоже на использование <code>innerHTML</code>, но с возможностью точного указания, куда именно вставить код.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let htmlContent = '&lt;div class="my-class"&gt;Привет!&lt;/div&gt;';
+let referenceElement = document.getElementById('container');
+referenceElement.insertAdjacentHTML('beforeend', htmlContent);  // Вставляет HTML в конец container
+        </code></pre>
+
+        <h3>10. <code>insertAdjacentText()</code></h3>
+
+        <p>
+            Метод <code>insertAdjacentText()</code> вставляет текст в определённое место в DOM. Он работает аналогично методу <code>insertAdjacentHTML()</code>, но только с текстом.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+let textContent = 'Привет, мир!';
+let referenceElement = document.getElementById('container');
+referenceElement.insertAdjacentText('beforeend', textContent);  // Вставляет текст в конец container
+        </code></pre>
+        <h3>11. <code>cloneNode()</code> и вставка</h3>
+
+        <p>
+            Метод <code>cloneNode()</code> позволяет создать копию существующего элемента и вставить его в DOM. Клон может быть добавлен как новый элемент, с или без вложенных элементов.
+        </p>
+
+        <p>
+            Клонирование в контексте работы с DOM и объектами в JavaScript можно разделить на два типа: <b>глубокое клонирование (deep cloning)</b> и <b>неглубокое клонирование (shallow cloning)</b>.
+        </p>
+
+        <h4>Неглубокое клонирование (Shallow Cloning)</h4>
+
+        <p>
+            Неглубокое клонирование <code>cloneNode(false)</code> создаёт поверхностную копию объекта или элемента. Это означает, что создаётся новый объект или элемент, но вложенные объекты или элементы не копируются. Вместо этого ссылки на вложенные объекты остаются теми же, что и в оригинале. То есть, изменения в вложенных объектах будут отражаться как в оригинале, так и в копии.
+        </p>
+
+        <h4>Глубокое клонирование (Deep Cloning)</h4>
+
+        <p>
+            Глубокое клонирование <code>cloneNode(true)</code> создаёт полную копию объекта или элемента, включая все вложенные объекты и элементы. В отличие от неглубокого клонирования, все вложенные структуры копируются рекурсивно, и изменения в копии не влияют на оригинал, а наоборот.
+        </p>
+
+        <h4>Пример глубокого клонирования:</h4>
+        <pre><code>
+let divElement = document.createElement('div');
+let clonedDiv = divElement.cloneNode(true);  // Создаёт полный клон элемента (с вложенными элементами)
+document.body.appendChild(clonedDiv);  // Вставляет клон в конец body
+    </code></pre>
+
+    </div>
+</body>
+</html>
