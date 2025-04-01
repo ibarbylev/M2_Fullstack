@@ -127,7 +127,6 @@ contentDiv.querySelector('ul').removeChild(firstListItem);</pre>
         <h3>Пример 2: Удаление всё содержимое внутри первого ul</h3>
         <pre>
 // Удалим весь контент внутри первого ul
-const firsUl = contentDiv.querySelector('ul').firstElementChild;
 let firstUl = contentDiv.querySelector('ul');
 console.log(firstUl);  // Проверяем элемент до изменений
 if (firstUl) {
@@ -160,7 +159,8 @@ console.log(document.body.contains(firstUl));  // false</pre>
         &lt;p&gt;Новый параграф добавлен динамически!&lt;/p&gt;
         &lt;h1&gt;Добро пожаловать в мир JavaScript!&lt;/h1&gt;
         &lt;p&gt;Это изменённый параграф.&lt;/p&gt;
-        &lt;ul&gt;&lt;/ul&gt;&lt;ul&gt;
+        &lt;ul&gt;&lt;/ul&gt;
+        &lt;ul&gt;
             &lt;li&gt;Первый элемент списка&lt;/li&gt;
             &lt;li&gt;Второй элемент списка&lt;/li&gt;
         &lt;/ul&gt;

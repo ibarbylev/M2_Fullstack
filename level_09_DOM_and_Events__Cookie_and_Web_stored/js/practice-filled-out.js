@@ -1,11 +1,22 @@
 // Получим элемент с id="content"
 const contentDiv = document.getElementById('content');
 
+// Имя узла
+console.log(contentDiv.nodeName); // DIV
+
+// Тип узла
+console.log(contentDiv.nodeType); // 1 (элемент)
+
 // Получим текст внутри заголовка <h1>
 const h1 = document.querySelector('h1');
+console.log(h1.textContent); // Привет, мир!
+
+// Получаем родительский элемент
+console.log(h1.parentNode.nodeName); // DIV
 
 // Получаем все дочерние элементы
 const children = contentDiv.children;
+console.log(children); // HTMLCollection [h1, p, ul]
 
 // Изменим текст заголовка
 h1.textContent = 'Добро пожаловать в мир JavaScript!';
@@ -45,7 +56,6 @@ console.log(firstListItem);
 contentDiv.querySelector('ul').removeChild(firstListItem);
 
 // Удалим весь контент внутри первого ul
-const firsUl = contentDiv.querySelector('ul').firstElementChild;
 let firstUl = contentDiv.querySelector('ul');
 console.log(firstUl); // Проверяем элемент до изменений
 if (firstUl) {

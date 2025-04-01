@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -53,4 +53,45 @@ th, td {
 
 th {
   background-color: #f2f2f2; /* Устанавливает цвет фона для заголовков */
+}
+
+/* ================ buttons ==================== */
+button {
+    min-height: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* Кнопка "Показать код" */
+.btn-show {
+    background-color: #4CAF50;  /* Приятный зелёный */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-show:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Кнопка "Запустить код" */
+.btn-run {
+    background-color: #D32F2F;  /* Приятный красный */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-run:hover {
+    background-color: #c62828;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-gray {
+    background-color: grey;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
