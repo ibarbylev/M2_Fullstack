@@ -190,6 +190,31 @@ for (let i = 0; i < elements.length; i++) {
         <pre><code>
 (пусто)
         </code></pre>
+
+        <p>В Internet Explorer (особенно в старых версиях, таких как IE 11 и ниже)
+            проблема заключается в том, что NodeList, который возвращается <code>document.querySelectorAll()</code>,
+            является статическим и не обновляется при удалении элементов.</p>
+
+        <p>В принципе, этот код можно доработать, если использовать <code>while</code> и обновляемый <code>querySelector()</code>:</p>
+
+        <pre><code>
+let elements = document.querySelectorAll(".some-class");
+while (elements.length) {
+    elements[0].parentNode.removeChild(elements[0]);
+    elements = document.querySelectorAll(".some-class"); // Обновляем список
+}
+        </code></pre>
+
+
+        <p>Или же можно перебирать элементы с конца:</p>
+
+        <pre><code>
+const elements = document.querySelectorAll(".some-class");
+for (let i = elements.length - 1; i >= 0; i--) {
+    elements[i].parentNode.removeChild(elements[i]);
+}
+        </code></pre>
+
     </div>
 </body>
 </html>
