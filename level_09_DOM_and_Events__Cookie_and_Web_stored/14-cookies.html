@@ -136,6 +136,82 @@
             <li><strong>IndexedDB</strong> — для хранения больших объёмов данных.</li>
         </ul>
 
+        <h4>Таблица сравнения <code>Cookies</code>, <code>LocalStorage</code> и <code>SessionStorage</code></h4>:
+
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                  <th>Характеристика</th>
+                  <th>Cookies</th>
+                  <th>LocalStorage</th>
+                  <th>SessionStorage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>Размер хранилища</td>
+                  <td>~4 КБ</td>
+                  <td>~5–10 МБ</td>
+                  <td>~5–10 МБ</td>
+                </tr>
+                <tr>
+                  <td>Время жизни</td>
+                  <td>Задаётся вручную (expires)</td>
+                  <td>До удаления вручную</td>
+                  <td>До закрытия вкладки</td>
+                </tr>
+                <tr>
+                  <td>Доступ с сервера</td>
+                  <td>✅ (отправляются с HTTP-запросами)</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                </tr>
+                <tr>
+                  <td>Доступ из JavaScript</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td>Область действия</td>
+                  <td>Домен + путь</td>
+                  <td>Домен</td>
+                  <td>Вкладка браузера (session)</td>
+                </tr>
+                <tr>
+                  <td>Поддержка по умолчанию</td>
+                  <td>Все браузеры</td>
+                  <td>Все современные браузеры</td>
+                  <td>Все современные браузеры</td>
+                </tr>
+                <tr>
+                  <td>Подходит для аутентификации</td>
+                  <td>✅ (часто используется)</td>
+                  <td>❌ (небезопасно для токенов)</td>
+                  <td>❌</td>
+                </tr>
+                <tr>
+                    <td>Автоматическая отправка</td>
+                    <td>✅ (в каждом HTTP-запросе)</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td>Использование</td>
+                    <td>Небольшие данные, авторизация</td>
+                    <td>Кэш, настройки, предпочтения</td>
+                    <td>Временные данные сессии</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Краткое резюме</h4>:
+        <ul>
+            <li><b><code>Cookies</code></b> — хороши для данных, которые нужны и клиенту, и серверу (например, auth_token).</li>
+            <li><b><code>LocalStorage</code></b> — для хранения данных "на постоянно" в браузере (настройки, темы, кеш).</li>
+            <li><b><code>SessionStorage</code></b> — для временных данных в рамках одной вкладки (например, шаги формы).</li>
+        </ul>
+
         <p><a href="index.html">Назад</a></p>
         <script src="js/show-and-run-code.js"></script>
     </div>
