@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for await ... of</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+</head>
+<body>
+    <div class="container">
+        <p><a href="index.html">Назад</a></p>
+        <h1>for await ... of</h1>
+
+        <pre class="language-javascript"><code>
+async function processStream(stream) {
+  const decoder = new TextDecoder("utf-8");
+
+  for await (const chunk of stream) {
+    const text = decoder.decode(chunk, { stream: true });
+    console.log("Получен фрагмент данных:", text);
+  }
+
+  console.log("Все данные получены.");
+}
+
+async function fetchAndProcess() {
+  try {
+    const response = await fetch('/example.txt'); // замените на ваш файл
+    const stream = response.body;
+
+    // Преобразуем ReadableStream в AsyncIterable
+    const asyncIterable = streamToAsyncIterable(stream);
+
+    await processStream(asyncIterable);
+  } catch (err) {
+    console.error("Ошибка:", err);
+  }
+}
+
+function streamToAsyncIterable(stream) {
+  const reader = stream.getReader();
+
+  return {
+    async *[Symbol.asyncIterator]() {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) return;
+        yield value;
+      }
+    }
+  };
+}
+
+fetchAndProcess();
+        </code></pre>
+
+
+        <div>
+            <h2>Пояснение:</h2>
+            <p>
+                <code>response.body</code> (т.е. поток от fetch) — это объект типа ReadableStream.
+                Он не поддерживает напрямую <code>for await...of</code>, потому что в нём нет <code>[Symbol.asyncIterator]</code>.
+            </p>
+            <p>
+                Решение - обернуть <code>ReadableStream</code> в <code>AsyncIterable</code>
+            </p>
+            <ol>
+                <li>Мы вызываем fetch() и получаем ответ response.</li>
+                <li>Из него достаём response.body — это поток (ReadableStream).</li>
+                <li>Мы превращаем его в AsyncIterable через streamToAsyncIterable.</li>
+                <li>Теперь мы можем писать:
+                     <pre class="language-javascript"><code>
+for await (const chunk of stream) {
+  // обрабатываем каждый фрагмент chunk
+}
+                    </code></pre>
+                </li>
+
+                <li>Каждый chunk — это Uint8Array (массив байтов).<br>
+Чтобы превратить его в читаемый текст (если это, например, HTML или .txt-файл), используем:
+                <pre class="language-javascript"><code>
+const decoder = new TextDecoder("utf-8");
+const text = decoder.decode(chunk, { stream: true });
+                    </code></pre>
+                </li>
+
+            </ol>
+        </div>
+    </div>
+    <script>
+        async function processStream(stream) {
+          const decoder = new TextDecoder("utf-8");
+
+          for await (const chunk of stream) {
+            const text = decoder.decode(chunk, { stream: true });
+            console.log("Получен фрагмент данных:", text);
+          }
+
+          console.log("Все данные получены.");
+        }
+
+        async function fetchAndProcess() {
+          try {
+            const response = await fetch('/example.txt'); // замените на ваш файл
+            const stream = response.body;
+
+            // Преобразуем ReadableStream в AsyncIterable
+            const asyncIterable = streamToAsyncIterable(stream);
+
+            await processStream(asyncIterable);
+          } catch (err) {
+            console.error("Ошибка:", err);
+          }
+        }
+
+        function streamToAsyncIterable(stream) {
+          const reader = stream.getReader();
+
+          return {
+            async *[Symbol.asyncIterator]() {
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) return;
+                yield value;
+              }
+            }
+          };
+        }
+
+        fetchAndProcess();
+    </script>
+    <script src="js/show-and-run-code.js"></script>
+</body>
+</html>
