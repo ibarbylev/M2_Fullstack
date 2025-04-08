@@ -25,7 +25,7 @@
   - Coroutines and Event Loop (корутин, управляемые циклом)
 
 
-Подробнее здесь: https://it4each.com/blog/threading-multiprocessing-i-a
+Подробнее здесь: https://it4each.com/blog/threading-multiprocessing-i-asyncio-v-python-chast-2/
 
 
 ## 1. Threading (Потоки) в JavaScript:
