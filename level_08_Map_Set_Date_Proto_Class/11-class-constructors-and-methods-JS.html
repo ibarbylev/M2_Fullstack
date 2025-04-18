@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Конструкторы и методы классов в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Конструкторы и методы классов в JavaScript</h1>
+
+        <h2>1. Конструкторы классов</h2>
+
+        <p>В классе может быть только один конструктор.</p>
+
+        <h3>Явный конструктор</h3>
+
+        <p>Когда мы определяем конструктор, он вызывается при создании объекта:</p>
+
+        <pre><code>
+class Person {
+  constructor(name, age) { // Явный конструктор
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const person = new Person("Иван", 30);
+console.log(person.name); // Иван
+console.log(person.age);  // 30
+        </code></pre>
+
+
+        <h3>Конструктор по умолчанию</h3>
+
+        <p>Если мы не определяем конструктор, он создаётся автоматически и ничего не делает:
+        </p>
+
+        <pre><code>
+class Animal {}
+
+const cat = new Animal(); // Конструктор по умолчанию
+console.log(cat); // Animal {}
+        </code></pre>
+
+        <h2>2. Методы классов</h2>
+
+        <p>
+            Методы в классах бывают обычные, приватные и статические.
+        </p>
+
+        <h3>Обычные методы</h3>
+
+        <p>Они доступны у всех экземпляров класса.</p>
+
+        <pre><code>
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHello() { // Обычный метод
+    return `Привет, меня зовут ${this.name}`;
+  }
+}
+
+const user = new User("Олег");
+console.log(user.sayHello()); // Привет, меня зовут Олег
+        </code></pre>
+
+        <h3>Приватные методы (#)</h3>
+
+        <p>Приватные методы можно вызывать только внутри класса.</p>
+
+        <pre><code>
+class BankAccount {
+  #balance = 0; // Приватное свойство
+
+  constructor(owner) {
+    this.owner = owner;
+  }
+
+  deposit(amount) {
+    this.#balance += amount;
+    console.log(`Баланс: ${this.#balance}`);
+  }
+
+  #getBalance() { // Приватный метод
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount("Алиса");
+account.deposit(100);
+// console.log(account.#getBalance()); // Ошибка! Приватный метод
+        </code></pre>
+
+        <h3>Статические методы (static)</h3>
+
+        <p>Статические методы принадлежат классу, а не объекту.</p>
+
+        <pre><code>
+class MathHelper {
+  static sum(a, b) { // Статический метод
+    return a + b;
+  }
+}
+
+console.log(MathHelper.sum(2, 3)); // 5
+// console.log(new MathHelper().sum(2, 3)); // Ошибка! sum не у экземпляра
+        </code></pre>
+        <p><b>Выводы:</b></p>
+
+        <ol>
+            <li>Конструктор</li>
+            <ul>
+                <li>Явный — определён внутри класса (constructor).</li>
+                <li>По умолчанию — если не определён, создаётся пустой.</li>
+            </ul>
+            <li>Методы</li>
+            <ul>
+                <li>Обычные — <code>methodName() {...}</code>.</li>
+
+                <li>Приватные — <code>#methodName() {...}</code> (доступны только внутри класса).</li>
+
+                <li>Статические — <code>static methodName() {...}</code> (вызываются через класс).</li>
+            </ul>
+        </ol>
+
+        <h2>Сравнение классов в JS и Python</h2>
+       <table>
+            <tr>
+                <th>Функция</th>
+                <th>JavaScript</th>
+                <th>Python</th>
+            </tr>
+            <tr>
+                <td><b>Конструктор (явный)</b></td>
+                <td>
+                    <pre>
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+                </pre>
+            </td>
+            <td>
+                <pre>
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Конструктор (по умолчанию)</b></td>
+            <td>
+                <pre>
+class Animal {}
+                </pre>
+            </td>
+            <td>
+                <pre>
+class Animal:
+    pass
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Обычный метод</b></td>
+            <td>
+                <pre>
+class User {
+  sayHello() {
+    return "Привет";
+  }
+}
+                </pre>
+            </td>
+            <td>
+                <pre>
+class User:
+    def say_hello(self):
+        return "Привет"
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Приватный метод</b></td>
+            <td>
+                <pre>
+class Bank {
+  #secret() {
+    return "Секрет";
+  }
+}
+                </pre>
+            </td>
+            <td>
+                <pre>
+class Bank:
+    def __secret(self):
+        return "Секрет"
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Статический метод</b></td>
+            <td>
+                <pre>
+class MathHelper {
+  static sum(a, b) {
+    return a + b;
+  }
+}
+                </pre>
+            </td>
+            <td>
+                <pre>
+class MathHelper:
+    @staticmethod
+    def sum(a, b):
+        return a + b
+                    </pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовый синтаксис CSS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Базовый синтаксис CSS</h1>
+
+        <h2>Основные элементы CSS:</h2>
+        <ul>
+            <li><a href="#rules">Правила (Rules)</a></li>
+            <li><a href="#selectors">Селекторы (Selectors)</a></li>
+            <li><a href="#properties">Свойства (Properties)</a></li>
+            <li><a href="#values">Значения (Values)</a></li>
+        </ul>
+
+        <h2 id="rules">Правила (Rules)</h2>
+        <p>CSS состоит из правил, которые определяют стиль элементов HTML. Каждое правило содержит селектор и блок объявлений.</p>
+        <p>Пример:</p>
+        <pre><code>p {
+    color: blue;
+    font-size: 16px;
+}</code></pre>
+
+        <h2 id="selectors">Селекторы (Selectors)</h2>
+        <p>Селекторы используются для выбора элементов HTML, к которым будут применяться стили.</p>
+        <ul>
+            <li><strong>Теговый селектор</strong>: <code>p { ... }</code> (Применяет стиль ко всем &lt;p&gt;)</li>
+            <li><strong>Классовый селектор</strong>: <code>.my-class { ... }</code> (Применяет стиль ко всем элементам с class="my-class")</li>
+            <li><strong>ID селектор</strong>: <code>#my-id { ... }</code> (Применяет стиль к элементу с id="my-id")</li>
+            <li><strong>Атрибутный селектор</strong>: <code>input[type="text"] { ... }</code> (Применяет стиль на основе атрибутов элемента.)</li>
+            <ul>
+                <li>[attr] — элементы, у которых есть указанный атрибут.</li>
+                <li>[attr="value"] — элементы с точным значением атрибута.</li>
+                <li>[attr^="value"] — элементы, у которых значение атрибута начинается с указанного текста.</li>
+                <li>[attr$="value"] — элементы, у которых значение атрибута заканчивается на указанный текст.</li>
+                <li>[attr*="value"] — элементы, у которых значение атрибута содержит указанный текст.</li>
+            </ul>
+        </ul>
+
+        <h2 id="properties">Свойства (Properties)</h2>
+        <p>Свойства определяют, какие аспекты внешнего вида элемента изменяются.</p>
+        <ul>
+            <li><code>color</code> — цвет текста</li>
+            <li><code>font-size</code> — размер шрифта</li>
+            <li><code>background-color</code> — цвет фона</li>
+        </ul>
+
+        <h2 id="values">Значения (Values)</h2>
+        <p>Значения задают конкретные параметры для свойств.</p>
+        <ul>
+            <li><code>red</code> — значение для <code>color</code></li>
+            <li><code>16px</code> — значение для <code>font-size</code></li>
+            <li><code>#f0f0f0</code> — значение для <code>background-color</code></li>
+        </ul>
+        <h3>Вам необходимо:</h3>
+        <ul>
+            <li>запомнить <strong>стандартные свойства элементов</strong></li>
+            <li>запомнить <strong>стандартные значения этих свойств</strong></li>
+            <li>запомнить <strong>уникальные свойства разных элементов</strong></li>
+            <li>запомнить, <strong>как эти свойства работают на практике</strong></li>
+            <li>запомнить, <strong>как эти свойства влияют друг на друга.</strong></li>
+        </ul>
+        <p>Лучше всего это сделать через практику – писать много CSS и смотреть как он работает.</p>
+
+    </div>
+</body>
+</html>

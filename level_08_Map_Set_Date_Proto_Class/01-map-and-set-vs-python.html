@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Map() и Set()</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>JavaScript Map и Set</h1>
+
+        <h2>Map</h2>
+        <p>Map — это коллекция пар "ключ-значение", где ключи могут быть любого типа.</p>
+        <pre>
+// Создание Map
+let map = new Map([
+  ['id1', 'Alice'],
+  ['id2', 'Bob']
+]);
+
+map.set('id3', 'Charlie');
+console.log(map.get('id1')); // Alice
+console.log(map.has('id2')); // true
+map.delete('id2');
+console.log(map.size); // 2
+        </pre>
+
+        <h2>Set</h2>
+        <p>Set — это коллекция уникальных значений.</p>
+        <pre>
+// Создание Set
+let set = new Set([1, 2, 3, 3, 4]);
+console.log(set); // Set(4) { 1, 2, 3, 4 }
+
+set.add(5);
+console.log(set.has(3)); // true
+set.delete(2);
+console.log(set.size); // 4
+        </pre>
+
+        <h2>Итерация по Map</h2>
+        <pre>
+let map = new Map([
+  ['one', 1],
+  ['two', 2],
+  ['three', 3]
+]);
+
+// forEach
+map.forEach((value, key) => {
+  console.log(`${key}: ${value}`);
+});
+
+// for...of
+for (let [key, value] of map) {
+  console.log(`${key} -> ${value}`);
+}
+        </pre>
+
+        <h2>Итерация по Set</h2>
+        <pre>
+let set = new Set(['a', 'b', 'c']);
+
+// forEach
+set.forEach(value => {
+  console.log(value);
+});
+
+// for...of
+for (let value of set) {
+  console.log(value);
+}
+        </pre>
+
+        <h2>Сравнение методов Map и Set</h2>
+        <table>
+            <tr>
+                <th>Метод</th>
+                <th>Map</th>
+                <th>Set</th>
+            </tr>
+            <tr>
+                <td>set()</td>
+                <td>Добавляет или обновляет пару ключ-значение</td>
+                <td>Добавляет значение</td>
+            </tr>
+            <tr>
+                <td>get()</td>
+                <td>Возвращает значение по ключу</td>
+                <td>Не поддерживается</td>
+            </tr>
+            <tr>
+                <td>has()</td>
+                <td>Проверяет наличие ключа</td>
+                <td>Проверяет наличие значения</td>
+            </tr>
+            <tr>
+                <td>delete()</td>
+                <td>Удаляет пару ключ-значение</td>
+                <td>Удаляет значение</td>
+            </tr>
+            <tr>
+                <td>clear()</td>
+                <td>Очищает все пары</td>
+                <td>Очищает все значения</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>Возвращает количество пар</td>
+                <td>Возвращает количество значений</td>
+            </tr>
+            <tr>
+                <td>forEach()</td>
+                <td>Итерируется по парам ключ-значение</td>
+                <td>Итерируется по значениям</td>
+            </tr>
+        </table>
+
+
+        <h2>Сравнение с Python</h2>
+        <table>
+            <tr>
+                <th>Особенность</th>
+                <th>Map в JS</th>
+                <th>dict в Python</th>
+                <th>Set в JS</th>
+                <th>set в Python</th>
+            </tr>
+            <tr>
+                <td>Хранение</td>
+                <td>Пары "ключ-значение"</td>
+                <td>Пары "ключ-значение"</td>
+                <td>Уникальные значения</td>
+                <td>Уникальные значения</td>
+            </tr>
+            <tr>
+                <td>Ключи</td>
+                <td>Любые значения</td>
+                <td>Только хэшируемые объекты</td>
+                <td>Любые значения</td>
+                <td>Только хэшируемые объекты</td>
+            </tr>
+            <tr>
+                <td>Доступ</td>
+                <td>map.get(key)</td>
+                <td>dict[key]</td>
+                <td>set.has(value)</td>
+                <td>value in set</td>
+            </tr>
+            <tr>
+                <td>Добавление</td>
+                <td>map.set(key, value)</td>
+                <td>dict[key] = value</td>
+                <td>set.add(value)</td>
+                <td>set.add(value)</td>
+            </tr>
+            <tr>
+                <td>Удаление</td>
+                <td>map.delete(key)</td>
+                <td>del dict[key]</td>
+                <td>set.delete(value)</td>
+                <td>set.remove(value)</td>
+            </tr>
+            <tr>
+                <td>Итерация</td>
+                <td>for (let [key, value] of map)</td>
+                <td>for key, value in dict.items()</td>
+                <td>for (let value of set)</td>
+                <td>for value in set</td>
+            </tr>
+        </table>
+
+        <h2>Почему поиск в Python работает быстрее?</h2>
+
+        В Python:
+        <ol>
+            <li>
+                Используется <strong>хэширование</strong> – ключи сначала хэшируются, а затем ищутся в памяти. Это дает амортизированную сложность поиска <b>O(1)</b>.
+            </li>
+            <li>
+                <strong>Сравнение по хэшу</strong> – даже если есть коллизии, в большинстве случаев достаточно сравнить только хэш-коды, а не сами объекты.
+            </li>
+            <li>
+                <strong>Неизменяемые ключи</strong> – это упрощает проверку уникальности.
+            </li>
+        </ol>
+
+        <h2>Сравнение Object с Map и Set</h2>
+
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Свойство</th>
+              <th>Object</th>
+              <th>Map</th>
+              <th>Set</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Хранение данных</td>
+              <td>Ключ-значение</td>
+              <td>Ключ-значение</td>
+              <td>Только уникальные значения</td>
+            </tr>
+            <tr>
+              <td>Тип ключей</td>
+              <td>Только строки и символы</td>
+              <td>Любой тип (объекты, числа, функции)</td>
+              <td>Нет ключей, только значения</td>
+            </tr>
+            <tr>
+              <td>Сохранение порядка</td>
+              <td>Не гарантируется</td>
+              <td>Гарантировано</td>
+              <td>Гарантировано</td>
+            </tr>
+            <tr>
+              <td>Проверка наличия элемента</td>
+              <td>"key" in obj или obj.hasOwnProperty("key")</td>
+              <td>map.has(key)</td>
+              <td>set.has(value)</td>
+            </tr>
+            <tr>
+              <td>Получение размера</td>
+              <td>Object.keys(obj).length</td>
+              <td>map.size</td>
+              <td>set.size</td>
+            </tr>
+            <tr>
+              <td>Перебор элементов</td>
+              <td>for...in, Object.keys(), Object.values(), Object.entries()</td>
+              <td>map.keys(), map.values(), map.entries(), forEach()</td>
+              <td>set.values(), set.keys() (аналогично), forEach()</td>
+            </tr>
+            <tr>
+              <td>Добавление элемента</td>
+              <td>obj[key] = value</td>
+              <td>map.set(key, value)</td>
+              <td>set.add(value)</td>
+            </tr>
+            <tr>
+              <td>Удаление элемента</td>
+              <td>delete obj[key]</td>
+              <td>map.delete(key)</td>
+              <td>set.delete(value)</td>
+            </tr>
+            <tr>
+              <td>Очистка</td>
+              <td>obj = {}</td>
+              <td>map.clear()</td>
+              <td>set.clear()</td>
+            </tr>
+            <tr>
+              <td>Производительность при частых операциях</td>
+              <td>Медленнее при большом количестве данных</td>
+              <td>Быстрее</td>
+              <td>Быстрее</td>
+            </tr>
+            <tr>
+              <td>Добавление произвольных методов</td>
+              <td>Можно</td>
+              <td>Нельзя (только через наследование)</td>
+              <td>Нельзя (только через обёртку в объект)</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание объектов в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+        th { text-align: center }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Создание объектов в JavaScript</h1>
+
+        <p>
+            В JavaScript объект — это структура данных, которая позволяет хранить набор свойств в виде пар "ключ-значение". Объекты используются для представления сущностей с их характеристиками и поведением. Существует несколько способов создания объектов в JavaScript. Вот основные из них:
+        </p>
+        <h2>1. Литерал объекта</h2>
+        <pre><code>
+const user1 = {
+    name: "Иван",
+    age: 30
+};
+console.log("Литерал объекта:", user1);
+        </code></pre>
+
+        <h2>2. Функция-конструктор</h2>
+        <pre><code>
+function User(name, age) {
+    this.name = name;
+    this.age = age;
+}
+const user2 = new User("Мария", 25);
+console.log("Функция-конструктор:", user2);
+        </code></pre>
+
+        <h2>3. Классы (ES6)</h2>
+        <pre><code>
+class UserClass {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+const user3 = new UserClass("Алексей", 35);
+console.log("Класс:", user3);
+        </code></pre>
+
+        <h2>4. Object.create</h2>
+        <pre><code>
+const person = {
+    greet() {
+        console.log("Привет!");
+    }
+};
+const user4 = Object.create(person);
+user4.name = "Ольга";
+console.log("Object.create:", user4);
+        </code></pre>
+
+        <h2>5. Object.assign</h2>
+
+        <p>
+             Этот метод копирует свойства из одного или нескольких исходных объектов в целевой объект. Его удобно использовать для создания новых объектов на основе существующих.
+        </p>
+        <pre><code>
+const user5 = Object.assign({}, { name: "Дмитрий", age: 40 });
+console.log("Object.assign:", user5);
+        </code></pre>
+
+        <h2>6. new Object()</h2>
+        <pre><code>
+const user6 = new Object();
+user6.name = "Сергей";
+user6.age = 28;
+console.log("new Object():", user6);
+        </code></pre>
+
+        <h2>7. Фабричная функция</h2>
+
+        <p>
+            Фабрика объектов — это функция, которая возвращает новый объект без явного использования ключевого слова <code>new</code>. Это шаблон проектирования, позволяющий создавать объекты с заданной структурой.
+        </p>
+        <pre><code>
+function createUser(name, age) {
+    return { name, age };
+}
+const user7 = createUser("Елена", 22);
+console.log("Фабричная функция:", user7);
+        </code></pre>
+
+        <table>
+            <tr>
+                <th>Признак</th>
+                <th>Простое создание объектов</th>
+                <th>Шаблоны для множества объектов</th>
+                <th>Создание на основе существующего объекта</th>
+            </tr>
+            <tr>
+                <td><strong>Примеры</strong></td>
+                <td>{}, new Object()</td>
+                <td>Функция-конструктор, Класс, Фабричная функция</td>
+                <td>Object.create(), Object.assign()</td>
+            </tr>
+            <tr>
+                <td><strong>Клонирование</strong></td>
+                <td>Нет</td>
+                <td>Каждый объект создаётся заново</td>
+                <td>Основано на существующих объектах</td>
+            </tr>
+            <tr>
+                <td><strong>Прототипное наследование</strong></td>
+                <td>По умолчанию Object.prototype</td>
+                <td>Можно задавать вручную через prototype</td>
+                <td>Наследует от переданного объекта</td>
+            </tr>
+            <tr>
+                <td><strong>Гибкость</strong></td>
+                <td>Минимальная</td>
+                <td>Высокая (можно передавать параметры)</td>
+                <td>Позволяет копировать или изменять</td>
+            </tr>
+            <tr>
+                <td><strong>Использование new</strong></td>
+                <td>Только new Object()</td>
+                <td>Обязательно (new для конструктора/класса)</td>
+                <td>Не требуется</td>
+            </tr>
+            <tr>
+                <td><strong>Использование this</strong></td>
+                <td>Нет</td>
+                <td>Да</td>
+                <td>В основном нет</td>
+            </tr>
+            <tr>
+                <td><strong>Производительность</strong></td>
+                <td>Высокая для отдельных объектов</td>
+                <td>Чуть ниже, но удобно для массового создания</td>
+                <td>Быстрее, чем полное копирование</td>
+            </tr>
+            <tr>
+                <td><strong>Где используется</strong></td>
+                <td>Разовые объекты</td>
+                <td>Шаблоны объектов в коде</td>
+                <td>Наследование, клонирование</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

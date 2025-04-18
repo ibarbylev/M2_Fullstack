@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Взаимодействие с узлами DOM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Взаимодействие с узлами DOM</h1>
+
+        <p>Давайте рассмотрим основные способы работы с узлами DOM, начиная с простого примера HTML и пошагово модифицируя его, чтобы показать все эти операции.
+        </p>
+
+
+
+        <h2>Пример исходного HTML:</h2>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Пример DOM&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="content"&gt;
+        &lt;h1&gt;Привет, мир!&lt;/h1&gt;
+        &lt;p&gt;Это параграф.&lt;/p&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Первый элемент списка&lt;/li&gt;
+            &lt;li&gt;Второй элемент списка&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+        <h2>1. Получение информации об узлах</h2>
+
+        <h3>Пример 1: Получение имени и типа узла</h3>
+        <pre>
+// Получим элемент с id="content"
+const contentDiv = document.getElementById('content');
+
+// Имя узла
+console.log(contentDiv.nodeName); // DIV
+
+// Тип узла
+console.log(contentDiv.nodeType); // 1 (элемент)</pre>
+
+        <h3>Пример 2: Получение содержимого узла</h3>
+        <pre>
+// Получим текст внутри заголовка &lt;h1&gt;
+const h1 = document.querySelector('h1');
+console.log(h1.textContent); // Привет, мир!</pre>
+
+        <h3>Пример 3: Место в иерархии</h3>
+        <pre>
+// Получаем родительский элемент
+console.log(h1.parentNode.nodeName); // DIV
+
+// Получаем все дочерние элементы
+const children = contentDiv.children;
+console.log(children); // HTMLCollection [h1, p, ul]</pre>
+
+        <h2>2. Изменение узлов</h2>
+
+        <h3>Пример 1: Изменение содержимого</h3>
+        <pre>
+// Изменим текст заголовка
+h1.textContent = 'Добро пожаловать в мир JavaScript!';
+
+// Изменим текст параграфа
+const paragraph = document.querySelector('p');
+paragraph.textContent = 'Это изменённый параграф.';</pre>
+
+        <h3>Пример 2: Изменение атрибута</h3>
+        <pre>
+// Изменим атрибут id у div
+contentDiv.setAttribute('id', 'main-content');
+console.log(contentDiv.id); // main-content</pre>
+
+        <h2>3. Создание узлов</h2>
+
+        <h3>Пример 1: Создание нового элемента</h3>
+        <pre>
+// Создадим новые элементы &lt;p&gt; и добавим их в начало и конец родительского элемента &lt;div&gt;
+const newParagraphFirst = document.createElement('p');
+newParagraphFirst.textContent = 'Новый параграф добавлен динамически!';
+contentDiv.prepend(newParagraphFirst);
+
+const newParagraphLast = document.createElement('p');
+newParagraphLast.textContent = 'Новый параграф добавлен динамически!';
+contentDiv.appendChild(newParagraphLast)</pre>
+
+        <h3>Пример 2: Создание списка</h3>
+        <pre>
+// Создадим новый элемент &lt;ul&gt; с несколькими &lt;li&gt; внутри
+const newList = document.createElement('ul');
+const newItem1 = document.createElement('li');
+newItem1.textContent = 'Третий элемент списка';
+const newItem2 = document.createElement('li');
+newItem2.textContent = 'Четвертый элемент списка';
+
+newList.appendChild(newItem1);
+newList.appendChild(newItem2);
+
+// Вставим новый список перед старым
+contentDiv.insertBefore(newList, contentDiv.querySelector('ul'));</pre>
+
+        <h2>4. Удаление узлов</h2>
+
+        <h3>Пример 1: Удаление элемента</h3>
+        <pre>
+// Удалим первый элемент списка
+const firstListItem = contentDiv.querySelector('ul').firstElementChild;
+contentDiv.querySelector('ul').removeChild(firstListItem);</pre>
+
+        <h3>Пример 2: Удаление всё содержимое внутри первого ul</h3>
+        <pre>
+// Удалим весь контент внутри первого ul
+let firstUl = contentDiv.querySelector('ul');
+console.log(firstUl);  // Проверяем элемент до изменений
+if (firstUl) {
+    firstUl.replaceChildren();
+}
+console.log(firstUl);  // Проверяем элемент после изменений</pre>
+        <p>
+            Обратите внимание, что сам первый ul при этом остался. Он не отображается в браузере, поскольку в нём не осталось видимых элементов, но его по-прежнему можно увидеть в инспекторе и в консоли: завершающий <code>console.log(firstUl);</code> по прежнему его показывает.
+        </p>
+
+                <h3>Пример 3: Полное удаление первого ul</h3>
+        <pre>
+// Теперь удалим первый ul полностью
+firstUl.remove();
+console.log(firstUl);  // Нет ошибки, поскольку remove() удаляет элемент из структуры DOM
+// но не из памяти
+// Корректнее будет проверить, содержится ли удалённый элемент в структуре DOM:
+console.log(document.body.contains(firstUl));  // false</pre>
+
+        <h2>Итоговый код после изменений</h2>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Пример DOM&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="main-content"&gt;
+        &lt;p&gt;Новый параграф добавлен динамически!&lt;/p&gt;
+        &lt;h1&gt;Добро пожаловать в мир JavaScript!&lt;/h1&gt;
+        &lt;p&gt;Это изменённый параграф.&lt;/p&gt;
+        &lt;ul&gt;&lt;/ul&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Первый элемент списка&lt;/li&gt;
+            &lt;li&gt;Второй элемент списка&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p&gt;Новый параграф добавлен динамически!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+
+        <h3>Важное замечание!</h3>
+        <p>
+            Кстати, попытка сохранить изменённый HTML-код традиционным способом (<code>Save page as ... --&gt; Only HTML</code>) ничего не даст - таким способом можно сохранить только старый HTML-код до изменений.
+        </p>
+        <p>
+            Чтобы сохранить новый код HTML, надо открыть инспектор и, далее, нажав правой кнопкой мыши на <code>&lt;html lang="ru"&gt;</code>, выбрать <code>Copy ----&gt; Outer HTML</code>. Это скопирует (сохранит) код в буфере обмена. А далее останется только вставить информацию из буфера в нужный HTML-файл.
+        </p>
+    </div>
+</body>
+</html>

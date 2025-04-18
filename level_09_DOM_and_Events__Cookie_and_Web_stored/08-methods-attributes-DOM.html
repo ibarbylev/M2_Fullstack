@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Методы работы с атрибутами HTML элементов</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Методы работы с атрибутами HTML элементов</h1>
+
+        <h2>1. <code>getAttribute(name)</code> — получение значения атрибута</h2>
+
+        <pre><code>
+let elem = document.getElementById("myElement");
+console.log(elem.getAttribute("class")); // Получает значение атрибута class
+        </code></pre>
+
+        <h2>2. <code>setAttribute(name, value)</code> — установка или изменение атрибута</h2>
+
+        <pre><code>
+elem.setAttribute("class", "new-class");
+elem.setAttribute("data-info", "example"); // Добавляет кастомный data-атрибут
+        </code></pre>
+
+        <h2>3. <code>removeAttribute(name)</code> — удаление атрибута</h2>
+
+        <pre><code>
+elem.removeAttribute("class"); // Удаляет атрибут class
+        </code></pre>
+
+        <h2>4. <code>hasAttribute(name)</code> — проверка существования атрибута</h2>
+
+        <pre><code>
+console.log(elem.hasAttribute("class")); // true или false
+        </code></pre>
+
+        <h2>5. Прямой доступ к свойствам DOM</h2>
+
+        <p>
+            Некоторые атрибуты доступны как свойства объекта элемента:
+        </p>
+
+        <pre><code>
+console.log(elem.id); // Получает id элемента
+elem.id = "newId"; // Изменяет id элемента
+
+console.log(elem.href); // Получает ссылку &lt;a&gt;
+elem.href = "https://example.com"; // Изменяет ссылку
+        </code></pre>
+
+        <p>
+            Но важно помнить, что не все атрибуты доступны через свойства.
+        </p>
+
+        <h2>6. Работа с <code>dataset</code> (data-атрибуты)</h2>
+
+        <p>
+            Если у элемента есть data-* атрибуты, их можно получать и устанавливать через <code>dataset</code>:
+        </p>
+
+
+        <pre><code>
+console.log(elem.dataset.info); // Получает data-info
+elem.dataset.info = "newValue"; // Устанавливает data-info="newValue"
+        </code></pre>
+
+
+        <h2>7. Методы <code>classList</code> для работы с классами</h2>
+
+        <p>
+            Методы работы с атрибутами и методы работы с классами (<code>classList</code>) связаны, но не одно и то же. Если цель — управлять <code>class</code>, то лучше использовать <code>classList</code>, потому что это удобнее и безопаснее, чем <code>setAttribute("class", ...)</code>.
+        </p>
+
+
+        <h3><code>element.classList.add(className)</code> — добавляет класс</h3>
+
+        <pre><code>
+elem.classList.add("highlight");
+        </code></pre>
+
+        <h3><code>element.classList.remove(className)</code> — удаляет класс</h3>
+
+        <pre><code>
+elem.classList.remove("highlight");
+        </code></pre>
+
+        <h3>
+            <code>element.classList.toggle(className [, force])</code> — переключает класс
+        </h3>
+
+        <pre><code>
+elem.classList.toggle("highlight"); // Добавляет, если нет, удаляет, если есть
+elem.classList.toggle("highlight", true); // Принудительно добавляет
+elem.classList.toggle("highlight", false); // Принудительно удаляет
+        </code></pre>
+
+        <h3>
+            <code>element.classList.contains(className)</code> — проверяет наличие класс
+        </h3>
+
+        <pre><code>
+console.log(elem.classList.contains("highlight")); // true или false
+        </code></pre>
+
+        <h3>
+            <code>element.classList.replace(oldClass, newClass)</code> — заменяет один класс другим
+        </h3>
+
+        <pre><code>
+elem.classList.replace("old-class", "new-class");
+        </code></pre>
+
+        <h3>
+            Почему <code>classList</code> лучше <code>setAttribute("class", ...)</code>?
+        </h3>
+
+        <ul>
+            <li>Безопаснее — не перезаписывает все классы, а изменяет нужный.</li>
+            <li>Проще — не нужно вручную разбирать строку class.</li>
+            <li>Быстрее — не требует полного обновления DOM-атрибута.</li>
+        </ul>
+
+        <p>
+            Если основная задача — работа с атрибутами, <code>classList</code> можно не добавлять. Но если ваш код часто изменяет классы, их стоит включить в описание, потому что это лучший способ управления <code>class</code>.
+        </p>
+
+
+    </div>
+</body>
+</html>

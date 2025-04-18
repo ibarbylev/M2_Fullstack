@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Методы навигации по DOM-узла</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Методы навигации по DOM-узлам</h1>
+        <h2>1. Методы и свойства для работы с родительскими узлами:</h2>
+
+        <h3><code>parentNode</code></h3>
+        <p>Возвращает родительский узел для текущего элемента.</p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const element = document.querySelector('div');
+const parent = element.parentNode;
+console.log(parent); // Выведет родительский узел
+        </code></pre>
+
+
+        <h2>2. Методы и свойства для работы с дочерними узлами:</h2>
+
+        <p>
+            Здесь прежде всего необходимо отметить разницу <b>дочерним узлом</b> (child node) и <b>элементным узлом</b> (element node):
+        </p>
+        <p>
+            <b>Дочерний узел</b> (child node) — это любой узел, находящийся внутри родительского узла. Он может быть:
+        </p>
+        <ul>
+            <li>
+                <b>Элементом</b> (ELEMENT_NODE) — &lt;div&gt;, &lt;p&gt;, &lt;a&gt; и т. д.
+            </li>
+            <li><b>Текстовым узлом</b> (TEXT_NODE) — текст между тегами.</li>
+            <li>
+                <b>Комментарием</b> (COMMENT_NODE) — &lt;!-- комментарий --&gt;.
+            </li>
+            <li>
+                Другими типами узлов (например, <code>DocumentFragment</code>).
+            </li>
+        </ul>
+        <p>
+            <b>Элементный узел</b> (element node) — это только узел, который является HTML- или SVG-элементом (&lt;div&gt;, &lt;p&gt;, &lt;a&gt; и т. д.). Он не включает текстовые узлы и комментарии.
+        </p>
+
+        <h3>Пример: Разница между childNodes и children</h3>
+        <pre><code>
+&lt;div id="parent"&gt;
+    Текстовый узел
+    &lt;p&gt;Параграф&lt;/p&gt;
+    &lt;!-- Комментарий --&gt;
+    &lt;span&gt;Спан&lt;/span&gt;
+&lt;/div&gt;
+        </code></pre>
+
+        <pre><code>
+const parent = document.getElementById("parent");
+
+console.log(parent.childNodes);
+// NodeList(5) [text, p, text, comment, span]
+
+console.log(parent.children);
+// HTMLCollection(2) [p, span]
+        </code></pre>
+
+        <ul>
+            <li>
+                <code>childNodes</code> содержит все узлы, включая текст и комментарии.
+            </li>
+            <li>
+                <code>children</code> содержит только элементные узлы (&lt;p&gt; и &lt;span&gt;).
+            </li>
+        </ul>
+
+        <h3><code>childNodes</code></h3>
+        <p>
+            Возвращает коллекцию всех дочерних узлов, включая текстовые узлы и комментарии.
+        </p>
+
+
+        <h4>Пример:</h4>
+        <pre><code>
+const parent = document.querySelector('div');
+const children = parent.childNodes;
+console.log(children); // Массив всех дочерних узлов,
+                       // включая текстовые и комментарии
+        </code></pre>
+
+        <h3><code>firstChild</code></h3>
+        <p>Возвращает первый дочерний узел (включая текстовые и комментарии).</p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const parent = document.querySelector('div');
+const firstChild = parent.firstChild;
+console.log(firstChild); // Первый дочерний узел (может быть текстом)
+        </code></pre>
+
+        <h3><code>lastChild</code></h3>
+        <p>Возвращает последний дочерний узел (включая текстовые и комментарии).</p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const parent = document.querySelector('div');
+const lastChild = parent.lastChild;
+console.log(lastChild); // Последний дочерний узел
+        </code></pre>
+
+        <h2>3. Методы и свойства для работы с элементами-соседями:</h2>
+
+        <h3><code>nextElementSibling</code></h3>
+        <p>
+            Возвращает следующий элементный узел (игнорирует текстовые узлы и комментарии).
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const element = document.querySelector('div');
+const nextSibling = element.nextElementSibling;
+console.log(nextSibling); // Следующий элементный узел
+        </code></pre>
+
+        <h3><code>previousElementSibling</code></h3>
+        <p>
+            Возвращает предыдущий элементный узел (игнорирует текстовые узлы и комментарии).
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const element = document.querySelector('div');
+const prevSibling = element.previousElementSibling;
+console.log(prevSibling); // Предыдущий элементный узел
+        </code></pre>
+
+        <h2>4. Методы и свойства для работы с первым и последним элементом:</h2>
+
+        <h3><code>firstElementChild</code></h3>
+        <p>
+            Возвращает первый дочерний элементный узел (игнорирует текстовые узлы и комментарии).
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const parent = document.querySelector('div');
+const firstElementChild = parent.firstElementChild;
+console.log(firstElementChild); // Первый дочерний элементный узел
+        </code></pre>
+
+        <h3><code>lastElementChild</code></h3>
+        <p>
+            Возвращает последний дочерний элементный узел (игнорирует текстовые узлы и комментарии).
+        </p>
+
+        <h4>Пример:</h4>
+        <pre><code>
+const parent = document.querySelector('div');
+const lastElementChild = parent.lastElementChild;
+console.log(lastElementChild); // Последний дочерний элементный узел
+        </code></pre>
+
+        <h4>Пример в одном блоке:</h4>
+
+        <p>Предположим, у нас есть HTML-структура:</p>
+
+        <pre><code>
+&lt;div id="parent"&gt;
+    &lt;p&gt;Первый абзац&lt;/p&gt;
+    &lt;p&gt;Второй абзац&lt;/p&gt;
+    &lt;span&gt;Текст в спане&lt;/span&gt;
+    &lt;p&gt;Третий абзац&lt;/p&gt;
+&lt;/div&gt;
+        </code></pre>
+
+<h4>Пример использования навигации по DOM:</h4>
+
+        <pre><code>
+const parent = document.getElementById('parent');
+
+// Получаем родительский узел
+console.log(parent.parentNode); // null, так как родитель для &lt;div> нет
+
+// Получаем все дочерние узлы
+console.log(parent.childNodes); // Включая текстовые узлы и комментарии
+
+// Получаем первый дочерний элементный узел
+console.log(parent.firstElementChild); // &lt;p>Первый абзац&lt;/p>
+
+// Получаем последний дочерний элементный узел
+console.log(parent.lastElementChild); // &lt;p>Третий абзац&lt;/p>
+
+// Получаем следующий элементный узел
+const firstParagraph = parent.firstElementChild;
+console.log(firstParagraph.nextElementSibling); // &lt;p>Второй абзац&lt;/p>
+
+// Получаем предыдущий элементный узел
+console.log(firstParagraph.nextElementSibling.previousElementSibling); // &lt;p>Первый абзац<&lt;/p>
+        </code></pre>
+
+        <h3>Заключение:</h3>
+
+        <p>
+            Эти методы и свойства позволяют гибко манипулировать DOM, обеспечивая доступ к родительским и дочерним узлам, а также к соседним элементам. Вы можете комбинировать их для выполнения сложных операций с деревом элементов на странице.
+        </p>
+
+    </div>
+</body>
+</html>

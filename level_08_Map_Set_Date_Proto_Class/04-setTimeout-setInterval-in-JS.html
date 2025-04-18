@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Сравнение setTimeout и setInterval</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Сравнение <code>setTimeout</code> и <code>setInterval</code></h1>
+        <p>В JavaScript есть два метода для выполнения кода с задержкой или через определенные интервалы: <code>setTimeout</code> и <code>setInterval</code>. Рассмотрим их различия.</p>
+
+        <h2>Основные различия</h2>
+        <table>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td><code>setTimeout</code></td>
+                <td>Выполняет переданную функцию <strong>один раз</strong> через указанное время (в миллисекундах).</td>
+            </tr>
+            <tr>
+                <td><code>setInterval</code></td>
+                <td>Выполняет переданную функцию <strong>многократно</strong> через заданные промежутки времени.</td>
+            </tr>
+        </table>
+
+        <h2>Очистка таймеров</h2>
+        <p>Если вам нужно отменить выполнение, используйте:</p>
+        <ul>
+            <li><code>clearTimeout(id)</code> — отменяет выполнение <code>setTimeout</code>, если оно еще не произошло.</li>
+            <li><code>clearInterval(id)</code> — останавливает выполнение <code>setInterval</code>.</li>
+        </ul>
+
+        <h2>Примеры кода</h2>
+        <h3>Использование <code>setTimeout</code></h3>
+        <pre><code>
+setTimeout(() => {
+    console.log("Выполнится через 3 секунды");
+}, 3000);
+        </code></pre>
+        <p>Этот код выведет сообщение в консоль через 3 секунды после запуска.</p>
+
+        <h3>Использование <code>setInterval</code></h3>
+        <pre><code>
+const intervalId = setInterval(() => {
+    console.log("Каждые 2 секунды");
+}, 2000);
+        </code></pre>
+        <p>Этот код будет выводить сообщение в консоль каждые 2 секунды, пока не будет остановлен.</p>
+
+        <h3>Остановка <code>setInterval</code> с <code>clearInterval</code></h3>
+        <pre><code>
+const intervalId = setInterval(() => {
+    console.log("Сообщение каждые 2 секунды");
+}, 2000);
+
+setTimeout(() => {
+    clearInterval(intervalId);
+    console.log("Интервал остановлен");
+}, 6000);
+        </code></pre>
+        <p>Этот код остановит выполнение интервала через 6 секунд.</p>
+
+    </div>
+</body>
+</html>

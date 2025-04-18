@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Кастомные события в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Кастомные события в JavaScript</h1>
+        <p>
+            <b>Кастомные события</b> — это пользовательские события, которые могут быть определены в JavaScript для специфической логики и взаимодействия в приложении. Такие события могут быть использованы для связи разных частей программы, которые должны реагировать на какие-то специфические изменения или действия, не привязанные напрямую к стандартным событиям браузера.
+        </p>
+        <p>Вот алгоритм создания кастомного события:</p>
+        <ol>
+            <li>Создание события</li>
+            <li>Добавление обработчика</li>
+            <li>Вызов события</li>
+        </ol>
+
+        <h2>1. Создание события</h2>
+        <p>Сначала создаём кастомное событие customEvent с помощью конструктора <code>CustomEvent</code>. Это событие содержит дополнительную информацию в свойстве <code>detail</code>:</p>
+
+        <pre><code>
+const customEvent = new CustomEvent('myCustomEvent', {
+  detail: { message: 'Привет, мир!' }
+});
+        </code></pre>
+
+        <h2>2. Добавление обработчика</h2>
+        <p>
+            С помощью <code>addEventListener</code> добавляем обработчик для события <code>myCustomEvent</code> на элемент <code>element</code> (в примере элемент с <code>id myElement</code>). Этот обработчик будет срабатывать, когда событие будет вызвано.
+        </p>
+
+
+        <pre><code>
+element.addEventListener('myCustomEvent', (event) => {
+  console.log('Событие произошло:', event.detail.message);
+});
+        </code></pre>
+
+        <h2>3. Вызов события</h2>
+        <p>
+            Чтобы событие фактически сработало, вызывается метод <code>dispatchEvent</code> на элементе element. Это инициирует событие, и если оно было добавлено через <code>addEventListener</code>, обработчик будет вызван.
+        </p>
+
+        <pre><code>
+element.dispatchEvent(customEvent);
+        </code></pre>
+
+
+        <h4>Пример создания кастомного события</h4>
+        <p>
+            Рассмотрим пример, где кастомное событие вызывается с помощью метода <code>dispatchEvent</code>, который вызывается на целевом DOM-элементе (в данном случае на элементе с <code>id myElement</code>).
+        </p>
+        <pre><code>
+&lt;!-- Элемент, на котором будет происходить событие --&gt;
+&lt;button class="btn-gray" id="myElement"&gt;Click me!&lt;/button&gt;
+        </code></pre>
+
+        <button class="btn-gray" id="myElement">Click me!</button>
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+
+        <div id="output"></div>
+        <pre id="code-output-01" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('11-1-example.js', 'code-output-01')">Показать код</button>
+        <button class="btn-run" onclick="runScript('11-1-example.js', 'console-output-01')">Запустить код</button>
+        <pre id="console-output-01" class="language-javascript"></pre>
+        <hr>
+
+
+
+
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>
