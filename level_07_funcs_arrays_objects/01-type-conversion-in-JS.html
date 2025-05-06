@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Переменные и типы данных в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr, th, td { width: 100% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Переменные и типы данных в JavaScript</h1>
+
+
+        <h2>Явное преобразование</h2>
+        <p>Явное преобразование выполняется вручную с использованием специальных функций.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>String(value)</td>
+                    <td>Преобразует значение в строку.</td>
+                    <td><pre>String(123) → "123"</pre></td>
+                </tr>
+                <tr>
+                    <td>Number(value)</td>
+                    <td>Преобразует значение в число.</td>
+                    <td><pre>Number("42") → 42</pre></td>
+                </tr>
+                <tr>
+                    <td>Boolean(value)</td>
+                    <td>Преобразует значение в логический тип.</td>
+                    <td><pre>Boolean(1) → true</pre></td>
+                </tr>
+                <tr>
+                    <td>parseInt(value, radix) <br>
+                        где <code>radix</code> - основание системы счисления (опционально)
+                    </td>
+                    <td>Преобразует строку в целое число.</td>
+                    <td><pre>parseInt("10.5") → 10</pre><br>
+                        <pre>parseInt("1010", 2) → 10</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>parseFloat(value)</td>
+                    <td>Преобразует строку в число с плавающей точкой.</td>
+                    <td><pre>parseFloat("10.5") → 10.5</pre></td>
+                </tr>
+                <tr>
+                    <td>toString()</td>
+                    <td>Преобразует число или объект в строку.</td>
+                    <td><pre>(123).toString() → "123"</pre></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Неявное преобразование</h2>
+        <p>Неявное (автоматическое) преобразование выполняется JavaScript при необходимости.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Выражение</th>
+                    <th>Описание</th>
+                    <th>Результат</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>"5" + 3</td>
+                    <td>Число преобразуется в строку (конкатенация).</td>
+                    <td><pre>"53"</pre></td>
+                </tr>
+                <tr>
+                    <td>"5" - 3</td>
+                    <td>Строка преобразуется в число.</td>
+                    <td><pre>2</pre></td>
+                </tr>
+                <tr>
+                    <td>"10" * "2"</td>
+                    <td>Обе строки преобразуются в числа.</td>
+                    <td><pre>20</pre></td>
+                </tr>
+                <tr>
+                    <td>true + false</td>
+                    <td>Булевы значения преобразуются в числа (1 и 0).</td>
+                    <td><pre>1</pre></td>
+                </tr>
+                <tr>
+                    <td>null + 1</td>
+                    <td>null преобразуется в 0.</td>
+                    <td><pre>1</pre></td>
+                </tr>
+                <tr>
+                    <td>undefined + 1</td>
+                    <td>undefined преобразуется в NaN.</td>
+                    <td><pre>NaN</pre></td>
+                </tr>
+                <tr>
+                    <td>"5" == 5</td>
+                    <td>Строка "5" неявно преобразуется в число.</td>
+                    <td><pre>true</pre></td>
+                </tr>
+                <tr>
+                    <td>"5" === 5</td>
+                    <td>Строгое сравнение без преобразования.</td>
+                    <td><pre>false</pre></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Дополнительные правила преобразования</h2>
+        <h3>Использование знака + перед строкой</h3>
+        <p>Добавление `+` перед строкой, содержащей число, преобразует её в число.</p>
+        <pre>
+let str = "42";
+let num = +str;
+console.log(num); // 42 (число)
+        </pre>
+
+        <h3>Правило арифметических операций</h3>
+        <p>Все арифметические операции (кроме `+`) приводят операнды к числовому типу.</p>
+        <pre>
+console.log("10" - 2);  // 8
+console.log("10" * "2"); // 20
+console.log("10" / 2);   // 5
+console.log("10" + 2);   // "102"
+        </pre>
+
+    </div>
+</body>
+</html>

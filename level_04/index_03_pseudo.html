@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семантическая HTML-страница</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        header, footer, section, article, aside, nav, main {
+            border: 6px solid #ddd; padding: 10px; margin: 10px 0;
+        }
+        .container { display: flex; }
+        main { flex: 5; }
+        aside { flex: 2; margin-left: 10px; }
+
+        button { display: block; height: 30px; width: 70%; margin: 20px auto;}
+        button:hover { background: red; } /* Меняет цвет ссылки при наведении */
+        button:focus { outline: 4px solid blue; } /* Добавляет рамку при фокусе */
+        button:active { background: green; } /* Изменяет цвет кнопки при нажатии */
+
+        a { display: block; color: blue; width: 70%; margin: 0 auto; }
+        a:visited { color: forestgreen }
+        a::before { content: "🔗"; margin-right: 5px; display: inline-block; }
+        a::after { content: "😉"; margin-left: 5px; display: inline-block; }
+
+        .no-style { display: inline; }
+        .no-style::before, .no-style::after
+        { content: none !important; display: none !important; }
+
+        .my-tag-p::selection { background-color: yellow; color: red; }
+        .my-tag-p::first-line { font-weight: bold; color: orangered; }
+    </style>
+</head>
+<body>
+    <header>
+        &lt;header&gt;
+        <h1>Семантические теги, псевдоклассы и псевдоэлементы</h1>
+        <nav>
+            &lt;nav&gt;
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+             &lt;/nav&gt;
+        </nav>
+        &lt;/header&gt;
+    </header>
+
+    <div class="container">
+        <main>
+            &lt;main&gt;
+            <section>
+                &lt;section&gt;
+                <h2>Основная секция</h2>
+                <h4>
+                    <a href="https://www.w3schools.com/html/html5_semantic_elements.asp" class="no-style" target="_blank">
+                        Семантические теги</a>
+                    - это теги, которые описывают смысл содержимого, а не просто его внешний вид.
+                </h4>
+                <article>
+                    &lt;article&gt;
+                    <h3>Статья 1</h3>
+                    <p>Это независимый блок контента.</p>
+                    <figure>
+                        <img src="img/rose.jpeg" alt="Пример изображения" width="200">
+                        <figcaption>Описание изображения</figcaption>
+                    </figure>
+                    <p>Дата публикации: <time datetime="2025-03-02">2 марта 2025</time></p>
+                    &lt;/article&gt;
+                </article>
+
+                <article>
+                    &lt;article&gt;
+                    <h3>Статья 2</h3>
+                    <p>Еще один независимый блок контента с выделенным <mark>важным</mark> словом.</p>
+                    &lt;/article&gt;
+                </article>
+                &lt;/section&gt;
+            </section>
+            &lt;/main&gt;
+        </main>
+
+        <aside>
+            &lt;aside&gt;
+            <h2>Боковая панель</h2>
+            <h4>
+                <a class="no-style" href="https://www.w3schools.com/css/css_pseudo_classes.asp" target="_blank">
+                    Псевдоклассы
+                </a> и
+                <a class="no-style" href="https://www.w3schools.com/css/css_pseudo_elements.asp" target="_blank">
+                    псевдоэлементы
+                </a>
+            </h4>
+            <ul>
+                <li>:hover - наведение курсора</li>
+                <li>:focus - попадание в фокус</li>
+                <li>:active - активный элемент</li>
+            </ul>
+            <button>Button</button>
+
+            <ul>
+                <li>:visited - ссылка, которую уже посетили</li>
+                <li>::before - псевдоэлемент перед селектором 🔗 </li>
+                <li>::after - псевдоэлемент после селектора 😉</li>
+            </ul>
+            <a href="/">Кликни меня</a>
+
+            <ul>
+                <li>::selected - выделенный фрагмент текста</li>
+                <li>::first-line - первая строка параграфа </li>
+            </ul>
+
+            <p class="my-tag-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+           <br><br><br><br><br><br><br><br><br><br>
+            &lt;/aside&gt;
+        </aside>
+    </div>
+
+    <footer>
+        &lt;footer&gt;
+        <p>&copy; 2025 Все права защищены.</p>
+        <address>
+            &lt;address&gt;
+            <p>Контакты: <a href="mailto:info@example.com">info@example.com</a></p>
+            &lt;/address&gt;
+        </address>
+        &lt;/footer&gt;
+    </footer>
+</body>
+</html>

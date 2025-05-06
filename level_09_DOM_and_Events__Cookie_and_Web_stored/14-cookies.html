@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookies</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Cookies</h1>
+        <h2>Что такое куки?</h2>
+        <p>Куки (cookies) — это небольшие текстовые файлы, которые веб-сайты сохраняют в браузере пользователя. Они предназначены для хранения информации, такой как идентификаторы сессий, пользовательские настройки, данные авторизации и прочее.</p>
+
+        <h2>Виды куки</h2>
+
+        <h3>По продолжительности хранения:</h3>
+        <ul>
+            <li><strong>Сессионные (Session Cookies)</strong>
+                <ul>
+                    <li>Хранятся только во время сеанса работы с сайтом.</li>
+                    <li>Удаляются после закрытия браузера.</li>
+                    <li>Используются, например, для аутентификации в пределах одной сессии.</li>
+                </ul>
+            </li>
+            <li><strong>Постоянные (Persistent Cookies)</strong>
+                <ul>
+                    <li>Хранятся в браузере даже после закрытия.</li>
+                    <li>Имеют дату истечения (Expires) или максимальное время жизни (Max-Age).</li>
+                    <li>Применяются для запоминания настроек, предпочтений, состояния корзины в интернет-магазинах.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>По области действия:</h3>
+        <ul>
+            <li><strong>Основные (First-party Cookies)</strong>
+                <ul>
+                    <li>Создаются сайтом, который посещает пользователь.</li>
+                    <li>Используются для аутентификации, персонализации интерфейса и других нужд.</li>
+                </ul>
+            </li>
+            <li><strong>Сторонние (Third-party Cookies)</strong>
+                <ul>
+                    <li>Создаются доменами, отличными от посещаемого сайта (например, рекламными сетями).</li>
+                    <li>Применяются для трекинга активности пользователя на разных сайтах.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>По назначению:</h3>
+        <ul>
+            <li><strong>Технические (Essential Cookies)</strong>
+                <ul>
+                    <li>Обеспечивают работу сайта (например, аутентификация, управление сессиями).</li>
+                    <li>Без них сайт может не работать корректно.</li>
+                </ul>
+            </li>
+            <li><strong>Аналитические (Analytics Cookies)</strong>
+                <ul>
+                    <li>Собирают статистику о посещаемости и поведении пользователей.</li>
+                    <li>Используются сервисами вроде Google Analytics.</li>
+                </ul>
+            </li>
+            <li><strong>Рекламные (Marketing Cookies)</strong>
+                <ul>
+                    <li>Применяются для таргетированной рекламы.</li>
+                    <li>Чаще всего являются сторонними куками.</li>
+                </ul>
+            </li>
+            <li><strong>Функциональные (Functional Cookies)</strong>
+                <ul>
+                    <li>Хранят пользовательские предпочтения (язык, тема оформления).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>Структура куки</h2>
+        <p>Куки хранятся в формате <code>ключ=значение</code> и могут содержать дополнительные параметры:</p>
+        <pre><code>Set-Cookie: session_id=abc123; Path=/; Secure; HttpOnly; SameSite=Lax</code></pre>
+
+        <p>Параметры:</p>
+        <ul>
+            <li><strong>Expires=Thu, 01 Jan 2025 12:00:00 GMT</strong> — дата истечения срока действия.</li>
+            <li><strong>Max-Age=3600</strong> — время жизни (в секундах).</li>
+            <li><strong>Domain=example.com</strong> — доступен для указанного домена.</li>
+            <li><strong>Path=/</strong> — ограничивает область действия куки (например, только в /account).</li>
+            <li><strong>Secure</strong> — передается только по HTTPS.</li>
+            <li><strong>HttpOnly</strong> — не доступен через JavaScript (защита от XSS).</li>
+            <li><strong>SameSite</strong> — ограничивает передачу куки на сторонние сайты (Strict, Lax, None).</li>
+        </ul>
+
+        <h2>Управление куки в Chrome</h2>
+        <p>Куки можно просматривать, редактировать и удалять в DevTools (<strong>F12 → Application → Storage → Cookies</strong>).</p>
+
+        <h2>Управление куки в Firefox</h2>
+        <p>Куки можно просматривать, редактировать и удалять в DevTools:</p>
+        <ol>
+            <li>Откройте <strong>Firefox</strong>.</li>
+            <li>Нажмите <strong>F12</strong> или используйте меню: <strong>Web Developer → Web Console</strong>.</li>
+            <li>Перейдите на вкладку <strong>Storage</strong> (если она не видна, выберите меню в верхней части и включите Storage).</li>
+            <li>В левой панели выберите <strong>Cookies</strong>, затем выберите сайт, куки которого вы хотите просмотреть, отредактировать или удалить.</li>
+        </ol>
+        <p>Здесь можно:</p>
+        <ul>
+            <li>Просматривать куки, их значения и параметры.</li>
+            <li>Редактировать или удалять куки, используя контекстное меню или кнопки на панели.</li>
+        </ul>
+
+        <h2>Работа с куки в JavaScript</h2>
+        <p><strong>Чтение:</strong></p>
+        <pre><code>console.log(document.cookie);</code></pre>
+
+        <p><strong>Запись:</strong></p>
+        <pre><code>document.cookie = "username=John; path=/; max-age=3600";</code></pre>
+
+        <p><strong>Удаление:</strong></p>
+        <pre><code>document.cookie = "username=; max-age=0";</code></pre>
+
+        <h2>Альтернативы куки</h2>
+        <ul>
+            <li><strong>LocalStorage</strong> — хранит данные на неограниченный срок.</li>
+            <li><strong>SessionStorage</strong> — данные сохраняются на время сессии.</li>
+            <li><strong>IndexedDB</strong> — для хранения больших объёмов данных.</li>
+        </ul>
+
+        <h4>Таблица сравнения <code>Cookies</code>, <code>LocalStorage</code> и <code>SessionStorage</code></h4>:
+
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                  <th>Характеристика</th>
+                  <th>Cookies</th>
+                  <th>LocalStorage</th>
+                  <th>SessionStorage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>Размер хранилища</td>
+                  <td>~4 КБ</td>
+                  <td>~5–10 МБ</td>
+                  <td>~5–10 МБ</td>
+                </tr>
+                <tr>
+                  <td>Время жизни</td>
+                  <td>Задаётся вручную (expires)</td>
+                  <td>До удаления вручную</td>
+                  <td>До закрытия вкладки</td>
+                </tr>
+                <tr>
+                  <td>Доступ с сервера</td>
+                  <td>✅ (отправляются с HTTP-запросами)</td>
+                  <td>❌</td>
+                  <td>❌</td>
+                </tr>
+                <tr>
+                  <td>Доступ из JavaScript</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                </tr>
+                <tr>
+                  <td>Область действия</td>
+                  <td>Домен + путь</td>
+                  <td>Домен</td>
+                  <td>Вкладка браузера (session)</td>
+                </tr>
+                <tr>
+                  <td>Поддержка по умолчанию</td>
+                  <td>Все браузеры</td>
+                  <td>Все современные браузеры</td>
+                  <td>Все современные браузеры</td>
+                </tr>
+                <tr>
+                  <td>Подходит для аутентификации</td>
+                  <td>✅ (часто используется)</td>
+                  <td>❌ (небезопасно для токенов)</td>
+                  <td>❌</td>
+                </tr>
+                <tr>
+                    <td>Автоматическая отправка</td>
+                    <td>✅ (в каждом HTTP-запросе)</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td>Использование</td>
+                    <td>Небольшие данные, авторизация</td>
+                    <td>Кэш, настройки, предпочтения</td>
+                    <td>Временные данные сессии</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Краткое резюме</h4>:
+        <ul>
+            <li><b><code>Cookies</code></b> — хороши для данных, которые нужны и клиенту, и серверу (например, auth_token).</li>
+            <li><b><code>LocalStorage</code></b> — для хранения данных "на постоянно" в браузере (настройки, темы, кеш).</li>
+            <li><b><code>SessionStorage</code></b> — для временных данных в рамках одной вкладки (например, шаги формы).</li>
+        </ul>
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

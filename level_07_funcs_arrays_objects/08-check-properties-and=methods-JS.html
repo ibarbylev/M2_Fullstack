@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Проверка наличия свойств и методов объекта в JS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Проверка наличия свойств и методов объекта</h1>
+
+        <h2>Итерация по свойствам объекта в JavaScript</h2>
+
+        <p>Цикл <code>for...in</code> позволяет перебирать все перечисляемые свойства объекта, включая как собственные, так и унаследованные свойства, а также методы, если они являются перечисляемыми.</p>
+
+        <pre><code>
+const person = {
+  name: 'Alice',
+  age: 25,
+  greet: function() { console.log("Hello!"); }
+};
+
+for (let key in person) {
+  console.log(key);       // имя свойства (или метода)
+  console.log(person[key]); // значение свойства или метода
+}
+        </code></pre>
+        <p>Результат выполнения кода:</p>
+        <pre><code>
+name
+Alice
+age
+25
+greet
+[Function: greet]
+        </code></pre>
+
+        <h2>Методы <code>Object.keys()</code>, <code>Object.values()</code>, <code>Object.entries()</code></h2>
+        <p>Эти методы могут быть использованы для получения собственных перечисляемых свойств объекта:</p>
+        <pre><code>
+const person = {
+  name: 'Alice',
+  age: 25,
+  greet: function() { console.log("Hello!"); }
+};
+
+console.log(Object.keys(person)); // ["name", "age", "greet"]
+console.log(Object.values(person)); // ["Alice", 25, [Function: greet]]
+console.log(Object.entries(person)); // [["name", "Alice"], ["age", 25], ["greet", function() {...}]]
+        </code></pre>
+
+        <h2>Проверка наличия свойств</h2>
+        <p>Для проверки наличия свойств можно использовать <code>in</code> и <code>hasOwnProperty()</code>.</p>
+        <pre><code>
+console.log('name' in person); // true
+console.log('greet' in person); // true
+console.log('nonexistent' in person); // false
+console.log(person.hasOwnProperty('name')); // true
+console.log(person.hasOwnProperty('greet')); // true
+console.log(person.hasOwnProperty('toString')); // false (унаследовано от Object.prototype)
+        </code></pre>
+
+        <h2>Пример статичного метода, который не попал в <code>for...in</code></h2>
+        <p>Статичный метод, такой как <code>Person.create</code>, не будет перебираться в цикле <code>for...in</code>, так как он не является свойством экземпляра объекта, а принадлежит самому классу.</p>
+        <pre><code>
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  static create(name, age) {
+    return new Person(name, age);
+  }
+}
+
+const person = Person.create('Alice', 25);
+
+for (let key in person) {
+  console.log(key); // "name" и "age" будут выведены, но не "create"
+}
+
+console.log('create' in person); // false
+    </code>
+  </pre>
+
+    </div>
+</body>
+</html>

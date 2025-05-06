@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все виды ветвлений в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Все виды ветвлений в JavaScript</h1>
+
+        <h2>1. Условный оператор if</h2>
+        <p>Оператор <code>if</code> используется для выполнения кода, если условие истинно.</p>
+        <pre>
+let age = 20;
+
+if (age >= 18) {
+    console.log("Вы совершеннолетний.");
+}
+      </pre>
+      <p>В данном примере сообщение "Вы совершеннолетний." будет выведено, так как переменная <code>age</code> равна 20, и условие <code>age >= 18</code> истинно.</p>
+
+      <h2>2. Условный оператор if...else</h2>
+      <p>Оператор <code>if...else</code> позволяет выполнить один блок кода, если условие истинно, и другой — если оно ложно.</p>
+      <pre>
+let age = 16;
+
+if (age >= 18) {
+    console.log("Вы совершеннолетний.");
+} else {
+    console.log("Вы несовершеннолетний.");
+}
+      </pre>
+      <p>Если значение переменной <code>age</code> меньше 18, то будет выведено сообщение "Вы несовершеннолетний."</p>
+
+      <h2>3. Условный оператор if...else if...else</h2>
+      <p>Оператор <code>if...else if...else</code> используется для проверки нескольких условий поочередно.</p>
+      <pre>
+let age = 20;
+
+if (age < 13) {
+    console.log("Вы ребенок.");
+} else if (age >= 13 && age < 18) {
+    console.log("Вы подросток.");
+} else {
+    console.log("Вы взрослый.");
+}
+      </pre>
+      <p>В этом примере для переменной <code>age</code> будет выведено сообщение "Вы взрослый.", так как <code>age</code> равно 20, и первое и второе условия не выполняются.</p>
+
+      <h2>4. Тернарный оператор</h2>
+      <p>Тернарный оператор — это короткая форма записи условного оператора. Он имеет следующий синтаксис: <code>условие ? выражение1 : выражение2</code>.</p>
+      <pre>
+let age = 17;
+let result = (age >= 18) ? "Вы совершеннолетний." : "Вы несовершеннолетний.";
+console.log(result);
+      </pre>
+      <p>Если условие <code>age >= 18</code> истинно, то будет выведено сообщение "Вы совершеннолетний.", в противном случае — "Вы несовершеннолетний."</p>
+
+      <h2>5. Оператор switch</h2>
+      <p>Оператор <code>switch</code> используется для проверки нескольких вариантов. Он позволяет сравнивать значение с несколькими возможными вариантами и выполнять соответствующие действия.</p>
+      <pre>
+let fruit = "apple";
+
+switch (fruit) {
+    case "apple":
+        console.log("Это яблоко.");
+        break;
+    case "banana":
+        console.log("Это банан.");
+        break;
+    default:
+        console.log("Неизвестный фрукт.");
+}
+      </pre>
+      <p>В этом примере будет выведено сообщение "Это яблоко.", так как переменная <code>fruit</code> равна "apple". Оператор <code>break</code> используется для выхода из оператора <code>switch</code> после выполнения одного из условий.</p>
+
+      <h2>6. Оператор switch с безусловным переходом</h2>
+      <p>Вместо <code>break</code> можно использовать безусловный переход через <code>return</code> или "выход" из блока, если необходимо завершить выполнение после первого совпадения.</p>
+      <pre>
+let fruit = "banana";
+
+switch (fruit) {
+    case "apple":
+        console.log("Это яблоко.");
+        return;
+    case "banana":
+        console.log("Это банан.");
+        return;
+    default:
+        console.log("Неизвестный фрукт.");
+}
+      </pre>
+      <p>В этом примере будет выведено "Это банан.", так как в <code>switch</code> нет необходимости продолжать выполнение после первого совпадения.</p>
+
+    </div>
+
+</body>
+</html>

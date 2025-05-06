@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Синтаксис классов в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Синтаксис классов в JavaScript</h1>
+
+        <p>
+            В JavaScript классы были добавлены в ES6 (2015) и являются синтаксическим сахаром над прототипным наследованием.
+        </p>
+
+        <h2>1. Объявление классов</h2>
+
+        <p>Есть два способа объявления классов:</p>
+
+        <h3>1.1 Класс через class (именованный)</h3>
+
+        <pre><code>
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+        </code></pre>
+
+        <h3>1.2 Класс через class в виде выражения (анонимный)</h3>
+
+        <pre><code>
+const Person = class {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+};
+        </code></pre>
+
+
+        <h2>2. Поля и методы классов</h2>
+
+        <h3>2.1 Поля класса</h3>
+
+        <p>
+            Ранее поля приходилось объявлять в constructor, но теперь можно объявлять их прямо в классе.
+        </p>
+
+        <pre><code>
+class Person {
+    name = "Default Name"; // Поле класса
+    age = 0;
+
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+        </code></pre>
+
+        <p>
+            <strong>ВАЖНОЕ ЗАМЕЧАНИЕ:</strong> в этом примере поля name и age, объявленные вне конструктора, не являются атрибутами класса (если пользоваться терминологией Python). А по-прежнему являются атрибутам экземпляра класса.
+        </p>
+        <p>
+            Если нужно создать именно атрибут класса, то для этого используют статические методы:
+        </p>
+
+        <pre><code>
+class Person {
+    static name = "Default Name";  // Поле класса
+    static age = 0;
+
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+const person1 = new Person("Alice", 30);
+const person2 = new Person("Bob", 25);
+
+console.log(Person.name); // "Default Name" (класс, не экземпляр)
+        </code></pre>
+        <h3>2.2 Методы класса</h3>
+
+        <p>Методы могут быть обычными, статическими и приватными.</p>
+
+        <pre><code>
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    greet() { // Обычный метод
+        console.log(`Hello, my name is ${this.name}`);
+    }
+
+    static info() { // Статический метод
+        console.log("This is the Person class");
+    }
+
+    #privateMethod() { // Приватный метод
+        console.log("This is a private method");
+    }
+}
+        </code></pre>
+
+        <ul>
+            <li>✅ Обычные методы работают с экземплярами.</li>
+            <li>✅ Статические методы вызываются на самом классе (<code>Person.info()</code>).</li>
+            <li>✅ Приватные методы начинаются с # и доступны только внутри класса.</li>
+        </ul>
+
+
+        <h2>3. Создание экземпляров (объектов) класса</h2>
+
+        <p>Чтобы создать объект класса, используем <code>new</code>:</p>
+
+
+        <pre><code>
+const user = new Person("Alice", 25);
+user.greet(); // Hello, my name is Alice
+Person.info(); // This is the Person class
+        </code></pre>
+
+
+        <h2>4. История классов в JavaScript</h2>
+
+        <p>До ES6 в JavaScript не было классов, и использовалось прототипное наследование. Пример до ES6:</p>
+
+
+        <pre><code>
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.greet = function() {
+    console.log(`Hello, my name is ${this.name}`);
+};
+
+const user = new Person("Alice");
+user.greet(); // Hello, my name is Alice
+        </code></pre>
+
+        <p>
+            Классы в ES6 лишь обёртка над этим механизмом, но они делают код более читаемым и удобным.
+        </p>
+
+        <h2>5. Сравнение с классами в Python</h2>
+
+        <table border="1">
+            <tr>
+                <th>Характеристика</th>
+                <th>JavaScript</th>
+                <th>Python</th>
+            </tr>
+            <tr>
+                <td>Объявление класса</td>
+                <td><code>class Person {}</code></td>
+                <td><code>class Person:</code></td>
+            </tr>
+            <tr>
+                <td>Конструктор</td>
+                <td><code>constructor()</code></td>
+                <td><code>__init__()</code></td>
+            </tr>
+            <tr>
+                <td>Поля</td>
+                <td>Определяются в <code>constructor</code> или в классе</td>
+                <td>Определяются в <code>__init__</code> или в классе</td>
+            </tr>
+            <tr>
+                <td>Методы</td>
+                <td>Обычные, статические, приватные (<code>#method</code>)</td>
+                <td>Обычные, статические, приватные (<code>_method</code> или <code>__method</code>)</td>
+            </tr>
+            <tr>
+                <td>Наследование</td>
+                <td><code>class Child extends Parent</code></td>
+                <td><code>class Child(Parent)</code></td>
+            </tr>
+            <tr>
+                <td>Статические методы</td>
+                <td><code>static methodName() {}</code></td>
+                <td><code>@staticmethod</code></td>
+            </tr>
+            <tr>
+                <td>Приватные свойства</td>
+                <td><code>#privateField</code></td>
+                <td><code>_protected</code>, <code>__private</code></td>
+            </tr>
+        </table>
+
+        <ul>Разница:
+            <li>
+                В Python приватные методы/атрибуты лишь рекомендация, в JS (начиная с ES2020) приватность жёстко контролируется (#).
+            </li>
+
+            <li>
+                В Python классы используются повсеместно, а в JS часто применяются функции и объекты вместо классов.
+            </li>
+        </ul>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовый синтаксис CSS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Селекторы в CSS</h1>
+
+        <h2>
+            <a href="https://www.w3schools.com/cssref/css_selectors.php">Базовые селекторы</a>
+        </h2>
+        <ul>
+            <li><strong>Теговый селектор</strong>: <code>p { ... }</code> (Применяет стиль ко всем &lt;p&gt;)</li>
+            <li><strong>Классовый селектор</strong>: <code>.my-class { ... }</code> (Применяет стиль ко всем элементам с class="my-class")</li>
+            <li><strong>ID селектор</strong>: <code>#my-id { ... }</code> (Применяет стиль к элементу с id="my-id")</li>
+        </ul>
+
+        <h2>Дополнительные селекторы</h2>
+        <ul>
+            <li><strong>Универсальный селектор</strong>: <code>* { ... }</code> (Применяет стиль ко всем элементам)</li>
+            <li><strong>Групповой селектор</strong>: <code>h1, h2, h3 { ... }</code> (Применяет стиль ко всем указанным тегам)</li>
+        <li><strong>Дочерний селектор</strong>: <code>div > p { color: red; }</code>
+            <p>Применяет стиль только к непосредственным потомкам &lt;div&gt;.</p>
+            <pre><code>&lt;div&gt;
+    &lt;p&gt;Этот текст станет красным.&lt;/p&gt;
+    &lt;section&gt;
+        &lt;p&gt;Этот текст НЕ изменится, так как он не является ПРЯМЫМ потомком div.&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+        </li>
+        <li><strong>Потомковый селектор</strong>: <code>div p { color: green; }</code>
+            <p>Применяет стиль ко всем вложенным &lt;p&gt; внутри &lt;div&gt;, независимо от уровня вложенности.</p>
+            <pre><code>&lt;div&gt;
+    &lt;p&gt;Этот текст станет зелёным.&lt;/p&gt;
+    &lt;section&gt;
+        &lt;p&gt;Этот текст тоже станет зелёным, так как p является потомком div.&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+        </li>
+        <li><strong>Соседний селектор</strong>: <code>h1 + p { color: blue; }</code>
+            <p>Применяет стиль к первому &lt;p&gt;, который идет сразу после &lt;h1&gt;.</p>
+            <pre><code>&lt;h1&gt;Заголовок&lt;/h1&gt;
+&lt;p&gt;Этот абзац сразу после h1 и станет синим.&lt;/p&gt;
+&lt;p&gt;Этот абзац НЕ изменится, так как он не сразу после h1.&lt;/p&gt;
+</code></pre>
+        </li>
+        <li><strong>Родственный селектор</strong>: <code>h1 ~ p { color: purple; }</code>
+            <p>Применяет стиль ко всем &lt;p&gt;, которые следуют за &lt;h1&gt; на одном уровне вложенности.</p>
+            <pre><code>&lt;h1&gt;Заголовок&lt;/h1&gt;
+&lt;p&gt;Этот абзац станет фиолетовым.&lt;/p&gt;
+&lt;div&gt;Некоторый блок&lt;/div&gt;
+&lt;p&gt;Этот абзац тоже станет фиолетовым, так как он является родственным элементом h1.&lt;/p&gt;
+
+&lt;section&gt;
+    &lt;p&gt;Этот абзац НЕ изменится, так как он находится в другом родительском элементе.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+        </li>
+
+            <li><strong>Атрибутные селекторы</strong>: <code>input[type="text"] { ... }</code> (Применяет стиль к input с type="text")</li>
+        </ul>
+
+        <h2>Псевдоклассы</h2>
+        <ul>
+            <li><code>a:hover { ... }</code> (Срабатывает при наведении на ссылку)</li>
+            <li><code>input:focus { ... }</code> (Срабатывает, когда input в фокусе)</li>
+            <li><code>p:first-child { ... }</code> (Применяет стиль к первому элементу p в родительском контейнере)</li>
+        </ul>
+
+        <h2>Псевдоэлементы</h2>
+        <ul>
+            <li><code>p::first-line { ... }</code> (Стилизует первую строку текста в параграфе)</li>
+            <li><code>::before</code> / <code>::after</code> (Добавляют контент до или после элемента)</li>
+            <li><code>::selection { ... }</code> (Стилизует выделенный текст)</li>
+        </ul>
+
+    </div>
+</body>
+</html>

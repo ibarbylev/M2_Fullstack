@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный пример HTML и CSS</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Три строчки ниже добавлены для подсветки кода на странице -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- стилизация списков -->
+    <style>
+        ul.custom-list {
+            list-style-type: katakana; /* Японская слоговая азбука */
+            color: blue; /* Цвет текста */
+        }
+
+        ol.custom-list {
+            list-style-type: hiragana-iroha; /* Японская система упорядочения */
+            color: green; /* Цвет текста */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Списки</h1>
+        <h2>ul -- li</h2>
+        <ul>
+            <li>Первый элемент списка</li>
+            <li>Второй элемент списка</li>
+            <li>Третий элемент списка</li>
+        </ul>
+        <h2>ol -- li</h2>
+        <ol>
+            <li>Первый элемент списка</li>
+            <li>Второй элемент списка</li>
+            <li>Третий элемент списка</li>
+        </ol>
+
+        <h2>Квадраты вместо точек (circle; disk; square)</h2>
+        <ul type="square">
+            <li>Первый элемент списка</li>
+            <li>Второй элемент списка</li>
+        </ul>
+        <h2>Буквы вместо цифр (буквы:a, A, римские цифры: i, I)</h2>
+        <ol type="I">
+            <li>Первый элемент списка</li>
+            <li>Второй элемент списка</li>
+            <li>Третий элемент списка</li>
+        </ol>
+
+        <h2>Вложенные списки: </h2>
+        <ul>
+            <li>Первый элемент списка</li>
+                <ul type="circle">
+                    <li>Вложенный первый элемент</li>
+                    <li>Вложенный второй элемент</li>
+                </ul>
+            <li>Второй элемент списка</li>
+            <li>Третий элемент списка</li>
+        </ul>
+
+        <!-- стилизация списков -->
+        <h2>Стилизация списков: </h2>
+        <ul class="custom-list">
+            <li>Первый элемент списка</li>
+            <li>Второй элемент списка</li>
+        </ul>
+
+        <ol class="custom-list">
+            <li>Первый элемент списка</li>
+            <li>Второй элемент списка</li>
+        </ol>
+
+
+        <h2>Размещение кода на странице: </h2>
+        <pre><code>
+                function helloWorld() {
+                    console.log('Hello, world!');
+                }
+        </code></pre>
+
+        <h2>Размещение произвольного текста на странице: </h2>
+        <pre>
+            Текст с 10 пробелами          посередине
+                    и произвольными
+                                            переносами
+                                строк
+        </pre>
+
+    </div>
+
+</body>
+</html>

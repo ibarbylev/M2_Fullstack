@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Шаблонные литералы в JS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Шаблонные литералы в JS</h1>
+
+        <h2>Вложенные выражения</h2>
+        <p>
+            В шаблонных литералах можно использовать любые выражения, которые будут автоматически вычислены при запуске кода:
+        </p>
+
+        <pre><code>
+const a = 5;
+const b = 10;
+
+const result = `The result of ${a} + ${b} is ${a + b}.`;
+console.log(result); // "The result of 5 + 10 is 15."
+        </code></pre>
+
+        <h2>Вложенные шаблонные литералы</h2>
+
+        <p>
+            Шаблонные литералы могут содержать несколько уровней вложение:
+        </p>
+
+        <h3>Вложенные шаблонные литералы в функциях</h3>
+        <pre><code>
+const formatAge = (age) => `${age} ${age % 10 === 1 && age !== 11 ? "год" : "лет"}`;
+
+const message = (name, age) => `Привет, ${name}! ${formatAge(age)}`;
+console.log(message("Анна", 25)); // "Привет, Анна! 25 лет"
+console.log(message("Иван", 31)); // "Привет, Иван! 31 год"
+
+// Привет, Анна! 25 лет
+// Привет, Иван! 31 год
+
+// На всякий случай - более сложные вариант условий для "года":
+// const formatAge = (age) => `${age} ${(age % 100 >= 11 && age % 100 <= 14) ? "лет" : (age % 10 === 1) ? "год" : (age % 10 >= 2 && age % 10 <= 4) ? "года" : "лет"}`;
+        </code></pre>
+
+
+         <h3>Вложенные шаблонные литералы в объекте</h3>
+        <pre><code>
+const user = {
+  name: "Олег",
+  details: {
+    age: 28,
+    country: "Россия",
+  },
+};
+
+const info = `Имя: ${user.name}, ${`Возраст: ${user.details.age}, Страна: ${user.details.country}`}`;
+console.log(info);
+
+// Имя: Олег, Возраст: 28, Страна: Россия
+        </code></pre>
+
+        <h2>Тегированные шаблонные литералы (Tagged Templates)</h2>
+
+        <p>
+            Тегированный шаблонный летирал в JS позволяет преобразовать шаблонную строку в массив строк и значений. Например, это выражение:
+        </p>
+
+        <pre><code>tag`Имя: ${name}, Возраст: ${age}`;</code></pre>
+
+        <p>эквивалентно функции:</p>
+        <pre><code>tag(["Имя: ", ", Возраст: ", ""], name, age);</code></pre>
+
+        <p>
+            То есть, JavaScript сам разбивает строку на части и передаёт их в функцию:
+        </p>
+        <pre><code>
+function tag(strings, ...values) {
+    console.log(strings);
+    console.log(values);
+    return 'Результат';
+}
+
+const name = "Анна";
+const age = 25;
+
+const result = tag`Имя: ${name}, Возраст: ${age}`;
+console.log(result);
+
+// Array(3) [ "Имя: ", ", Возраст: ", "" ]
+// Array(2) [ "Анна", 25 ]
+// Результат
+        </code></pre>
+
+        <p>
+            Кстати, чтобы вернуть строку с подставленными значениями, можно слегка отредактировать предыдущую функцию:
+        </p>
+
+        <pre><code>
+function tag(strings, ...values) {
+  let result = '';
+
+  strings.forEach((str, i) => {
+    result += str + (values[i] !== undefined ? values[i] : '');
+  });
+
+  return result;
+}
+
+const name = "Анна";
+const age = 25;
+
+const result = tag`Имя: ${name}, Возраст: ${age}`;
+console.log(result); // "Имя: Анна, Возраст: 25"
+        </code></pre>
+
+
+        <h2>Шаблонный литерал, как защита от XSS</h2>
+
+        <h3>Что такое XSS (межсайтовый скриптинг)?</h3>
+
+        <p>
+            <b>XSS (Cross-Site Scripting)</b> — это тип атаки, при котором злоумышленник внедряет вредоносный JavaScript-код в веб-страницу, чтобы выполнить его в браузере жертвы. Это может привести к краже данных (например, cookie-файлов), перенаправлению пользователя на фишинговые сайты или выполнению других нежелательных действий.
+        </p>
+        <h3>Как работает защита с safeHTML()?</h3>
+
+        <p>
+            В коде используется функция шаблонных литералов safeHTML(), которая предотвращает XSS, заменяя потенциально опасные символы (&lt;, &gt;, &amp;) их безопасными HTML-энкодированными эквивалентами (&amp;lt;, &amp;gt; &amp;amp;).
+        </p>
+
+        <pre><code>
+function safeHTML(strings, ...values) {
+  return strings.reduce((result, str, i) =>
+    `${result}${str}${String(values[i])
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')}`, '');
+}
+
+const userInput = '&lt;script>alert("XSS")&lt;/script>';
+const message = safeHTML`User input: ${userInput}`;
+
+console.log(message);
+// Выведет: "User input: &amp;lt;script&amp;gt;alert("XSS")&amp;lt;/script&amp;gt;"
+        </code></pre>
+
+
+    </div>
+</body>
+</html>
