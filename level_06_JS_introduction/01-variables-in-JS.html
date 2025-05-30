@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Переменные и типы данных в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr, th, td { width: 100% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Переменные и типы данных в JavaScript</h1>
+        <p>В JavaScript переменные используются для хранения данных. Объявить переменную можно с помощью <code>var</code>, <code>let</code> или <code>const</code>.</p>
+
+        <h2>Типы данных</h2>
+        <h1>Переменные и типы данных в JavaScript</h1>
+        <p>В JavaScript переменные используются для хранения данных. Объявить переменную можно с помощью <code>var</code>, <code>let</code> или <code>const</code>.</p>
+
+        <h2>Объявление переменных: var, let, const</h2>
+        <p>В JavaScript переменные можно объявлять тремя способами:</p>
+        <ul>
+            <li><code>var</code> – устаревший способ объявления переменной, имеет функциональную область видимости.</li>
+            <li><code>let</code> – позволяет объявлять переменные с блочной областью видимости.</li>
+            <li><code>const</code> – используется для объявления неизменяемых переменных с блочной областью видимости.</li>
+        </ul>
+
+        <h2>Области видимости</h2>
+        <p>В JavaScript существует три типа областей видимости:</p>
+        <ul>
+            <li><strong>Глобальная область</strong> – переменные доступны во всем коде.</li>
+            <li><strong>Функциональная область</strong> – переменные, объявленные с помощью <code>var</code> внутри функции, доступны только в этой функции.</li>
+            <li><strong>Блочная область</strong> – переменные, объявленные с помощью <code>let</code> или <code>const</code> внутри блока <code>{}</code>, доступны только в этом блоке.</li>
+        </ul>
+
+        <h2>Hoisting (всплытие переменных и функций)</h2>
+        <p><strong>Hoisting</strong> – это механизм в JavaScript, при котором объявления переменных и функций поднимаются в начало своей области видимости до выполнения кода.</p>
+        <p>Фактически, это означает, что переменные, объявленные с помощью <code>var</code>, и функции можно использовать до их объявления в коде.</p>
+        <p>Однако переменные, объявленные через <code>let</code> и <code>const</code>, поднимаются, но остаются в "временной мертвой зоне" (TDZ) и не могут быть использованы до фактического объявления.</p>
+
+        <h3>Пример hoisting:</h3>
+        <pre><code>console.log(a); // undefined (НЕ ошибка!)
+var a = 5;
+console.log(a); // 5
+
+console.log(b); // ❌ ReferenceError
+let b = 10;
+console.log(b);</code></pre>
+
+        <h2>Сравнение var, let, const</h2>
+        <table>
+            <tr>
+                <th>Характеристика</th>
+                <th>var</th>
+                <th>let</th>
+                <th>const</th>
+            </tr>
+            <tr>
+                <td><strong>Область видимости</strong></td>
+                <td>Функциональная или глобальная</td>
+                <td>Блочная</td>
+                <td>Блочная</td>
+            </tr>
+            <tr>
+                <td><strong>Hoisting (всплытие)</strong></td>
+                <td>Да, но инициализация не всплывает</td>
+                <td>Нет (ошибка при обращении до объявления)</td>
+                <td>Нет (ошибка при обращении до объявления)</td>
+            </tr>
+            <tr>
+                <td><strong>Переназначение</strong></td>
+                <td>Да</td>
+                <td>Да</td>
+                <td>Нет</td>
+            </tr>
+            <tr>
+                <td><strong>Инициализация (т.е. немедленное присвоение значения при объявлении)</strong></td>
+                <td>Необязательна</td>
+                <td>Необязательна</td>
+                <td>Обязательна</td>
+            </tr>
+        </table>
+
+        <h3>Примитивные типы данных и объекты (непримитивные типы данных)</h3>
+        <p>В JavaScript существует два типа данных: примитивные и объекты (непримитивные).</p>
+
+        <h3>Примитивные типы данных</h3>
+        <ul>
+            <li><strong>String</strong> – строка, например <code>"Привет, мир!"</code></li>
+            <li><strong>Number</strong> – число, например <code>42</code> или <code>3.14</code></li>
+            <li><strong>BigInt</strong> – большие числа, например <code>9007199254740991n</code></li>
+            <li><strong>Boolean</strong> – логическое значение <code>true</code> или <code>false</code></li>
+            <li><strong>Undefined</strong> – переменная объявлена, но не имеет значения</li>
+            <li><strong>Null</strong> – значение отсутствует</li>
+            <li><strong>Symbol</strong> – уникальный идентификатор</li>
+        </ul>
+
+        <h3>Объекты (непримитивные типы данных)</h3>
+        <ul>
+            <li><strong>Object</strong> – сложная структура данных, включая:</li>
+            <ul>
+                <li><strong>Обычный объект</strong>: <code>let obj = { name: "Alex", age: 30 };</code></li>
+                <li><strong>Array (массив)</strong>: <code>let arr = [1, 2, 3];</code></li>
+                <li><strong>Function (функция)</strong>: <code>function sayHello() { console.log("Hello"); }</code></li>
+                <li><strong>Date (дата)</strong>: <code>let date = new Date();</code></li>
+                <li><strong>RegExp (регулярное выражение)</strong>: <code>let regex = /ab+c/;</code></li>
+                <li><strong>Map</strong>: <code>let map = new Map(); map.set('key', 'value');</code></li>
+                <li><strong>Set</strong>: <code>let set = new Set([1, 2, 3]);</code></li>
+                <li><strong>WeakMap</strong> и <strong>WeakSet</strong>: Аналоги Map и Set, но с "слабыми" ссылками</li>
+                <li><strong>Promise</strong>: <code>let promise = new Promise((resolve) => resolve("done"));</code></li>
+                <li><strong>Error</strong>: <code>throw new Error("Something went wrong");</code></li>
+            </ul>
+        </ul>
+
+        <h3>Примитивы vs. Объекты</h3>
+        <ul>
+            <li>
+                Примитивы → ведут себя как <b>immutable</b> (неизменяемые) в Python.
+            </li>
+            <li>Объекты → ведут себя как ссылочные типы (<b>mutable</b>) в Python.</li>
+        </ul>
+
+        <h2>Пример кода</h2>
+        <h3>Примитивные типы данных</h3>
+        <pre><code>let stringVar = "Привет, мир!";
+let numberVar = 42;
+let floatVar = 3.14;
+let bigIntVar = 9007199254740991n;
+let booleanVar = true;
+let undefinedVar;
+let nullVar = null;
+let symbolVar = Symbol("id");
+
+console.log(stringVar);
+console.log(numberVar);
+console.log(floatVar);
+console.log(bigIntVar);
+console.log(booleanVar);
+console.log(undefinedVar);
+console.log(nullVar);
+console.log(symbolVar);</code></pre>
+
+        <h3>Непримитивные типы данных</h3>
+        <pre><code>let objectVar = { name: "Иван", age: 30 };
+let arrayVar = [1, 2, 3];
+let functionVar = function() { console.log("Функция"); };
+let dateVar = new Date();
+let regexVar = /ab+c/;
+let mapVar = new Map();
+mapVar.set("key", "value");
+let setVar = new Set([1, 2, 3]);
+let promiseVar = new Promise((resolve) => resolve("done"));
+let errorVar = new Error("Ошибка");
+
+console.log(objectVar);
+console.log(arrayVar);
+console.log(functionVar);
+console.log(dateVar);
+console.log(regexVar);
+console.log(mapVar);
+console.log(setVar);
+console.log(promiseVar);
+console.log(errorVar);</code></pre>
+    </div>
+    <script src="js/01-1-variables-and-data-types.js"></script>
+    <script src="js/01-2-variables-example.js"></script>
+</body>
+</html>

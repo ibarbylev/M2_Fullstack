@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формы</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        section { border: 6px solid #ddd; padding: 10px; margin: 10px 0; }
+        .my-style * { display: block; margin: 10px 0; } /* делает все элементы внутри класса блоковыми */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Формы</h1>
+
+        <section>
+            <h2>Секция 1. Пример формы</h2>
+            <form action="#" method="post">
+                <label for="username">Имя пользователя:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Секция 2. POST форма</h2>
+            <form class="my-style" action="#" method="post">
+                <label for="username2">Имя пользователя:</label>
+                <input type="text" id="username2" name="username2" required>
+                <br>
+                <label for="email2">Email:</label>
+                <input type="email" id="email2" name="email2" required>
+                <br>
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Секция 3. GET форма</h2>
+            <form class="my-style" action="#" method="get">
+                <label for="username3">Имя пользователя:</label>
+                <input type="text" id="username3" name="username3" required>
+                <br>
+                <label for="email3">Email:</label>
+                <input type="email" id="email3" name="email3" required>
+                <br>
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Секция 4. Отправка формы с помощью JavaScript</h2>
+            <form id="myForm" class="my-style" action="#" method="post">
+                <label for="username4">Имя пользователя:</label>
+                <input type="text" id="username4" name="username4" required>
+                <br>
+                <label for="email4">Email:</label>
+                <input type="email" id="email4" name="email4" required>
+                <br>
+                <button type="button" onclick="submitForm()">Отправить с помощью JS</button>
+            </form>
+        </section>
+
+    </div>
+    <script>
+        function submitForm() {
+            document.getElementById('myForm').submit();
+        }
+    </script>
+</body>
+</html>

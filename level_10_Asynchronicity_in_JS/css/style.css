@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.example-image {
+    display: block; /* Чтобы изображение стало блочным элементом */
+    margin: 0 auto; /* Центрируем изображение */
+    width: 500px; /* Ширина изображения */
+    height: 500px; /* Высота изображения */
+    border-radius: 5px;
+}
+
+pre {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-left: 5px solid #007BFF;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* =============== table styles ================ */
+table {
+  width: 50%; /* Устанавливает ширину таблицы */
+  border-collapse: collapse; /* Убирает двойные границы между ячейками */
+}
+
+th, td {
+  border: 1px solid black; /* Устанавливает границу для ячеек */
+  padding: 8px; /* Добавляет отступы внутри ячеек */
+  text-align: left; /* Выравнивает текст по левому краю */
+}
+
+th {
+  background-color: #f2f2f2; /* Устанавливает цвет фона для заголовков */
+}
+
+/* ================ buttons ==================== */
+button {
+    min-height: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* Кнопка "Показать код" */
+.btn-show {
+    background-color: #4CAF50;  /* Приятный зелёный */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-show:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Кнопка "Запустить код" */
+.btn-run {
+    background-color: #D32F2F;  /* Приятный красный */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-run:hover {
+    background-color: #c62828;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-gray {
+    background-color: grey;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

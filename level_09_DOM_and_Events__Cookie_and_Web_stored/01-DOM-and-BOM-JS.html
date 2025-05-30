@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM (Document Object Model) и BOM  (Browser Object Model)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>DOM (Document Object Model) и BOM (Browser Object Model)</h1>
+        <h2>DOM определение</h2>
+        <p><strong>DOM</strong> — это объектная модель документа, представляющая HTML-страницу в виде дерева узлов, которые можно изменять с помощью JavaScript.</p>
+
+        <h2>Узлы и элементы в DOM</h2>
+        <p>DOM состоит из узлов (<em>nodes</em>), которые можно разделить на несколько типов:</p>
+        <ul>
+            <li><strong>Элементы (Element nodes)</strong> – узлы, представляющие HTML-теги.</li>
+            <li><strong>Текстовые узлы (Text nodes)</strong> – узлы, содержащие текст внутри HTML-элементов.</li>
+            <li><strong>Узлы комментариев (Comment nodes)</strong> – узлы, представляющие комментарии в коде (<code>&lt;!-- comment --&gt;</code>).</li>
+            <li><strong>Документ (Document node)</strong> – корневой узел, представляющий весь HTML-документ (<code>document</code>).</li>
+        </ul>
+
+        <h2>Классификация узлов и элементов с примерами</h2>
+        <p>Пример HTML-страницы:</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Пример DOM&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Заголовок&lt;/h1&gt;
+    &lt;p&gt;Текстовый узел &lt;strong&gt;с вложенным элементом&lt;/strong&gt;.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h2>Структура DOM-дерева</h2>
+    <pre><code>document
+ ├── html
+ │    ├── head
+ │    │    └── title ("Пример DOM")
+ │    ├── body
+ │         ├── h1 ("Заголовок")
+ │         ├── p
+ │              ├── (Text "Текстовый узел")
+ │              └── strong ("с вложенным элементом")</code></pre>
+
+    <h2>Внешнее сходство с файловой системой</h2>
+    <pre><code>/ (Корень)
+ ├── /html
+ │    ├── /head
+ │    │    ├── title.txt
+ │    ├── /body
+ │         ├── h1.txt
+ │         ├── /p
+ │              ├── text.txt
+ │              └── strong.txt</code></pre>
+
+    <h1>BOM (Browser Object Model)</h1>
+    <h2>Определение</h2>
+    <p><strong>BOM</strong> — это объектная модель браузера, предоставляющая доступ к функционалу окна браузера, вкладок, истории и других возможностей, не связанных с HTML-документом.</p>
+
+    <h2>Связь между BOM и DOM</h2>
+    <ul>
+        <li>BOM включает в себя DOM.</li>
+        <li><code>window</code> — это главный объект BOM, который содержит:</li>
+        <ul>
+            <li><code>document</code> (DOM)</li>
+            <li><code>history</code>, <code>location</code>, <code>navigator</code>, <code>screen</code>, <code>console</code> и другие объекты</li>
+        </ul>
+    </ul>
+    <p>Пример связи:</p>
+    <pre><code>console.log(window.document.title); // Получаем заголовок страницы (из DOM)
+console.log(window.location.href);  // Получаем текущий URL (из BOM)</code></pre>
+    <p>Таким образом, <strong>DOM — это часть BOM</strong>, а BOM управляет поведением браузера в целом.</p>
+
+    </div>
+</body>
+</html>

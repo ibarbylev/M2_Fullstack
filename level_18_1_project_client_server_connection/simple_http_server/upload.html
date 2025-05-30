@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка изображения</title>
+</head>
+<body>
+    <h1>Загрузить изображение</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <input type="submit" value="Загрузить">
+    </form>
+    <p><a href="/index.html">На главную</a></p>
+</body>
+</html>

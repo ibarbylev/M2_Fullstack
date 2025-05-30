@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Логические операторы и операторы сравнения</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Логические операторы и операторы сравнения</h1>
+
+        <h2>1. Логические операторы</h2>
+
+        <h3>1. Оператор "И" (&&)</h3>
+        <p>Оператор <code>&&</code> возвращает <code>true</code>, если оба операнда истинны. В противном случае возвращает <code>false</code>.</p>
+        <pre>
+let a = true;
+let b = false;
+console.log(a && b); // false
+
+console.log(5 > 2 && 8 > 3); // true
+        </pre>
+        <p>Если хотя бы одно из условий ложно, результат будет <code>false</code>.</p>
+
+        <h3>2. Оператор "ИЛИ" (||)</h3>
+        <p>Оператор <code>||</code> возвращает <code>true</code>, если хотя бы один операнд истинный. Если оба ложны, возвращает <code>false</code>.</p>
+        <pre>
+let a = true;
+let b = false;
+console.log(a || b); // true
+
+console.log(5 < 2 || 8 > 3); // true
+        </pre>
+        <p>Если хотя бы одно из условий истинно, результат будет <code>true</code>.</p>
+
+        <h3>3. Оператор "НЕ" (!)</h3>
+        <p>Оператор <code>!</code> инвертирует логическое значение. Если значение <code>true</code>, оно становится <code>false</code>, и наоборот.</p>
+        <pre>
+let a = true;
+console.log(!a); // false
+
+console.log(!(5 > 2)); // false
+        </pre>
+        <p>Этот оператор используется для проверки отрицания условий.</p>
+
+        <h3>4. Оператор нулевого слияния (??)</h3>
+        <p>Оператор <code>??</code> возвращает первый операнд, если он не равен <code>null</code> или <code>undefined</code>, иначе возвращает второй операнд.</p>
+        <pre>
+let name = null;
+let defaultName = "Гость";
+console.log(name ?? defaultName); // "Гость"
+
+let value = 0;
+console.log(value ?? 10); // 0
+        </pre>
+        <p>Этот оператор полезен для установки значений по умолчанию.</p>
+
+        <h2>2. Операторы сравнения</h2>
+        <table>
+            <tr>
+                <th>Оператор</th>
+                <th>Описание</th>
+                <th>Пример</th>
+                <th>Результат</th>
+            </tr>
+            <tr>
+                <td><code>==</code> (нестрогое равенство)</td>
+                <td>Сравнивает значения без учёта типа</td>
+                <td><pre>console.log("5" == 5);</pre></td>
+                <td><code>true</code></td>
+            </tr>
+            <tr>
+                <td><code>===</code> (строгое равенство)</td>
+                <td>Сравнивает значения и их тип</td>
+                <td><pre>console.log("5" === 5);</pre></td>
+                <td><code>false</code></td>
+            </tr>
+            <tr>
+                <td><code>!=</code> (нестрогое неравенство)</td>
+                <td>Сравнивает значения без учёта типа</td>
+                <td><pre>console.log("5" != 5);</pre></td>
+                <td><code>false</code></td>
+            </tr>
+            <tr>
+                <td><code>!==</code> (строгое неравенство)</td>
+                <td>Сравнивает значения и их тип</td>
+                <td><pre>console.log("5" !== 5);</pre></td>
+                <td><code>true</code></td>
+            </tr>
+            <tr>
+                <td><code>&gt;</code> (больше)</td>
+                <td>Возвращает <code>true</code>, если первый операнд больше второго</td>
+                <td><pre>console.log(10 > 5);</pre></td>
+                <td><code>true</code></td>
+            </tr>
+            <tr>
+                <td><code>&lt;</code> (меньше)</td>
+                <td>Возвращает <code>true</code>, если первый операнд меньше второго</td>
+                <td><pre>console.log(10 < 5);</pre></td>
+                <td><code>false</code></td>
+            </tr>
+            <tr>
+                <td><code>&gt;=</code> (больше или равно)</td>
+                <td>Возвращает <code>true</code>, если первый операнд больше или равен второму</td>
+                <td><pre>console.log(5 >= 5);</pre></td>
+                <td><code>true</code></td>
+            </tr>
+            <tr>
+                <td><code>&lt;=</code> (меньше или равно)</td>
+                <td>Возвращает <code>true</code>, если первый операнд меньше или равен второму</td>
+                <td><pre>console.log(3 <= 5);</pre></td>
+                <td><code>true</code></td>
+            </tr>
+        </table>
+
+        <h2>3. Приоритет операторов</h2>
+        <p>Приоритет выполнения операторов (от высокого к низкому):</p>
+        <ul>
+            <li><code>!</code> (НЕ)</li>
+            <li><code>&gt;, &lt;, &gt;=, &lt;=</code> (сравнение)</li>
+            <li><code>==, ===, !=, !==</code> (равенство)</li>
+            <li><code>&&</code> (И)</li>
+            <li><code>||</code> (ИЛИ)</li>
+            <li><code>??</code> (Нулевое слияние)</li>
+        </ul>
+
+        <h2>4. Использование логических операторов в условиях</h2>
+        <pre>
+let age = 20;
+if (age >= 18 && age <= 65) {
+    console.log("Вы в трудоспособном возрасте.");
+} else {
+    console.log("Вы не в трудоспособном возрасте.");
+}
+        </pre>
+        <p>Этот код проверяет, находится ли возраст в диапазоне от 18 до 65 лет.</p>
+    </div>
+
+</body>
+</html>

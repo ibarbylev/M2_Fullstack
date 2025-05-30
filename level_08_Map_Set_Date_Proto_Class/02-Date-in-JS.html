@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с Date в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Работа с Date в JavaScript</h1>
+
+    <pre><code>
+// Создание объекта Date
+let now = new Date(); // Текущая дата и время
+console.log(now);
+
+// Создание даты с заданными параметрами
+let specificDate = new Date(2024, 2, 20); // 20 марта 2024 (месяцы с 0)
+console.log(specificDate);
+
+// Формат: new Date(year, month, day, hours, minutes, seconds, milliseconds);
+let customDate = new Date(2024, 2, 20, 15, 30, 45); // 20 марта 2024, 15:30:45
+console.log(customDate);
+
+// Создание даты из строки
+let dateFromString = new Date("2024-03-20T15:30:45");
+console.log(dateFromString);
+
+// Методы получения даты и времени
+let date = new Date();
+console.log(date.getFullYear());  // Год (2024)
+console.log(date.getMonth());     // Месяц (0-11)
+console.log(date.getDate());      // День месяца (1-31)
+console.log(date.getDay());       // День недели (0-6, вс = 0)
+console.log(date.getHours());     // Часы (0-23)
+console.log(date.getMinutes());   // Минуты (0-59)
+console.log(date.getSeconds());   // Секунды (0-59)
+console.log(date.getMilliseconds()); // Миллисекунды (0-999)
+console.log(date.getTime());      // Количество миллисекунд с 1970-01-01
+console.log(date.toISOString());  // Дата в формате ISO
+
+// Методы установки даты и времени
+let date2 = new Date();
+date2.setFullYear(2025);
+date2.setMonth(5); // Июнь
+date2.setDate(15);
+date2.setHours(10);
+date2.setMinutes(45);
+console.log(date2);
+
+// Разница между датами
+let start = new Date("2025-03-01");
+let end = new Date("2025-03-20");
+
+let diff = end - start; // Разница в миллисекундах
+console.log(diff / (1000 * 60 * 60 * 24)); // Количество дней
+
+// Форматирование даты
+let options = { year: "numeric", month: "long", day: "numeric" };
+console.log(new Date().toLocaleDateString("ru-RU", options));
+    </code></pre>
+
+    <script>
+        // Вставляем тот же код в консоль браузера
+        let now = new Date();
+        console.log(now);
+
+        let specificDate = new Date(2024, 2, 20);
+        console.log(specificDate);
+
+        let customDate = new Date(2024, 2, 20, 15, 30, 45);
+        console.log(customDate);
+
+        let dateFromString = new Date("2024-03-20T15:30:45");
+        console.log(dateFromString);
+
+        let date = new Date();
+        console.log(date.getFullYear());
+        console.log(date.getMonth());
+        console.log(date.getDate());
+        console.log(date.getDay());
+        console.log(date.getHours());
+        console.log(date.getMinutes());
+        console.log(date.getSeconds());
+        console.log(date.getMilliseconds());
+        console.log(date.getTime());
+        console.log(date.toISOString());
+
+        let date2 = new Date();
+        date2.setFullYear(2025);
+        date2.setMonth(5);
+        date2.setDate(15);
+        date2.setHours(10);
+        date2.setMinutes(45);
+        console.log(date2);
+
+        let start = new Date("2025-03-01");
+        let end = new Date("2025-03-20");
+
+        let diff = end - start;
+        console.log(diff / (1000 * 60 * 60 * 24));
+
+        let options = { year: "numeric", month: "long", day: "numeric" };
+        console.log(new Date().toLocaleDateString("ru-RU", options));
+    </script>
+
+</body>
+</html>

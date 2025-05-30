@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Наследование в JavaScript при создании классов</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Наследование в JavaScript при создании классов</h1>
+
+        <h2>1. Базовые концепции наследования</h2>
+
+        <p>
+            В JavaScript классы поддерживают наследование с помощью ключевого слова <code>extends</code>. Это позволяет одному классу (дочернему) наследовать свойства и методы другого класса (родительского).
+        </p>
+
+        <pre><code>
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  makeSound() {
+    console.log("Звук животного");
+  }
+}
+
+class Dog extends Animal {
+  bark() {
+    console.log("Гав-гав");
+  }
+}
+
+const dog = new Dog("Шарик");
+console.log(dog.name); // Шарик
+dog.makeSound(); // Звук животного
+dog.bark(); // Гав-гав
+        </code></pre>
+
+        <h2>2. Использование <code>super</code> в конструкторах</h2>
+
+        <p>
+            Ключевое слово <code>super</code> позволяет вызвать конструктор родительского класса, чтобы установить свойства, объявленные в нем.
+        </p>
+
+        <pre><code>
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name); // Вызываем конструктор родителя
+    this.breed = breed;
+  }
+}
+
+const dog = new Dog("Шарик", "Овчарка");
+console.log(dog.name); // Шарик
+console.log(dog.breed); // Овчарка
+        </code></pre>
+
+
+        <h2>3. Переопределение методов и использование <code>super</code></h2>
+
+        <p>
+            Можно переопределять методы родительского класса, но при этом использовать <code>super</code> для вызова оригинального метода.
+        </p>
+
+        <pre><code>
+class Animal {
+  makeSound() {
+    console.log("Какой-то звук...");
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    super.makeSound(); // Вызываем родительский метод
+    console.log("Гав-гав");
+  }
+}
+
+const dog = new Dog();
+dog.makeSound();
+// Какой-то звук...
+// Гав-гав
+        </code></pre>
+
+        <h2>4. Наследование от встроенных классов</h2>
+
+        <p>
+            Можно наследоваться от встроенных классов, таких как  <code>Array, Error и HTMLElement</code>.
+        </p>
+
+        <pre><code>
+class MyArray extends Array {
+  last() {
+    return this[this.length - 1];
+  }
+}
+
+const arr = new MyArray(1, 2, 3);
+console.log(arr.last()); // 3
+        </code></pre>
+
+        <h2>5. Статические методы и наследование</h2>
+
+        <p>Статические методы наследуются, но могут быть переопределены.</p>
+
+        <pre><code>
+class Parent {
+  static sayHello() {
+    console.log("Привет от родителя!");
+  }
+}
+
+class Child extends Parent {
+  static sayHello() {
+    super.sayHello();
+    console.log("Привет от ребенка!");
+  }
+}
+
+Child.sayHello();
+// Привет от родителя!
+// Привет от ребенка!
+        </code></pre>
+
+        <h2>Сравнение наследования в JavaScript и Python</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Особенность</th>
+                    <th>JavaScript</th>
+                    <th>Python</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Наследование</td>
+                    <td><code>class Dog extends Animal {}</code></td>
+                    <td><code>class Dog(Animal):</code></td>
+                </tr>
+                <tr>
+                    <td>Вызов родительского конструктора</td>
+                    <td><code>super(name);</code></td>
+                    <td><code>super().__init__(name)</code></td>
+                </tr>
+                <tr>
+                    <td>Вызов метода родителя</td>
+                    <td><code>super.makeSound();</code></td>
+                    <td><code>super().make_sound()</code></td>
+                </tr>
+                <tr>
+                    <td>Переопределение методов</td>
+                    <td><code>makeSound() { console.log("Гав"); }</code></td>
+                    <td><code>def make_sound(self): print("Гав")</code></td>
+                </tr>
+                <tr>
+                    <td>Статические методы</td>
+                    <td><code>static sayHello() {}</code></td>
+                    <td><code>@staticmethod\ndef say_hello():</code></td>
+                </tr>
+                <tr>
+                    <td>Наследование от встроенных классов</td>
+                    <td><code>class MyArray extends Array {}</code></td>
+                    <td><code>class MyList(list):</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

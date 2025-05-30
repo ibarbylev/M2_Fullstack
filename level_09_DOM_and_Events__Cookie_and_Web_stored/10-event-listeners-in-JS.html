@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Обработчики событий в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Обработчики событий в JavaScript</h1>
+
+        <p>Обработчики событий в JavaScript позволяют выполнять код в ответ на действия пользователя или изменения в документе.</p>
+
+        <h2>1. Cобытия и их обработчики. Определение и примеры</h2>
+
+        <h3>Событие (Event)</h3>
+
+        <p><b>Событие</b> — это сигнал от браузера о том, что произошло определённое действие.</p>
+
+        <h4>Примеры событий:</h4>
+        <ul>
+            <li><b>Мышь</b>: <code>click</code>, <code>dblclick</code>, <code>mouseover</code>, <code>mouseout</code>, <code>mousedown</code>, <code>mouseup</code>, <code>mousemove</code>, <code>contextmenu</code></li>
+            <li><b>Клавиатура</b>: <code>keydown</code>, <code>keyup</code>, <code>keypress</code></li>
+            <li><b>Форма</b>: <code>submit</code>, <code>change</code>, <code>focus</code>, <code>blur</code>, <code>input</code></li>
+            <li><b>Документ</b>: <code>DOMContentLoaded</code>, <code>scroll</code>, <code>resize</code></li>
+            <li><b>Копирование и вставка</b>: <code>copy</code>, <code>paste</code> <code>cut</code></li>
+            <li><b>Сеть</b>: <code>load</code>, <code>error</code>, <code>online</code>, <code>offline</code></li>
+        </ul>
+
+        <h3>Обработчик события (Event Handler)</h3>
+
+        <p><b>Обработчик события</b> — это функция, которая выполняется при наступлении события.</p>
+
+        <h4>Пример: </h4>
+
+        <div id="mouse-click">
+            Здесь находится элемент с id="mouse-click"<br>
+            <i>(Внимание! перед кликом по элементу не забудьте запустить код!)</i>
+        </div>
+
+        <pre id="code-output-01-1" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-1-1-example.js', 'code-output-01-1')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-1-1-example.js', 'console-output-01-1')">Запустить код</button>
+        <pre id="console-output-01-1" class="language-javascript"></pre>
+        <hr>
+
+        <h2>2. Основные свойства объектов событий</h2>
+
+        <p>Когда происходит событие, браузер передаёт в обработчик объект события (<code>event</code>).</p>
+
+        <h3>Общие свойства и методы <code>event</code></h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Свойство / Метод</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>event.type</code></td>
+                    <td>Тип события (например, "click", "keydown")</td>
+                </tr>
+                <tr>
+                    <td><code>event.target</code></td>
+                    <td>Элемент, на котором произошло событие</td>
+                </tr>
+                <tr>
+                    <td><code>event.currentTarget</code></td>
+                    <td>Элемент, на котором выполняется обработчик (учитывая делегирование)</td>
+                </tr>
+                <tr>
+                    <td><code>event.preventDefault()</code></td>
+                    <td>Отмена стандартного действия браузера (например, отмена отправки формы)</td>
+                </tr>
+                <tr>
+                    <td><code>event.stopPropagation()</code></td>
+                    <td>Остановка всплытия события вверх по дереву. (Но другие обработчики на этом же элементе продолжат выполняться.)</td>
+                </tr>
+                <tr>
+                    <td><code>event.stopImmediatePropagation()</code></td>
+                    <td>Остановка всплытия и предотвращение выполнения других обработчиков этого же события на текущем элементе</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h3>События мыши (<code>MouseEvent</code>)</h3>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Свойство</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>event.clientX, event.clientY</code></td>
+                    <td>Координаты курсора относительно окна</td>
+                </tr>
+                <tr>
+                    <td><code>event.pageX, event.pageY</code></td>
+                    <td>Координаты курсора относительно всей страницы</td>
+                </tr>
+                <tr>
+                    <td><code>event.screenX, event.screenY</code></td>
+                    <td>Координаты курсора относительно экрана</td>
+                </tr>
+                <tr>
+                    <td><code>event.button</code></td>
+                    <td>Код нажатой кнопки мыши (0 — левая, 1 — средняя, 2 — правая)</td>
+                </tr>
+                <tr>
+                    <td><code>event.ctrlKey, event.shiftKey, event.altKey</code></td>
+                    <td>true, если зажата соответствующая клавиша одновременно с другим событием мыши</td>
+                </tr>
+                <tr>
+                    <td><code>event.relatedTarget</code></td>
+                    <td>Элемент (или его потомок), на который курсор попадает (или покидает) при движении мыши <code>mouseover</code> / <code>mouseout</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Пример: </h4>
+        <div><i>(Внимание! перед кликом по экрану не забудьте запустить код!)</i></div>
+        <pre id="code-output-01-2" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-1-2-example.js', 'code-output-01-2')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-1-2-example.js', 'console-output-01-2')">Запустить код</button>
+        <pre id="console-output-01-2" class="language-javascript"></pre>
+        <hr>
+
+        <h3>События клавиатуры (<code>KeyboardEvent</code>)</h3>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Свойство</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>event.key</code></td>
+                    <td>Символ или название клавиши (например, "a", "Enter")</td>
+                </tr>
+                <tr>
+                    <td><code>event.code</code></td>
+                    <td>Физический код клавиши (например, "KeyA", "ArrowUp")</td>
+                </tr>
+                <tr>
+                    <td><code>event.repeat</code></td>
+                    <td>true, если клавиша удерживается</td>
+                </tr>
+                <tr>
+                    <td><code>event.ctrlKey, event.shiftKey, event.altKey</code></td>
+                    <td>true, если соответствующая клавиша нажата</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Пример: </h4>
+        <div><i>(Внимание! перед нажатием клавиш не забудьте запустить код!)</i></div>
+        <pre id="code-output-01-3" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-1-3-example.js', 'code-output-01-3')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-1-3-example.js', 'console-output-01-3')">Запустить код</button>
+        <pre id="console-output-01-3" class="language-javascript"></pre>
+        <hr>
+
+        <h3>События формы (<code>FocusEvent</code>, <code>InputEvent</code>, <code>SubmitEvent</code>)</h3>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Свойство</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>event.target.value</code></td>
+                    <td>Значение поля ввода</td>
+                </tr>
+                <tr>
+                    <td><code>event.relatedTarget</code></td>
+                    <td>Элемент, с которого или на который перешёл фокус</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Пример: </h4>
+        <label for="myInput">Введите текст:</label>
+        <input type="text" id="myInput" value=""/>
+        <div><i>(Внимание! перед вводом в input не забудьте запустить код!)</i></div>
+        <pre id="code-output-01-4" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-1-4-example.js', 'code-output-01-4')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-1-4-example.js', 'console-output-01-4')">Запустить код</button>
+        <pre id="console-output-01-4" class="language-javascript"></pre>
+        <hr>
+
+        <h3>События загрузки (<code>LoadEvent</code>, <code>ErrorEvent</code>)</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Свойство</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>event.target</code></td>
+                    <td>Элемент, который загрузился или вызвал ошибку</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <hr>
+
+        <h3>События копирования (<code>ClipboardEvent</code>)</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Свойство / Метод</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>event.target</code></td>
+                    <td>Элемент, на котором произошло событие (например, поле ввода, из которого копируют текст)</td>
+                </tr>
+                <tr>
+                    <td><code>event.clipboardData</code></td>
+                    <td>Объект, содержащий данные, которые копируются или вставляются (например, текст, изображение и т.д.)</td>
+                </tr>
+                <tr>
+                    <td><code>event.preventDefault()</code></td>
+                    <td>Отменяет стандартное поведение события. В случае события копирования предотвращает выполнение стандартного действия копирования, если оно не нужно (например, для защиты от копирования текста).</td>
+                </tr>
+                <tr>
+                    <td><code>event.stopPropagation()</code></td>
+                    <td>Останавливает всплытие события, предотвращая его дальнейшую обработку в родительских элементах.</td>
+                </tr>
+                <tr>
+                    <td><code>event.stopImmediatePropagation()</code></td>
+                    <td>Останавливает всплытие события и предотвращает выполнение других обработчиков на текущем элементе.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Пример: </h4>
+        <p>Попробуйте скопировать этот текст: <b>Текст для копирования</b></p>
+        <div><i>(Внимание! Перед копированием не забудьте запустить код!)</i></div>
+        <pre id="code-output-01-5" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-1-5-example.js', 'code-output-01-5')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-1-5-example.js', 'console-output-01-5')">Запустить код</button>
+        <pre id="console-output-01-5" class="language-javascript"></pre>
+        <hr>
+
+        <h2>3. Способы назначения обработчиков</h2>
+        <h3>1. Через HTML-атрибут (не рекомендуется)</h3>
+
+        <p>В этом случае имя события указывается непосредственно в элементе как HTML-атрибут, а в качестве его значения указывается JS-функция:</p>
+
+        <pre><code>
+&lt;button onclick="alert('Нажато!')"&gt;Клик&lt;/button&gt;
+        </code></pre>
+
+        <p>❗ Минусы: нет разделения логики и структуры; низкая безопасность; отсутствие делегирования и масштабирования.</p>
+
+        <h3>2. Через свойство элемента</h3>
+
+        <pre><code>
+const btn = document.getElementById("myButton");
+btn.onclick = function () {
+    alert("Кнопка нажата!");
+};
+        </code></pre>
+
+        <p>❗ Минус: можно назначить только один обработчик — новое присвоение перезапишет старое.</p>
+
+        <h3>3. Через addEventListener (наилучший способ)</h3>
+
+        <pre><code>
+btn.addEventListener("click", function () {
+    alert("Кнопка нажата!");
+});
+        </code></pre>
+
+        <p>✅ Плюсы:</p>
+        <ul>
+            <li>Можно назначить несколько обработчиков.</li>
+            <li>Можно легко удалить обработчик.</li>
+        </ul>
+
+        <h3>Удаление обработчика:</h3>
+
+        <pre><code>
+function handler() {
+    console.log("Клик!");
+}
+btn.addEventListener("click", handler);
+btn.removeEventListener("click", handler);
+        </code></pre>
+
+        <h2>4. Модель распространения событий</h2>
+        <h2></h2>
+
+        <p>Рассмотрим стандартную ситуацию: элемент, вызывающий событие, находится внутри иерархии родительских элементов.</p>
+        <pre><code>
+&lt;div id="grandparent-3"&gt;
+    &lt;div id="parent-3"&gt;
+        &lt;div id="child-3"&gt;
+            &lt;button class="btn-gray" id="btn-3">Click me&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+        <p>И на каждом элементе находится обработчик событий. Вопрос: в какой последовательности будут вызываться эти обработчики?</p>
+        <p>Так называемая, "трёхфазная модель распространения событий" описывает все возможные варианты:</p>
+        <ol>
+            <li><b>Фаза перехвата</b> (Capturing Phase): Событие идет сверху вниз от корня до целевого элемента, проходя через всех его родителей.</li>
+            <li><b>Целевая фаза</b> (Target Phase): Событие достигает непосредственно целевого элемента. Обработчики на элементе будут вызваны.</li>
+            <li><b>Фаза всплытия</b> (Bubbling Phase): Это фаза по умолчанию: событие поднимается снизу вверх от целевого элемента к корню.</li>
+        </ol>
+        <p>Рассмотрим подробно все возможные варианты.</p>
+
+        <h3>1. Всплытие (<code>Bubbling</code>)</h3>
+        <p>
+            Всплытие и погружение — это два механизма, которые описывают, как события распространяются по DOM-дереву от элемента, на котором произошло событие, к родительским элементам (в случае всплытия) или наоборот (в случае погружения).
+        </p>
+        <p>Как работает всплытие событий:</p>
+        <ul>
+            <li>Событие начинается на самом целевом элементе.</li>
+            <li>Оно затем передаётся по цепочке родительских элементов, от вложенных к более внешним (родительским) элементам.</li>
+            <li>Если событие не было остановлено на каком-либо элементе, оно будет продолжать всплывать до корня документа.</li>
+        </ul>
+
+        <h4>Пример: </h4>
+        <p>Предположим, у нас есть следующий HTML:</p>
+        <div id="parent">
+            <button class="btn-gray" id="child">Click me</button>
+        </div>
+        <pre><code>
+&lt;div id="parent"&gt;
+    &lt;button id="child">Click me&lt;/button&gt;
+&lt;/div&gt;
+        </code></pre>
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+        <pre id="code-output-04-1" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-4-1-example.js', 'code-output-04-1')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-4-1-example.js', 'console-output-04-1')">Запустить код</button>
+        <pre id="console-output-04-1" class="language-javascript"></pre>
+        <hr>
+
+        <p>Как видим, событие сначала срабатывает на самом вложенном элементе, затем поднимается вверх:</p>
+        <ul>
+            <li>При клике на кнопку сначала срабатывает обработчик на дочернем элементе <code>#child</code>.</li>
+            <li>Затем событие "всплывает" к родителю <code>#parent</code>, и срабатывает обработчик на родительском элементе.</li>
+        </ul>
+
+        <h3>2. Остановка всплытия</h3>
+
+        <p>Если вы хотите остановить всплытие события на определённом элементе, используйте метод <code>event.stopPropagation()</code>.</p>
+        <p>Теперь, при клике на кнопку, только обработчик на дочернем элементе сработает, и событие не будет передано родителю.</p>
+
+        <h4>Пример: </h4>
+        <p>HTML код тот же. Но в обработчике теперь стоит новый метод <code>event.stopPropagation()</code>:</p>
+        <div id="parent-2">
+            <button class="btn-gray" id="child-2">Click me</button>
+        </div>
+        <pre><code>
+&lt;div id="parent-2"&gt;
+    &lt;button class="btn-gray" id="child-2">Click me&lt;/button&gt;
+&lt;/div&gt;
+        </code></pre>
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+        <pre id="code-output-04-2" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-4-2-example.js', 'code-output-04-2')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-4-2-example.js', 'console-output-04-2')">Запустить код</button>
+        <pre id="console-output-04-2" class="language-javascript"></pre>
+        <hr>
+
+        <h3>3. Погружение (или захват) событий (<code>Event Capturing</code>)</h3>
+
+        <p>
+            Погружение событий (или фазирование захвата) — это механизм, при котором событие сначала срабатывает на самом внешнем (родительском) элементе и "погружается" в сторону целевого элемента.
+        </p>
+        <p>Как работает погружение:</p>
+        <ul>
+            <li>Событие начинается на самом внешнем элементе (родителе) и погружается вниз к целевому элементу, вызывая обработчики событий.</li>
+            <li>Если на каком-либо уровне события не было остановлено, оно будет продолжать своё погружение до целевого элемента.</li>
+        </ul>
+
+        <h4>Пример: </h4>
+
+        <div id="grandparent-3">
+            <div id="parent-3">
+                <div id="child-3">
+                    <button class="btn-gray" id="btn-3">Click me</button>
+                </div>
+            </div>
+        </div>
+
+        <pre><code>
+&lt;div id="grandparent-3"&gt;
+    &lt;div id="parent-3"&gt;
+        &lt;div id="child-3"&gt;
+            &lt;button class="btn-gray" id="btn-3">Click me&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+        <pre id="code-output-04-3" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-4-3-example.js', 'code-output-04-3')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-4-3-example.js', 'console-output-04-3')">Запустить код</button>
+        <pre id="console-output-04-3" class="language-javascript"></pre>
+        <hr>
+
+        <h3>4. Пример с использованием обеих фаз (и всплытие, и погружение)</h3>
+
+        <p>Последним параметром обработчика мы можем "разворачивать вспять" начавшееся было погружение и менять его на всплытие.</p>
+
+        <h4>Пример: </h4>
+
+<div id="parent-4">
+    <button class="btn-gray" id="child-4">Click me</button>
+</div>
+
+        <pre><code>
+&lt;div id="parent-4"&gt;
+    &lt;button class="btn-gray" id="child-4">Click me&lt;/button&gt;
+&lt;/div&gt;
+        </code></pre>
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+        <pre id="code-output-04-4" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-4-4-example.js', 'code-output-04-4')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-4-4-example.js', 'console-output-04-4')">Запустить код</button>
+        <pre id="console-output-04-4" class="language-javascript"></pre>
+        <hr>
+
+
+        <h2>4. Делегирование событий (<code>Event Delegation</code>)</h2>
+
+        <p>
+            <b>Делегирование событий</b> — это техника, при которой один обработчик события устанавливается на родительский элемент, а затем внутри обработчика определяется, на каком дочернем элементе произошло событие.
+        </p>
+        <p>Эта техника особенно полезна, если:</p>
+        <ul>
+            <li>Элементов много, и мы хотим избежать назначения обработчика на каждый.</li>
+            <li>Элементы могут динамически добавляться/удаляться (например, кнопки в списке).</li>
+        </ul>
+        <p>Как работает делегирование событий?</p>
+        <ul>
+            <li>Устанавливаем обработчик события на родителя (а не на все элементы внутри).</li>
+            <li>Внутри обработчика проверяем, какой элемент вызвал событие (event.target).</li>
+            <li>Если это нужный элемент — выполняем нужные действия.</li>
+        </ul>
+
+        <h4>Пример с делегированием событий: </h4>
+
+        <p>Допустим, у нас есть список &lt;ul&gt;, в который мы будем добавлять &lt;li&gt;. <br>
+            Вместо того чтобы вешать обработчик на каждую &lt;li&gt;, мы повесим его на &lt;ul&gt;:</p>
+
+        <ul id="list">
+            <li>Элемент 1</li>
+            <li>Элемент 2</li>
+            <li>Элемент 3</li>
+        </ul>
+        <button class="btn-gray" id="add">Добавить в список новый элемент</button>
+
+        <pre><code>
+&lt;ul id="list"&gt;
+    &lt;li&gt;Элемент 1&lt;/li&gt;
+    &lt;li&gt;Элемент 2&lt;/li&gt;
+    &lt;li&gt;Элемент 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;button class="btn-gray" id="add">Добавить в список новый элемент&lt;/button>
+        </code></pre>
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+        <pre id="code-output-05" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-5-example.js', 'code-output-05')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-5-example.js', 'console-output-05')">Запустить код</button>
+        <pre id="console-output-05" class="language-javascript"></pre>
+
+        <p>Как видим</p>
+        <ul>
+            <li>Клик по любому &lt;li&gt; внутри &lt;ul&gt; обрабатывается родителем (&lt;ul&gt;), так как: </li>
+            <ul>
+                <li>Обработчик событий находится именно на <code>list</code> (&lt;ul&gt;)</li>
+                <li>Действует дополнительная проверка <code>event.target.tagName === 'LI'</code></li>
+            </ul>
+            <li>Динамически добавленные элементы тоже работают:<br>
+                даже если мы добавим новый &lt;li&gt;, он автоматически будет поддерживать обработку кликов.</li>
+        </ul>
+
+        <h3>Вопрос на засыпку: </h3>
+        <h3>Что будет с обработчиками, размещёнными на соседних ветках DOM-дерева?</h3>
+
+        <ul id="list1">
+            <li id="item1">Элемент 1</li>
+        </ul>
+        <ul id="list2">
+            <li id="item2">Элемент 2</li>
+        </ul>
+
+        <pre><code>
+&lt;ul id="list1"&gt;
+    &lt;li id="item1"&gt;Элемент 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul id="list2"&gt;
+    &lt;li id="item2"&gt;Элемент 2&lt;/li&gt;
+&lt;/ul&gt;
+        </code></pre>
+
+        <div><i>(Внимание! Перед кликом не забудьте запустить код!)</i></div>
+        <pre id="code-output-06" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('10-6-example.js', 'code-output-06')">Показать код</button>
+        <button class="btn-run" onclick="runScript('10-6-example.js', 'console-output-06')">Запустить код</button>
+        <pre id="console-output-06" class="language-javascript"></pre>
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

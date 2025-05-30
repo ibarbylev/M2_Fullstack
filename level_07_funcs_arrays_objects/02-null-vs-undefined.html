@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Разница между null и undefined</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 25% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Разница между <code>null</code> и <code>undefined</code> в JavaScript</h1>
+        <p>
+            Тип <code>null</code> представляет намеренное отсутствие значения. Это значение часто используется для инициализации переменных, которые будут позже присвоены объектом, или для очистки значения переменной.
+        </p>
+        <p>
+             В отличии от этого, тип <code>undefined</code> представляет значение переменной, которая была объявлена, но не инициализирована. Это значение также возвращается при доступе к несуществующему свойству объекта или же при обращению к элементу массива, по не существующему индексу.
+        </p>
+        <table>
+            <tr>
+                <th>Свойство</th>
+                <th>null (JS)</th>
+                <th>undefined (JS)</th>
+                <th>None (Python)</th>
+            </tr>
+            <tr>
+                <td>Тип</td>
+                <td>object</td>
+                <td>undefined</td>
+                <td>NoneType</td>
+            </tr>
+            <tr>
+                <td>Значение</td>
+                <td>Отсутствие значения (намеренно установлено)</td>
+                <td>Переменная объявлена, но значение не присвоено</td>
+                <td>Отсутствие значения (аналогично <code>null</code>)</td>
+            </tr>
+            <tr>
+                <td>Использование</td>
+                <td>Используется для обозначения "пустого" значения</td>
+                <td>Обычно означает неинициализированную переменную</td>
+                <td>Используется для обозначения "пустого" значения</td>
+            </tr>
+            <tr>
+                <td>Пример</td>
+                <td><code>let x = null;</code></td>
+                <td><code>let y;</code></td>
+                <td><code>x = None</code></td>
+            </tr>
+            <tr>
+                <td>Сравнение</td>
+                <td><code>null == undefined // true</code></td>
+                <td><code>null === undefined // false</code></td>
+                <td><code>None == None  # True</code></td>
+            </tr>
+            <tr>
+                <td>Функция без return</td>
+                <td colspan="2"><code>function test() { }</code> → <code>undefined</code></td>
+                <td><code>def test(): pass</code> → <code>None</code></td>
+            </tr>
+        </table>
+
+        <h3>Сходство и отличие Python <code>None</code> от JavaScript <code>null</code> и <code>undefined</code></h3>
+
+        <p>В Python <code>None</code> ближе всего к <code>null</code> в JavaScript, так как оба означают "отсутствие значения". Однако есть несколько отличий:</p>
+
+        <ul>
+            <li><code>None</code> в Python имеет тип <code>NoneType</code>, а <code>null</code> в JavaScript – это <code>object</code>.</li>
+            <li><code>undefined</code> в JavaScript обозначает переменную, которой не присвоено значение. В Python такой ситуации нет — если переменная не определена, возникнет ошибка <code>NameError</code>.</li>
+            <li>Если функция в JavaScript не возвращает значение, она возвращает <code>undefined</code>. В Python функция без <code>return</code> возвращает <code>None</code>.</li>
+        </ul>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+groups:
+  - name: demo_alerts
+    rules:
+      - alert: ExporterDown
+        expr: up{job="python_exporter"} == 0
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Python exporter недоступен"
+
+      - alert: HighTemperature
+        expr: room_temperature_celsius > 24
+        for: 15s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Температура выше нормы"

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: image_app
+    volumes:
+      - ./images:/images
+      - ./logs:/logs
+      - ./static:/app/static
+    expose:
+      - 5000
+    restart: unless-stopped
+    command: >
+      sh -c "mkdir -p /images /logs && chmod -R 775 /images /logs && python app.py"
+
+  nginx:
+    image: nginx:latest
+    container_name: image_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./images:/images
+      - ./static:/app/static
+    depends_on:
+      - app
+    restart: unless-stopped
+    command: >
+      sh -c "mkdir -p /images && chmod -R 775 /images && nginx -g 'daemon off;'"
