@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовый синтаксис CSS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Цвет в CSS</h1>
+
+        <h2>1. Способы задания цвета в CSS</h2>
+        <p>Цвет в CSS можно задавать разными способами:</p>
+        <ul>
+            <li>Название цвета (например, <code>red</code>, <code>blue</code>, <code>green</code>)</li>
+            <li>RGB (например, <code>rgb(255, 0, 0)</code>)</li>
+            <li>HEX (например, <code>#FF0000</code>)</li>
+            <li>HSL (например, <code>hsl(0, 100%, 50%)</code>)</li>
+            <li>RGBA и HSLA (например, <code>rgba(255, 0, 0, 0.5)</code>)</li>
+        </ul>
+
+        <h2>2. Цветовая модель RGB</h2>
+        <p>RGB (Red, Green, Blue) задает цвет с помощью красного, зеленого и синего компонентов.</p>
+        <div class="color-box" style="background-color: rgb(255, 0, 0); color: white;">
+            rgb(255, 0, 0)
+        </div>
+        <div class="color-box" style="background-color: rgb(0, 255, 0); color: black;">
+            rgb(0, 255, 0)
+        </div>
+        <div class="color-box" style="background-color: rgb(0, 0, 255); color: white;">
+            rgb(0, 0, 255)
+        </div>
+
+        <h2>3. Цветовая модель HEX</h2>
+        <p>HEX (шестнадцатеричный код) использует 6 символов для задания цвета.</p>
+        <div class="color-box" style="background-color: #ff0000; color: white;">#FF0000</div>
+        <div class="color-box" style="background-color: #00ff00; color: black;">#00FF00</div>
+        <div class="color-box" style="background-color: #0000ff; color: white;">#0000FF</div>
+
+        <h2>4. Цветовая модель HSL</h2>
+        <p>HSL (Hue, Saturation, Lightness) использует оттенок, насыщенность и яркость.</p>
+        <div class="color-box" style="background-color: hsl(0, 100%, 50%); color: white;">
+            hsl(0, 100%, 50%)
+        </div>
+        <div class="color-box" style="background-color: hsl(120, 100%, 50%); color: black;">
+            hsl(120, 100%, 50%)
+        </div>
+        <div class="color-box" style="background-color: hsl(240, 100%, 50%); color: white;">
+            hsl(240, 100%, 50%)
+        </div>
+
+        <h2>5. Прозрачность: RGBA и HSLA</h2>
+        <p>RGBA и HSLA добавляют альфа-канал (прозрачность) к цвету.</p>
+        <div class="color-box" style="background-color: rgba(255, 0, 0, 0.5); color: white;">
+            rgba(255, 0, 0, 0.5)
+        </div>
+        <div class="color-box" style="background-color: hsla(240, 100%, 50%, 0.5); color: black;">
+            hsla(240, 100%, 50%, 0.5)
+        </div>
+    </div>
+</body>
+</html>

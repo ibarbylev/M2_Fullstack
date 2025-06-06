@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Браузерные веб-хранилища localStorage и sessionStorage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Браузерные веб-хранилища localStorage и sessionStorage</h1>
+
+        <p><code>localStorage</code> и <code>sessionStorage</code> — это встроенные механизмы хранения данных в браузере. Они относятся к <code>Web Storage API</code> и позволяют сохранять пары "ключ-значение" в виде строк.</p>
+
+        <p>Оба хранилища работают аналогично, но есть ключевые различия в их поведении.</p>
+
+        <h2>1. Отличия <code>localStorage</code> и <code>sessionStorage</code></h2>
+
+        <table border="1">
+            <tr>
+                <th>Свойство</th>
+                <th>localStorage</th>
+                <th>sessionStorage</th>
+            </tr>
+            <tr>
+                <td>Время жизни</td>
+                <td>Пока не будет удалено вручную пользователем или скриптом</td>
+                <td>До закрытия вкладки (сессии)</td>
+            </tr>
+            <tr>
+                <td>Область видимости</td>
+                <td>Доступно для всех вкладок и окон с этим доменом</td>
+                <td>Доступно только в рамках текущей вкладки</td>
+            </tr>
+            <tr>
+                <td>Объём хранилища</td>
+                <td>Обычно 5-10MB на домен</td>
+                <td>Обычно 5-10MB на домен</td>
+            </tr>
+            <tr>
+                <td>Доступ между окнами</td>
+                <td>Доступно из всех вкладок одного домена</td>
+                <td>Не доступно в других вкладках</td>
+            </tr>
+            <tr>
+                <td>Удаление данных</td>
+                <td>Нужно удалять вручную</td>
+                <td>Очищается автоматически при закрытии вкладки</td>
+            </tr>
+        </table>
+
+        <h2>2. Методы и свойства <code>localStorage</code> и <code>sessionStorage</code></h2>
+
+        <p>Оба объекта имеют одинаковые методы и свойства.</p>
+
+        <h4>Свойства</h4>
+
+        <table border="1">
+            <tr>
+                <th>Свойство</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>.length</td>
+                <td>Количество элементов в хранилище.</td>
+            </tr>
+        </table>
+
+        <h4>Методы</h4>
+        <h4>Методы</h4>
+        <table border="1">
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>setItem(key, value)</td>
+                <td>Сохранить значение по ключу.</td>
+            </tr>
+            <tr>
+                <td>getItem(key)</td>
+                <td>Получить значение по ключу.</td>
+            </tr>
+            <tr>
+                <td>removeItem(key)</td>
+                <td>Удалить элемент по ключу.</td>
+            </tr>
+            <tr>
+                <td>clear()</td>
+                <td>Очистить всё хранилище.</td>
+            </tr>
+            <tr>
+                <td>key(index)</td>
+                <td>Получить ключ по индексу.</td>
+            </tr>
+        </table>
+
+        <h4>Пример использования</h4>
+        <pre><code>
+// Запись данных
+localStorage.setItem("username", "JohnDoe");
+sessionStorage.setItem("sessionID", "abc123");
+
+// Чтение данных
+console.log(localStorage.getItem("username")); // "JohnDoe"
+console.log(sessionStorage.getItem("sessionID")); // "abc123"
+
+// Удаление одного элемента
+localStorage.removeItem("username");
+
+// Полная очистка хранилища
+sessionStorage.clear();
+        </code></pre>
+
+
+        <h2>3. Когда и какое хранилище использовать?</h2>
+        <table border="1">
+            <tr>
+                <th>Сценарий</th>
+                <th>Какой вариант лучше?</th>
+                <th>Причина</th>
+            </tr>
+            <tr>
+                <td>Хранение пользовательских настроек, тем оформления</td>
+                <td>localStorage</td>
+                <td>Данные не должны исчезать после закрытия вкладки.</td>
+            </tr>
+            <tr>
+                <td>Хранение токенов аутентификации (если нет возможности использовать cookies)</td>
+                <td>sessionStorage</td>
+                <td>Безопаснее, потому что очищается при закрытии вкладки.</td>
+            </tr>
+            <tr>
+                <td>Кеширование данных (например, избранные статьи)</td>
+                <td>localStorage</td>
+                <td>Пользователь должен видеть данные даже после перезапуска браузера.</td>
+            </tr>
+            <tr>
+                <td>Временное хранение данных форм, чтобы избежать потери при перезагрузке страницы</td>
+                <td>sessionStorage</td>
+                <td>Данные нужны только в текущей сессии.</td>
+            </tr>
+            <tr>
+                <td>Хранение промежуточных данных, которые должны исчезнуть после закрытия вкладки</td>
+                <td>sessionStorage</td>
+                <td>Автоматическое удаление данных при закрытии вкладки.</td>
+            </tr>
+        </table>
+
+        <h4>4. Дополнительные замечания</h4>
+
+        <p><b>Ограничение по объёму</b>: обычно оба хранилища имеют лимит 5-10MB на домен.</p>
+        <p><b>Только строковые значения</b>: в <code>localStorage</code> и <code>sessionStorage</code> можно хранить только строки. Для хранения объектов используйте <code>JSON.stringify()</code> и <code>JSON.parse()</code>:</p>
+
+        <pre><code>
+let user = { name: "Alice", age: 30 };
+localStorage.setItem("user", JSON.stringify(user));
+
+let storedUser = JSON.parse(localStorage.getItem("user"));
+console.log(storedUser.name); // "Alice"
+        </code></pre>
+
+        <p><b>Безопасность</b>: данные хранятся без шифрования, поэтому не стоит хранить пароли, токены или конфиденциальные данные.</p>
+
+        <p><b>Событие storage</b>: localStorage поддерживает событие storage, которое срабатывает при изменении данных в другой вкладке.</p>
+
+
+        <pre><code>
+window.addEventListener("storage", (event) => {
+    console.log(`Ключ: ${event.key}, новое значение: ${event.newValue}`);
+});
+        </code></pre>
+        <p><code>sessionStorage</code>не поддерживает это событие, так как данные доступны только в одной вкладке.</p>
+
+
+        <h2>Вывод</h2>
+        <ul>
+            <li>Используйте <code>localStorage</code>, если данные должны сохраняться долго.</li>
+            <li>Используйте <code>sessionStorage</code>, если данные должны существовать только в пределах одной вкладки.</li>
+            <li>Никогда не храните чувствительные данные в <code>Web Storage</code>, так как они доступны через JavaScript.</li>
+        </ul>
+
+        <h2>IndexedDB</h2>
+        <p>IndexedDB — это встроенная в браузеры NoSQL-база данных, предназначенная для хранения больших объемов структурированных данных на стороне клиента. В отличие от localStorage и sessionStorage, IndexedDB позволяет:</p>
+
+        <ul>
+            <li>Хранить большие объемы данных (без ограничения в 5-10 МБ).</li>
+            <li>Работать с объектами (JavaScript-объектами, массивами, Blob, File и другими типами).</li>
+            <li>Использовать индексы для быстрого поиска.</li>
+            <li>Поддерживать транзакции и асинхронные операции через API на основе Promise (в современных реализациях).</li>
+            <li>Работать в офлайн-режиме, сохраняя данные локально.</li>
+        </ul>
+
+        <h3>Основные принципы работы:</h3>
+        <ul>
+            <li>Открытие базы через indexedDB.open('имя_базы', версия).</li>
+            <li>Создание хранилища объектов (object store) внутри базы данных.</li>
+            <li>Добавление, чтение, обновление и удаление данных с использованием транзакций.</li>
+            <li>Использование индексов для быстрого поиска.</li>
+        </ul>
+
+        <p>IndexedDB удобен для приложений, которым нужно кэшировать данные, хранить пользовательские настройки или работать офлайн. Например, он используется в прогрессивных веб-приложениях (PWA) для локального хранения информации.</p>
+
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

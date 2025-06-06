@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Order Example (sync)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        #result { margin-top: 20px; font-size: 18px; }
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 30px 0 100px; }
+        .final-message { margin-top: 10px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <p><a href="index.html">Назад</a></p>
+    <h1>Taxi Order Example (sync)</h1>
+
+    <pre class="language-javascript"><code>
+// Function to simulate ordering a taxi (similar to Promise)
+function orderTaxi(success = true) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (success) {
+                resolve("Такси прибыло!");
+            } else {
+                reject("Такси не пришло...");
+            }
+        }, 2000);
+    });
+}
+
+// Function to update the result message on the page
+function updateResult(message, className) {
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = message;
+    resultElement.className = className;
+}
+
+function updateFinalMessage(message) {
+    const finalMessageElement = document.getElementById('finalMessage');
+    finalMessageElement.textContent = message;
+}
+
+function updateVariableState(message) {
+    const finalMessageElement = document.getElementById('variableState');
+    finalMessageElement.textContent = message;
+}
+
+// Event handler for button click
+let successFlag = true; // Start with successful case
+let successOfError;
+console.log('Изменение состояния флага successFlag до обработки клика:', successFlag);
+document.getElementById('orderButton').addEventListener('click', () => {
+    updateResult('Пожалуйста, подождите! Ваш заказ обрабатывается...', ''); // Initial message
+    updateFinalMessage('...');
+    updateVariableState('');
+
+
+    orderTaxi(successFlag) // Toggle between true/false
+        .then(result => {
+            updateResult(result, 'success');
+            successOfError = successFlag ? 'успешно' : 'с ошибкой';
+            updateFinalMessage(`Операция завершена ${successOfError}`);
+
+            // Переключение successFlag, который хранится в браузере до обновления страницы, происходит после каждого клика
+            successFlag = !successFlag;
+            console.log('Изменение состояния флага successFlag на:', successFlag);
+            updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке then`);
+        })
+        .catch(error => {
+            updateResult(error, 'error');
+            successOfError = successFlag ? 'успешно' : 'с ошибкой';
+            updateFinalMessage(`Операция завершена ${successOfError}`);
+
+            // Переключение successFlag, который хранится в браузере до обновления страницы, происходит после каждого клика
+            successFlag = !successFlag;
+            console.log('Изменение состояния флага successFlag на:', successFlag);
+            updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке then`);
+        });
+});
+    </code></pre>
+
+
+    <div id="result"></div>
+    <div id="finalMessage" class="final-message"></div>
+    <div id="variableState" style="color: blue; font-size: 20px;"></div>
+    <button id="orderButton" class="btn-run">Order Taxi</button><br><br><br><br>
+    <p><a href="index.html">Назад</a></p>
+    <script>
+        // Function to simulate ordering a taxi (similar to Promise)
+        function orderTaxi(success = true) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (success) {
+                        resolve("Такси прибыло!");
+                    } else {
+                        reject("Такси не пришло...");
+                    }
+                }, 2000);
+            });
+        }
+
+        // Function to update the result message on the page
+        function updateResult(message, className) {
+            const resultElement = document.getElementById('result');
+            resultElement.textContent = message;
+            resultElement.className = className;
+        }
+
+        function updateFinalMessage(message) {
+            const finalMessageElement = document.getElementById('finalMessage');
+            finalMessageElement.textContent = message;
+        }
+
+        function updateVariableState(message) {
+            const finalMessageElement = document.getElementById('variableState');
+            finalMessageElement.textContent = message;
+        }
+
+        // Event handler for button click
+        let successFlag = true; // Start with successful case
+        let successOfError;
+        console.log('Изменение состояния флага successFlag до обработки клика:', successFlag);
+        document.getElementById('orderButton').addEventListener('click', () => {
+            updateResult('Пожалуйста, подождите! Ваш заказ обрабатывается...', ''); // Initial message
+            updateFinalMessage('...');
+            updateVariableState('');
+
+
+            orderTaxi(successFlag) // Toggle between true/false
+                .then(result => {
+                    updateResult(result, 'success');
+                    successOfError = successFlag ? 'успешно' : 'с ошибкой';
+                    updateFinalMessage(`Операция завершена ${successOfError}`);
+
+                    // Переключение successFlag, который хранится в браузере до обновления страницы, происходит после каждого клика
+                    successFlag = !successFlag;
+                    console.log('Изменение состояния флага successFlag на:', successFlag);
+                    updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке then`);
+                })
+                .catch(error => {
+                    updateResult(error, 'error');
+                    successOfError = successFlag ? 'успешно' : 'с ошибкой';
+                    updateFinalMessage(`Операция завершена ${successOfError}`);
+
+                    // Переключение successFlag, который хранится в браузере до обновления страницы, происходит после каждого клика
+                    successFlag = !successFlag;
+                    console.log('Изменение состояния флага successFlag на:', successFlag);
+                    updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке then`);
+                });
+        });
+    </script>
+    <script src="js/show-and-run-code.js"></script>
+</body>
+</html>

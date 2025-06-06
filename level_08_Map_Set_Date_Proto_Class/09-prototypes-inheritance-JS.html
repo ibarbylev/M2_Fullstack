@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Как работает прототипное наследование</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <p>
+            В JavaScript наследование реализуется через прототипы, а не через классы, как в классических ООП-языках. Давайте разберем, как это работает.
+        </p>
+        <h1>Как работает прототипное наследование</h1>
+
+        <p>
+           Каждый объект в JavaScript связан с другим объектом — его прототипом. Если у объекта нет нужного свойства или метода, JavaScript ищет его в прототипе (и так далее вверх по цепочке прототипов).
+        </p>
+
+        <p>Пример создания прототипного наследования</p>
+
+        <pre><code>
+function Animal(name) {
+    this.name = name;
+}
+
+Animal.prototype.sayHello = function () {
+    console.log(`Привет, я ${this.name}!`);
+};
+
+// Создаем новый конструктор
+function Dog(name, breed) {
+    Animal.call(this, name); // Вызываем конструктор родителя
+    this.breed = breed;
+}
+
+// Наследуем прототип
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+// Добавляем метод только для собак
+Dog.prototype.bark = function () {
+    console.log(`${this.name} говорит: Гав-гав!`);
+};
+
+// Используем наследование
+const rex = new Dog("Рекс", "Овчарка");
+rex.sayHello(); // Привет, я Рекс!
+rex.bark();     // Рекс говорит: Гав-гав!
+
+console.log(rex instanceof Dog);    // true
+console.log(rex instanceof Animal); // true
+        </code></pre>
+
+        <h3>Разбор кода</h3>
+
+        <ul>
+            <li>
+                Создали функцию-конструктор Animal — она задает свойство name.
+            </li>
+            <li>
+                Добавили метод sayHello в <code>Animal.prototype</code> — он будет доступен всем объектам, созданным через new <code>Animal()</code>.
+            </li>
+            <li>
+                Создали функцию-конструктор <code>Dog</code> и вызвали <code>Animal.call(this, name)</code>, чтобы передать name в родительский конструктор.
+            </li>
+            <li>
+                Наследуем <code>Animal.prototype</code> с помощью <code>Object.create(Animal.prototype)</code>.
+            </li>
+            <li>
+                Переназначаем <code>constructor</code>, потому что <code>Dog.prototype.constructor</code> после <code>Object.create()</code> указывает на <code>Animal</code>.
+            </li>
+            <li>
+                Добавляем <code>bark()</code> в <code>Dog.prototype</code> — теперь этот метод есть только у собак.
+            </li>
+        </ul>
+
+        <h2>Цепочка прототипов</h2>
+
+        <p>JavaScript строит цепочку прототипов, где каждый объект ссылается на другой:</p>
+
+        <pre><code>
+console.log(rex.__proto__ === Dog.prototype);       // true
+console.log(Dog.prototype.__proto__ === Animal.prototype); // true
+console.log(Animal.prototype.__proto__ === Object.prototype); // true
+console.log(Object.prototype.__proto__ === null);   // Достигли конца цепочки
+        </code></pre>
+
+        <h2>Object.create()</h2>
+
+        <p>Можно создать объект с указанным прототипом без конструктора:</p>
+
+        <pre><code>
+const cat = Object.create(Animal.prototype);
+cat.name = "Барсик";
+cat.sayHello(); // Привет, я Барсик!
+        </code></pre>
+
+        <h3>📌 Итог</h3>
+
+        <ul>
+            <li>
+                Наследование в JS идет через прототипы.
+            </li>
+            <li>
+                <code>Object.create()</code> создает объект с указанным прототипом.
+            </li>
+            <li>
+                Чтобы наследовать конструкторы, используют <code>Parent.call(this, ...)</code>.
+            </li>
+            <li>
+                После <code>Object.create()</code> важно вручную восстановить constructor.
+            </li>
+        </ul>
+
+    </div>
+</body>
+</html>

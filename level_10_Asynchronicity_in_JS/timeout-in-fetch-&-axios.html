@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Таймаут в Fetch API и Axios</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключение jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+
+    <!-- Загрузка библиотеки Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Таймаут в Fetch API и Axios</h1>
+
+        <p>В Fetch и Axios можно настроить таймауты, чтобы ограничить время ожидания ответа от сервера.</p>
+
+        <h2>1. Fetch</h2>
+
+        <p>В Fetch нет встроенной поддержки таймаутов, но можно реализовать его вручную с использованием Promise.race для ожидания как ответа, так и таймаута.</p>
+
+        <p>Мы используем первый пришедший Promise в Promise.race, так как в нашем случае их два: от fetch и от setTimeout:</p>
+        <ul>
+            <li>Если fetch ответит раньше, чем таймер — мы получим результат (response).</li>
+            <li>Если setTimeout сработает раньше — мы отклоним с ошибкой: «Таймаут запроса».</li>
+        </ul>
+
+
+         <h2>Пример с таймаутом в 5 секунд:</h2>
+
+        <button class="btn-gray" id="fetchButton">Click me</button><br>
+        <p>Не забудьте запустить скрипт прежде чем кликнуть!!!</p>
+
+        <pre id="code-output-01" class="language-javascript"></pre>
+        <p id="response-1"></p>
+        <button class="btn-show" onclick="displayCode('timeout-fetch.js', 'code-output-01')">Показать код</button>
+        <button class="btn-run" onclick="runScript('timeout-fetch.js', 'console-output-01')">Запустить код</button>
+
+        <pre id="console-output-01" class="language-javascript"></pre>
+        <hr>
+
+        <h2>2. Axios</h2>
+
+        <p>В Axios настройка таймаута намного проще, так как она предоставляется в параметрах конфигурации.</p>
+        <p>В Fetch нужно использовать внешние механизмы для реализации таймаута.</p>
+        <p>В Axios таймаут задается непосредственно в параметрах запроса.</p>
+        <h2>Пример с таймаутом в 5 секунд:</h2>
+
+        <button class="btn-gray" id="axiosButton">Click me</button><br>
+        <p>Не забудьте запустить скрипт прежде чем кликнуть!!!</p>
+
+        <pre id="code-output-02" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('timeout-axios.js', 'code-output-02')">Показать код</button>
+        <button class="btn-run" onclick="runScript('timeout-axios.js', 'console-output-02')">Запустить код</button>
+        <pre id="console-output-02" class="language-javascript"></pre>
+        <hr>
+
+
+
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>
