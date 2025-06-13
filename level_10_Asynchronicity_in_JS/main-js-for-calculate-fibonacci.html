@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вычисление числа Фибоначчи</title>
+</head>
+<body>
+    <h1>Вычисление числа Фибоначчи с использованием Web Worker</h1>
+
+    <!-- Краткая аннотация -->
+    <div>
+        <h2>Описание работы программы:</h2>
+        <p><strong>1. Что делает основной JavaScript и что делает Worker?</strong></p>
+        <p><strong>Основной JavaScript (основной поток):</strong> Основной поток управляет взаимодействием с пользователем. <br>
+            Когда пользователь вводит индекс числа Фибоначчи и нажимает кнопку, основной поток отправляет запрос на вычисление числа в Web Worker. <br>
+            После того как Worker вычислит число, основной поток выводит результат на экран.</p>
+        <p><strong>Web Worker:</strong> Web Worker выполняет вычисления числа Фибоначчи в фоновом потоке. <br>
+            Worker не блокирует основной поток, что позволяет избежать задержек в интерфейсе. <br>
+            После вычислений Worker отправляет результат обратно в основной поток.</p>
+
+        <p><strong>2. Зачем сделано это разделение?</strong></p>
+        <p> Чтобы не блокировать основной поток (интерфейс) при выполнении потенциально долгих и сложных вычислений. <br>
+            Если бы тяжелые вычисления выполнялись в основном потоке, это бы замедлило интерфейс. <br>
+            Web Worker позволяет выполнять вычисления в фоновом потоке, оставляя интерфейс отзывчивым.
+        </p>
+
+        <p><strong>3. Почему использован обмен сообщениями?</strong></p>
+        <p>Web Worker работает в <b>полностью</b> изолированном контексте, не имея доступа к основному потоку. <br>
+            Чтобы обмениваться данными между основным потоком и Worker, используется механизм обмена сообщениями. <br>
+            Это гарантирует безопасную передачу данных, избегая возможных ошибок при попытке прямого доступа к общим объектам.
+        </p>
+
+        <p><strong>4. Как реализован этот обмен?</strong></p>
+        <p>Обмен сообщениями между основным потоком и Worker реализуется с помощью двух методов:</p>
+        <ul>
+            <li><strong>postMessage(data):</strong> используется для отправки данных от одного потока к другому.</li>
+            <li><strong>onmessage:</strong> обработчик, который срабатывает при получении сообщения от другого потока.</li>
+        </ul>
+        <p>Когда основной поток отправляет сообщение через <code>postMessage(index)</code>, <br>
+            Worker получает его через <code>onmessage</code>, выполняет вычисления и возвращает результат обратно через <code>postMessage(result)</code>.</p>
+    </div>
+
+    <hr>
+
+    <!-- Интерфейс пользователя -->
+    <label for="index">Введите индекс числа Фибоначчи: </label>
+    <input type="number" id="index" min="0">
+    <button id="computeBtn">Вычислить</button>
+    <h3>Результат: <span id="result"></span></h3>
+    <br><br>
+
+    <!-- Основной скрипт -->
+    <script>
+        // Получаем элементы интерфейса
+        const indexInput = document.getElementById('index');
+        const computeBtn = document.getElementById('computeBtn');
+        const resultDisplay = document.getElementById('result');
+
+        // Создаем Worker
+        const worker = new Worker('js/worker-fibonacci.js');
+
+        // Обработчик нажатия кнопки
+        computeBtn.addEventListener('click', function() {
+            const index = parseInt(indexInput.value, 10);
+            if (isNaN(index) || index < 0) {
+                alert('Пожалуйста, введите корректный индекс!');
+                return;
+            }
+            // Отправляем запрос на вычисление числа Фибоначчи
+            worker.postMessage(index);
+        });
+
+        // Получаем результат от Worker
+        worker.onmessage = function(e) {
+            resultDisplay.textContent = e.data;
+        };
+    </script>
+</body>
+</html>

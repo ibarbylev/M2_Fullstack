@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Методы массивов в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Методы массивов в JavaScript</h1>
+
+        <h2>splice()</h2>
+        <p><strong>Синтаксис:</strong> <code>array.splice(start, deleteCount, item1, ..., itemN)</code></p>
+        <p><strong>Описание:</strong> Изменяет содержимое массива, удаляя или добавляя элементы.</p>
+        <pre><code>let arr = [1, 2, 3, 4, 5];
+arr.splice(2, 1, 99);
+console.log(arr); // [1, 2, 99, 4, 5]</code></pre>
+
+    <h2>slice()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.slice(start, end)</code></p>
+    <p><strong>Описание:</strong> Возвращает новый массив, содержащий копию части исходного массива.</p>
+    <pre><code>let arr = [1, 2, 3, 4, 5];
+let newArr = arr.slice(1, 4);
+console.log(newArr); // [2, 3, 4]</code></pre>
+
+    <h2>concat()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.concat(arr2, arr3, ...)</code></p>
+    <p><strong>Описание:</strong> Объединяет два или более массива, не изменяя исходные.</p>
+    <pre><code>let arr1 = [1, 2];
+let arr2 = [3, 4];
+let arr3 = arr1.concat(arr2);
+console.log(arr3); // [1, 2, 3, 4]</code></pre>
+
+    <h2>indexOf()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.indexOf(searchElement, fromIndex)</code></p>
+    <p><strong>Описание:</strong> Возвращает первый индекс элемента в массиве или -1, если элемент не найден.</p>
+    <pre><code>let arr = [10, 20, 30, 40];
+console.log(arr.indexOf(30)); // 2</code></pre>
+
+    <h2>forEach()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.forEach(callback)</code></p>
+    <p><strong>Описание:</strong> Выполняет функцию для каждого элемента массива.</p>
+    <pre><code>let arr = [1, 2, 3];
+arr.forEach(num => console.log(num * 2));</code></pre>
+
+    <h2>map()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.map(callback)</code></p>
+    <p><strong>Описание:</strong> Создаёт новый массив, применяя функцию к каждому элементу.</p>
+    <pre><code>let arr = [1, 2, 3];
+let squared = arr.map(num => num ** 2);
+console.log(squared); // [1, 4, 9]</code></pre>
+
+    <h2>filter()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.filter(callback)</code></p>
+    <p><strong>Описание:</strong> Возвращает новый массив с элементами, которые соответствуют условию.</p>
+    <pre><code>let arr = [1, 2, 3, 4];
+let even = arr.filter(num => num % 2 === 0);
+console.log(even); // [2, 4]</code></pre>
+
+    <h2>reduce()</h2>
+    <p><strong>Синтаксис:</strong> <code>array.reduce(callback, initialValue)</code></p>
+    <p><strong>Описание:</strong> Применяет функцию к каждому элементу, сводя массив к одному значению.</p>
+    <pre><code>let arr = [1, 2, 3, 4];
+let sum = arr.reduce((acc, num) => acc + num, 0);
+console.log(sum); // 10</code></pre>
+
+        <h2>some()</h2>
+        <p><strong>Синтаксис:</strong> <code>array.some(callback)</code></p>
+        <p><strong>Описание:</strong> Проверяет, удовлетворяет ли хотя бы один элемент массива условию.</p>
+        <pre><code>let arr = [1, 2, 3, 4];
+console.log(arr.some(num => num > 3)); // true</code></pre>
+
+        <h2>every()</h2>
+        <p><strong>Синтаксис:</strong> <code>array.every(callback)</code></p>
+        <p><strong>Описание:</strong> Проверяет, удовлетворяют ли все элементы массива условию.</p>
+        <pre><code>let arr = [2, 4, 6];
+console.log(arr.every(num => num % 2 === 0)); // true</code></pre>
+
+        <h2>find()</h2>
+        <p><strong>Синтаксис:</strong> <code>array.find(callback)</code></p>
+        <p><strong>Описание:</strong> Возвращает первый элемент массива, удовлетворяющий условию.</p>
+        <pre><code>let arr = [1, 2, 3, 4];
+console.log(arr.find(num => num > 2)); // 3</code></pre>
+
+        <h2>findIndex()</h2>
+        <p><strong>Синтаксис:</strong> <code>array.findIndex(callback)</code></p>
+        <p><strong>Описание:</strong> Возвращает индекс первого элемента массива, удовлетворяющего условию.</p>
+        <pre><code>let arr = [1, 2, 3, 4];
+console.log(arr.findIndex(num => num > 2)); // 2</code></pre>
+        <h2>Сравнение с Python</h2>
+        <table>
+            <tr>
+                <th>Метод JavaScript</th>
+                <th>Аналог в Python</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>splice()</td>
+                <td>del, list slicing</td>
+                <td>Удаление и вставка элементов в список</td>
+            </tr>
+            <tr>
+                <td>slice()</td>
+                <td>list[start:end]</td>
+                <td>Извлечение подсписка</td>
+            </tr>
+            <tr>
+                <td>concat()</td>
+                <td>+</td>
+                <td>Объединение списков</td>
+            </tr>
+            <tr>
+                <td>indexOf()</td>
+                <td>list.index()</td>
+                <td>Поиск индекса элемента</td>
+            </tr>
+            <tr>
+                <td>forEach()</td>
+                <td>for element in list</td>
+                <td>Перебор элементов списка</td>
+            </tr>
+            <tr>
+                <td>map()</td>
+                <td>map()</td>
+                <td>Применение функции к каждому элементу</td>
+            </tr>
+            <tr>
+                <td>filter()</td>
+                <td>filter()</td>
+                <td>Фильтрация элементов списка</td>
+            </tr>
+            <tr>
+                <td>reduce()</td>
+                <td>functools.reduce()</td>
+                <td>Агрегация элементов списка</td>
+            </tr>
+            <tr>
+                <td>some()</td>
+                <td>any()</td>
+                <td>Проверка наличия хотя бы одного элемента, удовлетворяющего условию</td>
+            </tr>
+            <tr>
+                <td>every()</td>
+                <td>all()</td>
+                <td>Проверка соответствия всех элементов условию</td>
+            </tr>
+        <tr>
+            <td>find()</td>
+            <td><pre><code>numbers = [1, 2, 3, 4]
+result = next((x for x in numbers if x > 2), None)
+print(result)  # 3</code></pre></td>
+            <td>Поиск первого элемента, удовлетворяющего условию</td>
+        </tr>
+        <tr>
+            <td>findIndex()</td>
+            <td><pre><code>numbers = [1, 2, 3, 4]
+index = next((i for i, v in enumerate(numbers) if v > 2), -1)
+print(index)  # 2</code></pre></td>
+            <td>Поиск индекса первого элемента, удовлетворяющего условию</td>
+        </tr>
+    </table>
+
+    </div>
+</body>
+</html>

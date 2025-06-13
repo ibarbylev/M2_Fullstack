@@ -1,0 +1,25 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert.rules.yml:/etc/prometheus/alert.rules.yml
+    depends_on:
+      - python-exporter
+    networks:
+      - prometheus-net
+
+  python-exporter:
+    build: ./exporter
+    container_name: python-exporter
+    ports:
+      - "8000:8000"  # 🔁 Проброс порта на хост-машину
+    networks:
+      - prometheus-net
+
+networks:
+  prometheus-net:
+    driver: bridge

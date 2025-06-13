@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Замыкания в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Замыкания в JavaScript</h1>
+
+        <h2>Простое замыкание в JavaScript</h2>
+
+
+        <p>Создадим простое замыкание, где внутренней функции доступна переменная из внешней функции:</p>
+        <pre><code>
+function outer() {
+    let counter = 0;  // Внешняя переменная
+
+    function inner() {
+        counter++;
+        console.log(counter);
+    };
+
+    return inner;
+}
+
+const closure = outer();  // Вызов outer() возвращает inner
+closure();  // 1</code></pre>
+
+        <p>Функция <code>outer</code> создает переменную <code>counter</code>, а затем возвращает функцию <code>inner</code>, которая имеет доступ к переменной <code>counter</code>. Каждый вызов <code>increment</code> увеличивает значение <code>counter</code>.
+        </p>
+        <p>
+            В этом принципиальное отличие замыкания в Python от замыкания в JS: в Python нам обязательно потребовалось бы объявить переменную <code>counter</code> как <code>nonlocal</code>.
+        </p>
+        <p>
+            Здесь же, внешняя переменная сохраняется, потому что внутренний контекст функции "запоминает" ссылку на её лексическое окружение, включая все её переменные.
+        </p>
+        <p>
+            Смыслом замыкания является то, что переменные, определённые в внешних функциях, продолжают существовать и быть доступными даже после завершения их выполнения, если на них есть ссылки в замкнутых функциях.
+        </p>
+        <p>
+            Это позволяет создавать такие конструкции, как счётчики, где переменная продолжает изменяться между вызовами, несмотря на то, что функция-обёртка (внешняя) уже завершила своё выполнение.
+        </p>
+
+
+        <h2>1. Счетчик с использованием замыкания</h2>
+        <p>Создадим счетчик, который инкапсулирует переменную счетчика в замыкании:</p>
+        <pre><code>
+function createCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2
+console.log(counter());  // 3</code></pre>
+
+        <h2>2. Замыкание в цикле</h2>
+        <p>Пример замыкания в цикле для создания различных значений:</p>
+        <pre><code>
+function createFunctions() {
+    const functions = [];
+    for (var i = 0; i < 3; i++) {
+        functions.push(function() {
+            return i;
+        });
+    }
+    return functions;
+}
+
+const functions = createFunctions();
+console.log(functions[0]());  // 3
+console.log(functions[1]());  // 3
+console.log(functions[2]());  // 3</code></pre>
+        <p>
+            Когда используется var в цикле, переменная i имеет функциональную область видимости (function scope). Это означает, что i существует в пределах всей функции createFunctions, а не ограничивается телом цикла. При этом все функции, которые добавляются в массив functions, ссылаются на одну и ту же переменную i. После завершения цикла значение i становится равным 3 (условие выхода из цикла i < 3 больше не выполняется), и все функции в массиве, вызывая return i, возвращают текущее значение этой общей переменной — то есть 3.
+        </p>
+
+
+        <h3>Решение: используем <code>let</code> для создания нового контекста на каждой итерации:</h3>
+        <pre><code>
+function createFunctions() {
+    const functions = [];
+    for (let i = 0; i < 3; i++) {
+        functions.push(function() {
+            return i;
+        });
+    }
+    return functions;
+}
+
+const functions = createFunctions();
+console.log(functions[0]());  // 0
+console.log(functions[1]());  // 1
+console.log(functions[2]());  // 2</code></pre>
+
+        <p>
+            При использовании let, переменная i имеет блочную область видимости (block scope), то есть она ограничена телом цикла for. В JavaScript при использовании let в цикле создаётся новая копия переменной i для каждой итерации. Это поведение связано с тем, как let работает в сочетании с замыканиями (closures).
+        </p>
+        <p>
+            Поэтому каждая функция в массиве functions захватывает свою собственную копию i, соответствующую значению на момент итерации.
+        </p>
+
+    <h2>3. Частичное применение функции (Partial Application)</h2>
+    <p>Частичное применение позволяет заранее зафиксировать некоторые аргументы функции:</p>
+    <pre><code>
+function multiply(a, b) {
+    return a * b;
+}
+
+function partial(func, ...fixedArgs) {
+    return function(...args) {
+        return func(...fixedArgs, ...args);
+    };
+}
+
+const double = partial(multiply, 2);
+console.log(double(5));  // 10
+console.log(double(10));  // 20</code></pre>
+
+        <h2>4. Скрытие данных (Data Hiding)</h2>
+        <p>Скрытие данных с использованием приватных переменных и методов:</p>
+        <pre><code>
+function createPerson(name, age) {
+    let _name = name;
+    let _age = age;
+
+    return {
+        getName: function() {
+            return _name;
+        },
+        getAge: function() {
+            return _age;
+        },
+        setName: function(newName) {
+            _name = newName;
+        },
+        setAge: function(newAge) {
+            _age = newAge;
+        }
+    };
+}
+
+const person = createPerson("Alice", 25);
+console.log(person.getName());  // Alice
+console.log(person.getAge());  // 25
+person.setName("Bob");
+person.setAge(30);
+console.log(person.getName());  // Bob
+console.log(person.getAge());  // 30</code></pre>
+
+        <h2>5. Мемоизация</h2>
+        <p>Мемоизация — это техника, при которой результаты вычислений сохраняются для предотвращения повторных вычислений:</p>
+        <pre><code>
+function memoize(func) {
+    const cache = {};
+    return function(...args) {
+        const key = JSON.stringify(args);
+        if (key in cache) {
+            return cache[key];
+        } else {
+            const result = func(...args);
+            cache[key] = result;
+            return result;
+        }
+    };
+}
+
+const slowFunction = (num) => {
+    console.log("Вычисление...");
+    return num * 2;
+};
+
+const fastFunction = memoize(slowFunction);
+console.log(fastFunction(2));  // Вычисление... 4
+console.log(fastFunction(2));  // 4 (из кеша)
+console.log(fastFunction(3));  // Вычисление... 6</code></pre>
+        <p>
+            <b>Почему JSON.stringify важен?</b>
+        </p>
+        <p>
+            Если бы мы пытались использовать массив args напрямую как ключ (например, cache[args]), это бы не сработало корректно, потому что в JavaScript массивы — это объекты, и их сравнение происходит по ссылке, а не по содержимому. Два массива [2] и [2] считаются разными объектами, даже если их содержимое одинаково. JSON.stringify решает эту проблему, преобразуя массив в строку, где сравнение уже работает по значению.
+        </p>
+        <p>
+            <b>Почему cache сохраняет данные между вызовами?</b>
+        </p>
+        <p>
+            Объект cache — это ссылочный тип данных, и его содержимое (пары ключ-значение) может изменяться. Когда memoize вызывается, создаётся один экземпляр объекта cache, который "живёт" в замыкании возвращаемой функции. Каждый раз, когда вызывается fastFunction (например, fastFunction(2)), мы работаем с одной и той же возвращённой функцией, которая ссылается на один и тот же объект cache.
+        </p>
+    </div>
+    <script src="js/some-script.js"></script>
+</body>
+</html>

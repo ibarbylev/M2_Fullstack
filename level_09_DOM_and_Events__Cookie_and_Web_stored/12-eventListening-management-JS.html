@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление обработчиками событий</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Управление обработчиками событий</h1>
+
+        <p>Помимо таких методов установления (изменения) приоритета обработки как всплывания и погружения, имеются и другие способы воздействия (влияния) на обработку событий:</p>
+        <ul>
+            <li>Удаление обработчика события</li>
+            <li>Остановка события</li>
+            <li>Ограничение частоты (Debouncing и Throttling)</li>
+        </ul>
+
+        <h2>Удаление обработчика события</h2>
+        <p>Для удаления обработчика события применяется метод <code>removeEventListener</code>:</p>
+
+        <pre><code>
+element.removeEventListener('click', myFunction);
+        </code></pre>
+
+        <p>Важно, чтобы в этом методе было указанна именно та функция, которая была указана и в обработчике событий.</p>
+
+        <h2>Остановка события</h2>
+        <p>Чтобы остановить дальнейшее распространение события (например, в случае события клика или отправки формы), можно использовать методы:</p>
+        <ul>
+            <li><code>event.stopPropagation()</code></li>
+            <li><code>event.preventDefault()</code></li>
+            <li><code>event.stopImmediatePropagation()</code></li>
+        </ul>
+
+
+        <h3>1. <code>event.stopPropagation()</code></h3>
+        <p>Этот метод предотвращает дальнейшее распространение события в цепочке обработки событий (в "всплытии" или "погружении").</p>
+        <h4>Пример:</h4>
+        <p>Предположим, у нас есть несколько вложенных элементов, и каждый из них имеет обработчик событий. Если мы нажмем на внутренний элемент, событие будет "всплывать" к родительским элементам, если не остановить его.</p>
+
+        <pre><code>
+&lt;div id="parent"&gt;
+    &lt;button id="child"&gt;Click me!&lt;/button&gt;
+&lt;/div&gt;
+        </code></pre>
+
+        <pre><code class="language-javascript">
+const parent = document.getElementById('parent');
+const child = document.getElementById('child');
+
+parent.addEventListener('click', () => {
+    alert('Parent clicked!');
+});
+
+child.addEventListener('click', (event) => {
+    event.stopPropagation();
+    alert('Child clicked!');
+});
+        </code></pre>
+        <p>В этом примере при клике на кнопку будет выведено только сообщение "Child clicked!", и событие не будет передаваться родительскому элементу.</p>
+
+        <h3>2. <code>event.preventDefault()</code></h3>
+        <p>Этот метод отменяет стандартное поведение браузера для данного события. Например, это полезно при работе с формами, ссылками или клавишами.</p>
+        <h4>Пример: </h4>
+        <p>Предположим, что у нас есть форма, и при её отправке нужно выполнить дополнительные действия, а не отправлять данные на сервер:</p>
+        <pre><code></code></pre>
+
+        <pre><code>
+&lt;form id="myForm"&gt;
+    &lt;input type="text" name="username"&gt;
+    &lt;button type="submit">Submit&lt;/button&gt;
+&lt;/form&gt;
+        </code></pre>
+
+
+        <pre><code class="language-javascript">
+const form = document.getElementById('myForm');
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); // Отменяет отправку формы
+    alert('Form submission prevented');
+});
+        </code></pre>
+        <p>Здесь, при попытке отправить форму, стандартное поведение (отправка данных) будет предотвращено, и вместо этого будет показано сообщение.</p>
+
+
+        <h3>3. <code>event.stopImmediatePropagation()</code></h3>
+        <p>Этот метод предотвращает распространение события не только по цепочке, как <code>stopPropagation()</code>, но и не позволяет другим обработчикам событий на том же элементе быть выполненными. Это особенно полезно, если нужно остановить выполнение всех обработчиков на одном элементе.</p>
+
+        <h4>Пример:</h4>
+
+        <pre><code class="language-javascript">
+&lt;button id="myButton"&gt;Click me!&lt;/button&gt;
+        </code></pre>
+
+        <pre><code class="language-javascript">
+const button = document.getElementById('myButton');
+
+button.addEventListener('click', (event) => {
+    alert('First handler');
+    event.stopImmediatePropagation();
+});
+
+button.addEventListener('click', () => {
+    alert('Second handler');
+});
+        </code></pre>
+        <p>Здесь будет показано только сообщение "First handler", а второй обработчик события не сработает, так как <code>stopImmediatePropagation()</code> предотвратил его выполнение.</p>
+
+        <h2>Ограничение частоты (Debouncing и Throttling)</h2>
+        <p>Иногда нужно ограничить частоту срабатывания события. Для этого применяются техники "debouncing" и "throttling"</p>
+
+        <h3>Разница между Debouncing и Throttling:</h3>
+
+        <p><b>Debouncing</b>: выполняет функцию только один раз, после того как события прекратятся. Это идеальный выбор для таких случаев, как автозаполнение или поиск в реальном времени.</p>
+        <p> <b>Throttling</b>: выполняет функцию через заданные интервалы, независимо от того, сколько раз происходит событие. Это лучше использовать для таких событий, как прокрутка или изменение размера окна, чтобы избежать слишком частых вызовов функции.</p>
+
+        <h3>1. <code>Debouncing</code></h3>
+
+        <p><b>Debouncing</b> — это техника, которая предотвращает выполнение функции до тех пор, пока не прекратится последовательный вызов события в течение определённого времени. Это полезно, например, при обработке событий, которые могут вызываться часто, как scroll, resize, или input в поле поиска.</p>
+
+        <h4>Пример:</h4>
+
+        <p> Использование техники <code>debouncing</code> для поля ввода, когда вы хотите обработать ввод только после того, как пользователь прекратит вводить текст на определённый промежуток времени:</p>
+
+        <pre><code class="language-javascript">
+let debounceTimer;
+const inputField = document.getElementById('searchInput');
+
+inputField.addEventListener('input', function(event) {
+    clearTimeout(debounceTimer); // Отменяем предыдущий таймер
+    debounceTimer = setTimeout(function() {
+        console.log('Текст после паузы:', event.target.value); // Выполнение после задержки
+    }, 500); // Задержка 500 мс
+});
+        </code></pre>
+
+        <p>Здесь каждый раз, когда пользователь вводит текст в поле, срабатывает событие <code>input</code>.</p>
+        <p><code></code>clearTimeout(debounceTimer) отменяет предыдущий таймер, если текст продолжает изменяться.</p>
+        <p><code>setTimeout</code> устанавливает новый таймер, который сработает через 500 миллисекунд после последнего ввода.</p>
+        <p>Если пользователь прекратит ввод, то через 500 миллисекунд будет выполнен код внутри <code>setTimeout</code>, и только после этого будет обработан текст.</p>
+        <p>Если пользователь продолжает вводить, то таймер будет сбрасываться, и функция выполнится только после того, как пользователь остановится.</p>
+
+        <h3>2. <code>Throttling</code></h3>
+        <p><b>Throttling</b> — это техника, которая ограничивает частоту вызова функции, гарантируя, что она будет вызвана не чаще, чем через заданный промежуток времени. Это полезно, когда события происходят очень часто, например, на прокрутку страницы или изменение размера окна.</p>
+
+        <p>Пример использования throttling для события прокрутки страницы:</p>
+
+
+        <pre><code class="language-javascript">
+let lastTime = 0;
+const scrollContainer = document.getElementById('scrollContainer');
+
+scrollContainer.addEventListener('scroll', function() {
+    const now = new Date().getTime();
+
+    if (now - lastTime >= 200) { // Разрешаем выполнение не чаще, чем раз в 200 мс
+        console.log('Прокручено!', now); // Выполнение
+        lastTime = now; // Обновляем время последнего выполнения
+    }
+});
+        </code></pre>
+
+        <p> Каждый раз, когда происходит событие scroll, проверяется, сколько времени прошло с момента последнего вызова функции.</p>
+        <p>Если прошло больше 200 миллисекунд, то выполняется код внутри обработчика события.</p>
+        <p>lastTime = now обновляет время последнего выполнения, чтобы на следующем событии оно могло быть проверено.</p>
+        <p> Если время с последнего события меньше 200 миллисекунд, то обработчик не выполняется, и событие игнорируется до следующего интервала.</p>
+
+        <h3>Когда лучше использовать каждый из методов?</h3>
+
+        <p>
+            <b>Debouncing</b>: когда нужно выполнить действие только после того, как пользователь перестанет быстро вводить или генерировать события). Это идеальный выбор для таких случаев, как автозаполнение или поиск в реальном времени.
+        <p>
+        <p>
+            <b>Throttling</b>: когда нужно ограничить частоту вызова функции, но при этом позволить ей срабатывать по определённому расписанию. Это лучше использовать для таких событий, как прокрутка или изменение размера окна, чтобы избежать слишком частых вызовов функции.
+        </p>
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

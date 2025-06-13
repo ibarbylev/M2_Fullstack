@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Примеры input</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        section { border: 6px solid #ddd; padding: 10px; margin: 10px 0; }
+        label, input, select, textarea, button {
+            display: block; margin: 10px auto; width: 50%; min-height: 24px;
+        }
+        /*body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: 20px auto;
+        }
+        input, select, textarea {
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 10px;
+        }*/
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Примеры input</h1>
+
+        <!-- Текстовое поле -->
+        <section>
+            <label>Текстовое поле (type="text"):</label>
+            <input type="text" placeholder="Введите текст"><br>
+
+        <!-- Поле для пароля -->
+            <label>Пароль (type="password"):</label>
+            <input type="password" placeholder="Введите пароль"><br>
+
+        <!-- Числовое поле -->
+            <label>Число (type="number"):</label>
+            <input type="number" min="1" max="100" value="10"><br>
+
+            <!-- Email -->
+            <label>Email (type="email"):</label>
+            <input type="email" placeholder="example@mail.com"><br>
+
+            <!-- Телефон -->
+            <label>Телефон (type="tel"):</label>
+            <input type="tel" placeholder="+7 (999) 123-45-67"><br>
+
+            <!-- Дата -->
+            <label>Дата (type="date"):</label>
+            <input type="date"><br>
+
+            <!-- Время -->
+            <label>Время (type="time"):</label>
+            <input type="time"><br>
+
+            <!-- Выбор цвета -->
+            <label for="favcolor">Выберите ваш любимый цвет (type="color"):</label>
+            <input type="color" id="favcolor" name="favcolor" value="#ff0000"><br>
+
+            <!-- Поиск -->
+            <label for="search">Поиск (type="search):</label>
+            <input type="search" id="search" name="search" placeholder="Введите поисковый запрос">
+        </section>
+
+        <!-- Ползунок (range) -->
+        <section>
+            <label>Ползунок type="range":</label>
+            <input type="range" min="0" max="100" value="50"><br>
+        </section>
+
+        <!-- Флажок (checkbox) -->
+        <section>
+            <label>Чекбокс type="checkbox"</label>
+            <input type="checkbox" checked> Согласен с условиями
+        </section>
+
+        <!-- Переключатель (radio) -->
+        <section>
+            <label>Выберите цвет (type="radio"):</label>
+            <label><input type="radio" name="color" value="red"> Красный</label>
+            <label><input type="radio" name="color" value="blue"> Синий</label>
+        </section>
+
+        <!-- Выбор файла -->
+        <section>
+            <label>Загрузить файл (type="file"):</label>
+            <input type="file"><br>
+        </section>
+
+        <!-- Выпадающий список -->
+        <section>
+            <label>Выберите город (теги select и option):</label>
+            <select>
+                <option value="moscow">Москва</option>
+                <option value="spb">Санкт-Петербург</option>
+                <option value="kazan">Казань</option>
+            </select><br>
+        </section>
+
+        <!-- Выпадающий список с внутренней группировкой -->
+        <section>
+            <label>Выберите марку автомобиля <br>(теги select, optgroup и option):</label>
+            <select name="car">
+                <optgroup label="German Cars">
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                    <option value="bmw">BMW</option>
+                </optgroup>
+                <optgroup label="Japanese Cars">
+                    <option value="toyota">Toyota</option>
+                    <option value="honda">Honda</option>
+                    <option value="nissan">Nissan</option>
+                </optgroup>
+            </select>
+        </section>
+
+        <!-- Текстовое поле для комментариев -->
+        <section>
+            <label>Комментарий (тег textarea):</label>
+            <textarea rows="3" placeholder="Введите сообщение"></textarea>
+        </section>
+
+        <!-- Кнопка отправки -->
+        <button type="submit">Отправить</button>
+    </div>
+</body>
+</html>

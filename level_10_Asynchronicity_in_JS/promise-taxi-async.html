@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Order Example (async)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        #result { margin-top: 20px; font-size: 18px; }
+        .success { color: green; }
+        .error { color: red; }
+        button { margin: 30px 0 100px; }
+        .final-message { margin-top: 10px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <p><a href="index.html">Назад</a></p>
+    <h1>Taxi Order Example (async)</h1>
+
+    <pre class="language-javascript"><code>
+// Функция для имитации заказа такси (аналог Promise)
+function orderTaxi(success = true) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (success) {
+                resolve("Такси прибыло!");
+            } else {
+                reject("Такси не пришло...");
+            }
+        }, 2000);
+    });
+}
+
+// Функция для обновления сообщения о результате на странице
+function updateResult(message, className) {
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = message;
+    resultElement.className = className;
+}
+
+function updateFinalMessage(message) {
+    const finalMessageElement = document.getElementById('finalMessage');
+    finalMessageElement.textContent = message;
+}
+
+function updateVariableState(message) {
+    const finalMessageElement = document.getElementById('variableState');
+    finalMessageElement.textContent = message;
+}
+
+// Обработчик события для кнопки
+let successFlag = true; // Начальное состояние успешного случая
+let successOfError;
+console.log('Изменение состояния флага successFlag до обработки клика:', successFlag);
+
+document.getElementById('orderButton').addEventListener('click', async () => {
+    updateResult('Пожалуйста, подождите! Ваш заказ обрабатывается...', ''); // Начальное сообщение
+    updateFinalMessage('...');
+    updateVariableState('');
+
+    try {
+        // Используем async/await для обработки промиса
+        const result = await orderTaxi(successFlag); // В ожидании выполнения промиса
+        updateResult(result, 'success');
+        successOfError = successFlag ? 'успешно' : 'с ошибкой';
+        updateFinalMessage(`Операция завершена ${successOfError}`);
+
+        // Переключение флага successFlag после обработки
+        successFlag = !successFlag;
+        console.log('Изменение состояния флага successFlag на:', successFlag);
+        updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке try`);
+    } catch (error) {
+        // Обработка ошибок
+        updateResult(error, 'error');
+        successOfError = successFlag ? 'успешно' : 'с ошибкой';
+        updateFinalMessage(`Операция завершена ${successOfError}`);
+
+        // Переключение флага successFlag после обработки
+        successFlag = !successFlag;
+        console.log('Изменение состояния флага successFlag на:', successFlag);
+        updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке catch`);
+    }
+});
+    </code></pre>
+
+    <h2>Объяснение изменений</h2>
+    <ul>
+        <li><b>Асинхронный обработчик</b>: <br>
+            Мы обернули обработчик клика в асинхронную функцию <b>async</b>, чтобы можно было использовать <b>await</b> для промиса.</li>
+        <li><b><code>await</code> для промиса:</b> <br>
+            Вместо того, чтобы использовать <code>.then()</code> и <code>.catch()</code>, мы теперь используем await для ожидания завершения промиса. Это делает код более читаемым и линейным.</li>
+        <li><b>Обработка ошибок с <code>try/catch</code></b>: <br>
+            Ошибки, которые могут возникнуть при выполнении промиса, обрабатываются внутри блока <code>try/catch</code>, что позволяет избежать цепочек <code>.then()</code> и <code>.catch()</code>.</li>
+    </ul>
+
+
+
+
+    <div id="result"></div>
+    <div id="finalMessage" class="final-message"></div>
+    <div id="variableState" style="color: blue; font-size: 20px;"></div>
+    <button id="orderButton" class="btn-run">Order Taxi</button><br><br><br><br>
+    <p><a href="index.html">Назад</a></p>
+    <script>
+// Функция для имитации заказа такси (аналог Promise)
+function orderTaxi(success = true) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (success) {
+                resolve("Такси прибыло!");
+            } else {
+                reject("Такси не пришло...");
+            }
+        }, 2000);
+    });
+}
+
+// Функция для обновления сообщения о результате на странице
+function updateResult(message, className) {
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = message;
+    resultElement.className = className;
+}
+
+function updateFinalMessage(message) {
+    const finalMessageElement = document.getElementById('finalMessage');
+    finalMessageElement.textContent = message;
+}
+
+function updateVariableState(message) {
+    const finalMessageElement = document.getElementById('variableState');
+    finalMessageElement.textContent = message;
+}
+
+// Обработчик события для кнопки
+let successFlag = true; // Начальное состояние успешного случая
+let successOfError;
+console.log('Изменение состояния флага successFlag до обработки клика:', successFlag);
+
+document.getElementById('orderButton').addEventListener('click', async () => {
+    updateResult('Пожалуйста, подождите! Ваш заказ обрабатывается...', ''); // Начальное сообщение
+    updateFinalMessage('...');
+    updateVariableState('');
+
+    try {
+        // Используем async/await для обработки промиса
+        const result = await orderTaxi(successFlag); // В ожидании выполнения промиса
+        updateResult(result, 'success');
+        successOfError = successFlag ? 'успешно' : 'с ошибкой';
+        updateFinalMessage(`Операция завершена ${successOfError}`);
+
+        // Переключение флага successFlag после обработки
+        successFlag = !successFlag;
+        console.log('Изменение состояния флага successFlag на:', successFlag);
+        updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке try`);
+    } catch (error) {
+        // Обработка ошибок
+        updateResult(error, 'error');
+        successOfError = successFlag ? 'успешно' : 'с ошибкой';
+        updateFinalMessage(`Операция завершена ${successOfError}`);
+
+        // Переключение флага successFlag после обработки
+        successFlag = !successFlag;
+        console.log('Изменение состояния флага successFlag на:', successFlag);
+        updateVariableState(`Значение successFlag, равное ${!successFlag}, изменено на ${successFlag} в блоке catch`);
+    }
+});
+    </script>
+    <script src="js/show-and-run-code.js"></script>
+</body>
+</html>

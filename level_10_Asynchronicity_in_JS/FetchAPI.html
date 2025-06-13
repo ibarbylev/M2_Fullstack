@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключение jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Fetch API</h1>
+
+        <h2>Пример XMLHttpRequest запроса</h2>
+
+        <pre id="code-output-01" class="language-javascript"></pre>
+        <p id="response-1"></p>
+        <button class="btn-show" onclick="displayCode('example-XMLHttpRequest.js', 'code-output-01')">Показать код</button>
+        <button class="btn-run" onclick="runScript('example-XMLHttpRequest.js', 'console-output-01')">Запустить код</button>
+        <pre id="console-output-01" class="language-javascript"></pre>
+        <hr>
+
+        <h2>Пример AJAX запроса</h2>
+
+        <pre id="code-output-02" class="language-javascript"></pre>
+        <p id="response-2"></p>
+        <button class="btn-show" onclick="displayCode('example-AJAX.js', 'code-output-02')">Показать код</button>
+        <button class="btn-run" onclick="runScript('example-AJAX.js', 'console-output-02')">Запустить код</button>
+        <pre id="console-output-02" class="language-javascript"></pre>
+        <hr>
+
+
+        <h2>Пример Fetch API</h2>
+
+        <pre id="code-output-03" class="language-javascript"></pre>
+        <p id="response-3"></p>
+        <button class="btn-show" onclick="displayCode('example-FetchAPI.js', 'code-output-03')">Показать код</button>
+        <button class="btn-run" onclick="runScript('example-FetchAPI.js', 'console-output-03')">Запустить код</button>
+        <pre id="console-output-03" class="language-javascript"></pre>
+        <hr>
+
+
+        <h2>Пример Fetch API c async/await</h2>
+
+        <pre id="code-output-04" class="language-javascript"></pre>
+        <p id="response-4"></p>
+        <button class="btn-show" onclick="displayCode('example-FetchAPI-async-await.js', 'code-output-04')">Показать код</button>
+        <button class="btn-run" onclick="runScript('example-FetchAPI-async-await.js', 'console-output-04')">Запустить код</button>
+        <pre id="console-output-04" class="language-javascript"></pre>
+        <hr>
+
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

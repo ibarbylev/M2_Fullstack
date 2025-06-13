@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовый синтаксис CSS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Псевдоклассы в CSS</h1>
+        <ul>
+            <li><strong>:hover</strong>: <code>a:hover { ... }</code>
+                <p>Применяет стиль при наведении на ссылку.</p>
+                <pre><code>a:hover {
+        color: red;
+    }</code></pre>
+            </li>
+            <li><strong>:focus</strong>: <code>input:focus { ... }</code>
+                <p>Применяет стиль, когда элемент получает фокус.</p>
+                <pre><code>input:focus {
+        border-color: blue;
+    }</code></pre>
+            </li>
+            <li><strong>:first-child</strong>: <code>p:first-child { ... }</code>
+                <p>Применяет стиль к первому элементу &lt;p&gt; в родительском контейнере.</p>
+                <pre><code>p:first-child {
+        font-weight: bold;
+    }</code></pre>
+            </li>
+            <li><strong>:last-child</strong>: <code>p:last-child { ... }</code>
+                <p>Применяет стиль к последнему элементу &lt;p&gt; в родительском контейнере.</p>
+                <pre><code>p:last-child {
+        color: green;
+    }</code></pre>
+            </li>
+            <li><strong>:nth-child(n)</strong>: <code>li:nth-child(n) { ... }</code>
+                <p>Применяет стиль к элементам в зависимости от значения <code>n</code>.</p>
+                <pre><code>li:nth-child(2) { background-color: yellow; } /* второй элемент */
+li:nth-child(odd) { background-color: lightgray; } /* нечетные элементы */
+li:nth-child(even) { background-color: lightblue; } /* четные элементы */
+li:nth-child(3n) { font-weight: bold; } /* каждый 3-й элемент */
+li:nth-child(3n+1) { color: red; } /* каждый 3-й элемент начиная с 1-го */
+li:nth-child(-n+5) { text-decoration: underline; } /* первые 5 элементов */
+</code></pre>
+            </li>
+
+            <li><strong>:not(selector)</strong>: <code>p:not(.special) { ... }</code>
+                <p>Применяет стиль ко всем &lt;p&gt;, кроме тех, у которых есть класс <code>special</code>.</p>
+                <pre><code>p:not(.special) {
+        color: gray;
+    }</code></pre>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

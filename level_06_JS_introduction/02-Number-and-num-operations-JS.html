@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Числа, операции с числами, встроенные математические функции</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Числа, операции с числами, встроенные математические функции</h1>
+
+        <p>В JavaScript все числа представлены одним типом – Number. Это 64-битное число с плавающей запятой в формате IEEE 754.</p>
+
+        <p>Также есть специальный тип BigInt для работы с большими целыми числами.</p>
+
+        <h2>Диапазоны чисел</h2>
+        <table>
+            <tr><th>Тип данных</th><th>Диапазон</th></tr>
+            <tr><td>Number</td><td>-1.7976931348623157 × 10³⁰⁸ до 1.7976931348623157 × 10³⁰⁸</td></tr>
+            <tr><td>BigInt</td><td>Неограниченный</td></tr>
+            <tr><td>Number.MIN_SAFE_INTEGER</td><td>-9 007 199 254 740 991</td></tr>
+            <tr><td>Number.MAX_SAFE_INTEGER</td><td>9 007 199 254 740 991</td></tr>
+        </table>
+
+        <h2>Безопасные числа</h2>
+        <p>JavaScript использует 64-битный формат IEEE 754, но может точно представлять только целые числа в диапазоне <code>Number.MIN_SAFE_INTEGER</code> до <code>Number.MAX_SAFE_INTEGER</code>. Числа за пределами этого диапазона могут вести себя неожиданно.</p>
+        <table>
+            <tr><th>Операция</th><th>Пример</th><th>Результат</th></tr>
+            <tr><td>Максимальное безопасное число</td><td><code>Number.MAX_SAFE_INTEGER</code></td><td><span id="max_safe"></span></td></tr>
+            <tr><td>Минимальное безопасное число</td><td><code>Number.MIN_SAFE_INTEGER</code></td><td><span id="min_safe"></span></td></tr>
+            <tr><td>Число за пределами безопасного диапазона</td><td><code>Number.MAX_SAFE_INTEGER + 1</code></td><td><span id="unsafe"></span></td></tr>
+        </table>
+
+        <h2>Арифметические операции</h2>
+        <table>
+            <tr><th>Операция</th><th>Пример</th><th>Результат</th></tr>
+            <tr><td>Сложение</td><td><code>5 + 3</code></td><td><span id="sum"></span></td></tr>
+            <tr><td>Вычитание</td><td><code>5 - 3</code></td><td><span id="sub"></span></td></tr>
+            <tr><td>Умножение</td><td><code>5 * 3</code></td><td><span id="mul"></span></td></tr>
+            <tr><td>Деление</td><td><code>5 / 2</code></td><td><span id="div"></span></td></tr>
+            <tr><td>Остаток</td><td><code>5 % 2</code></td><td><span id="mod"></span></td></tr>
+            <tr><td>Возведение в степень</td><td><code>2 ** 3</code></td><td><span id="pow"></span></td></tr>
+        </table>
+
+        <h2>Функции Math</h2>
+        <table>
+            <tr><th>Функция</th><th>Пример</th><th>Результат</th></tr>
+            <tr><td>Math.abs(-5)</td><td><code>Math.abs(-5)</code></td><td><span id="abs"></span></td></tr>
+            <tr><td>Math.ceil(4.2)</td><td><code>Math.ceil(4.2)</code></td><td><span id="ceil"></span></td></tr>
+            <tr><td>Math.floor(4.8)</td><td><code>Math.floor(4.8)</code></td><td><span id="floor"></span></td></tr>
+            <tr><td>Math.round(4.5)</td><td><code>Math.round(4.5)</code></td><td><span id="round"></span></td></tr>
+            <tr><td>Math.random()</td><td><code>Math.random()</code></td><td><span id="random"></span></td></tr>
+        </table>
+
+    </div>
+    <script>
+        document.getElementById("sum").innerText = 5 + 3;
+        document.getElementById("sub").innerText = 5 - 3;
+        document.getElementById("mul").innerText = 5 * 3;
+        document.getElementById("div").innerText = 5 / 2;
+        document.getElementById("mod").innerText = 5 % 2;
+        document.getElementById("pow").innerText = 2 ** 3;
+
+        document.getElementById("abs").innerText = Math.abs(-5);
+        document.getElementById("ceil").innerText = Math.ceil(4.2);
+        document.getElementById("floor").innerText = Math.floor(4.8);
+        document.getElementById("round").innerText = Math.round(4.5);
+        document.getElementById("random").innerText = Math.random().toFixed(2);
+
+        document.getElementById("max_safe").innerText = Number.MAX_SAFE_INTEGER;
+        document.getElementById("min_safe").innerText = Number.MIN_SAFE_INTEGER;
+        document.getElementById("unsafe").innerText = Number.MAX_SAFE_INTEGER + 1;
+    </script>
+</body>
+</html>

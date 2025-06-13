@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Axios CRUD, FormData, headers</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключение jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <!-- Загрузка библиотеки Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Axios CRUD, FormData, headers</h1>
+
+        <h2>Пример Axios GET запроса</h2>
+
+        <pre id="code-output-01" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('axios-get.js', 'code-output-01')">Показать код</button>
+        <button class="btn-run" onclick="runScript('axios-get.js', 'console-output-01')">Запустить код</button>
+        <h3>В отличие от fetch(), Axios :</h3>
+        <ul>
+            <li>автоматически преобразует тело ответа в объект JavaScript, если это JSON.</li>
+            <li>заголовки передаются через объект <code>response.headers</code>, а не через <code>res.headers.entries()</code></li>
+        </ul>
+
+        <pre id="console-output-01" class="language-javascript"></pre>
+        <hr>
+
+
+        <h2>Пример Axios POST запроса</h2>
+
+        <pre id="code-output-02" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('axios-post.js', 'code-output-02')">Показать код</button>
+        <button class="btn-run" onclick="runScript('axios-post.js', 'console-output-02')">Запустить код</button>
+        <h3>Что происходит:</h3>
+        <p>В Axios данные автоматически сериализуются в JSON.</p>
+
+
+        <pre id="console-output-02" class="language-javascript"></pre>
+        <hr>
+
+
+
+        <h2>Пример Axios PUT запроса</h2>
+
+        <pre id="code-output-03" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('axios-put.js', 'code-output-03')">Показать код</button>
+        <button class="btn-run" onclick="runScript('axios-put.js', 'console-output-03')">Запустить код</button>
+        <h3>Что происходит:</h3>
+        <p>В Axios данные автоматически сериализуются в JSON.</p>
+
+
+        <pre id="console-output-03" class="language-javascript"></pre>
+        <hr>
+
+
+
+        <h2>Пример Axios DELETE запроса</h2>
+
+        <pre id="code-output-04" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('axios-delete.js', 'code-output-04')">Показать код</button>
+        <button class="btn-run" onclick="runScript('axios-delete.js', 'console-output-04')">Запустить код</button>
+        <h3>Что происходит:</h3>
+        <p>В Axios данные автоматически сериализуются в JSON.</p>
+
+
+        <pre id="console-output-04" class="language-javascript"></pre>
+        <hr>
+
+
+
+        <h2>5. Axios POST с FormData (файлы, формы)</h2>
+
+        <pre id="code-output-05" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('axios-FormData.js', 'code-output-05')">Показать код</button>
+        <button class="btn-run" onclick="runScript('axios-FormData.js', 'console-output-05')">Запустить код</button>
+        <h3>Что происходит:</h3>
+        <ul>
+            <li>В Axios данные автоматически сериализуются в JSON.</li>
+            <li>Axios автоматически устанавливает заголовки для отправки данных типа multipart/form-data, когда используется FormData.</li>
+        </ul>
+        <pre id="console-output-05" class="language-javascript"></pre>
+        <hr>
+
+
+
+        <h2>6. 📦 Получение заголовков из ответа</h2>
+
+        <pre id="code-output-06" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('axios-headers.js', 'code-output-06')">Показать код</button>
+        <button class="btn-run" onclick="runScript('axios-headers.js', 'console-output-06')">Запустить код</button>
+        <h3>Что происходит:</h3>
+
+
+        <ul>
+            <li>Получаем заголовки ответа от сервера.</li>
+            <li>Через res.headers выводим их в консоль.</li>
+            <li>В теле res.data.headers, где отразятся наши заголовки запроса, которые мы отправили с запросом.</li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Что</th>
+                    <th>Где содержится</th>
+                    <th>Что показывает</th>
+                    <th>Простой образ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>res.headers</code></td>
+                    <td>Мета-данные HTTP-ответа</td>
+                    <td>Заголовки, которые <strong>сервер вернул</strong> клиенту</td>
+                    <td>«Что сказал сервер»</td>
+                </tr>
+                <tr>
+                    <td><code>res.data.headers</code></td>
+                    <td>В теле JSON-ответа</td>
+                    <td>Заголовки, которые <strong>браузер отправил</strong> на сервер</td>
+                    <td>«Что мы сказали серверу, и он это записал в блокнотик»</td>
+                </tr>
+            </tbody>
+        </table>
+        <pre id="console-output-06" class="language-javascript"></pre>
+        <hr>
+
+        <h3>Вопрос на засыпку:</h3>
+        <p>Если посмотреть в <b><code>res</code></b> в инспекторе браузера, где находится тело ответа <b><code>data</code></b>?</p>
+        <h3>Ответ:</h3>
+        <p>Там же и находится. По ключу <b><code>data</code></b></p>
+        <h3>Резюме:</h3>
+        <p>Как мы только что наглядно убедились, в Axios тело ответа автоматически разбирается (например, если это JSON) и возвращается в виде объекта JavaScript в свойстве response.data. Это отличие от fetch(), где нужно вручную вызывать метод .json() для обработки тела ответа.</p>
+        <p><b>Важное различие:</b></p>
+        <ul>
+            <li>Axios автоматически парсит данные (например, JSON) и возвращает их как объект в <b><code>response.data</code></b>, следовательно, больше не нужно отдельно вызывать <b><code>.json()</code></b>.</li>
+            <li>В Fetch API необходимо вручную вызвать метод <b><code>.json()</code></b>, чтобы извлечь и разобрать тело ответа в формате JSON.</li>
+        </ul>
+
+
+
+
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: image_app
+    volumes:
+      - ./images:/images
+      - ./logs:/logs
+      - ./static:/app/static
+    expose:
+      - 5000
+    restart: unless-stopped
+    command: >
+      sh -c "mkdir -p /images /logs && chmod -R 775 /images /logs && python app.py"
+
+  nginx:
+    image: nginx:latest
+    container_name: image_nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./images:/images
+      - ./static:/app/static
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - app
+    restart: unless-stopped
+    command:
+      - /bin/sh
+      - -c
+      - chmod -R 775 /images /var/log/nginx && ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log && ln -sf /dev/stdout /var/log/nginx/images.log && nginx -g 'daemon off;'
+
+      # Команда ln -sf /dev/stdout /var/log/nginx/images.log перенаправляет image-логи Nginx в stdout (терминал).
+      # Команда ln -sf /dev/stdout /var/log/nginx/access.log перенаправляет access-логи Nginx в stdout (терминал).
+      # Команда ln -sf /dev/stderr /var/log/nginx/error.log — перенаправляет error-логи в stderr (терминал).
+      # И логи по-прежнему будут записываться в ./logs/nginx/images.log
