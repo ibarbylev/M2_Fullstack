@@ -1,0 +1,12 @@
+services:
+    web:
+        image: nginx:alpine
+        ports:
+            - "8080:80"
+        deploy:
+            replicas: 3
+        networks:
+            - webnet
+
+networks:
+    webnet:

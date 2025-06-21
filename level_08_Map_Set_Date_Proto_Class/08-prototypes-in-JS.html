@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Прототип в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Прототип в JavaScript</h1>
+
+        <p>
+            В JavaScript прототипы – это механизм, который позволяет объектам наследовать свойства и методы друг друга. Это фундаментальная часть работы с объектами в JS.
+        </p>
+
+        <h2>1. Что такое прототип?</h2>
+        <p>
+            Каждый объект в JavaScript связан с другим объектом, который называется прототипом. Если у объекта нет какого-то свойства или метода, JavaScript будет искать его в прототипе.
+        </p>
+<pre><code>
+const obj = {};
+console.log(obj.__proto__); // Выведет Object.prototype</code></pre>
+
+        <h2>2. Прототипное наследование</h2>
+
+        <p>
+            Если свойство или метод отсутствует в объекте, оно будет искаться в его прототипе, затем в прототипе прототипа, пока не дойдёт до null.
+        </p>
+
+        <pre><code>
+const animal = {
+    makeSound() {
+        console.log("Some sound");
+    }
+};
+
+const dog = Object.create(animal); // Наследуем animal
+dog.makeSound(); // "Some sound"
+        </code></pre>
+
+        <p>
+            Метод <code>makeSound</code> не определён в <code>dog</code>, но JavaScript нашёл его в <code>animal</code>.
+        </p>
+
+        <h2>
+            3. Свойство <code>__proto__</code> и <code>Object.getPrototypeOf</code>
+        </h2>
+
+        <p>
+            Каждый объект содержит скрытое свойство <code>[[Prototype]]</code>, которое можно получить через <code>__proto__</code> (устаревший способ) или <code>Object.getPrototypeOf()</code>.
+        </p>
+
+        <pre><code>
+console.log(dog.__proto__ === animal); // true
+console.log(Object.getPrototypeOf(dog) === animal); // true
+        </code></pre>
+
+        <h2>4. Прототипы в функциях-конструкторах</h2>
+
+        <p>
+            Когда создаётся объект через <code>new</code>, его прототипом становится <code>prototype</code> конструктора.
+        </p>
+
+        <pre><code>
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.sayHello = function() {
+    console.log(`Hello, my name is ${this.name}`);
+};
+
+const user = new Person("Alice");
+user.sayHello(); // "Hello, my name is Alice"
+console.log(user.__proto__ === Person.prototype); // true
+        </code></pre>
+
+        <h2>5. Переопределение методов прототипа</h2>
+
+        <p>Можно добавить или изменить методы в <code>prototype</code>.</p>
+
+        <pre><code>
+Person.prototype.sayHello = function() {
+    console.log("New greeting!");
+};
+
+user.sayHello(); // "New greeting!"
+        </code></pre>
+
+        <h2>6. Цепочка прототипов</h2>
+
+        <p>JavaScript ищет свойства в объекте, затем в его прототипе, затем в прототипе прототипа и так далее.</p>
+
+        <pre><code>
+console.log(user.toString());
+// Этот метод не в Person.prototype, но он есть в Object.prototype.
+        </code></pre>
+
+        <h2>7. Проверка принадлежности к прототипу</h2>
+
+        <ul>
+            <li>
+                <code>obj.hasOwnProperty(prop)</code> – проверяет, есть ли свойство непосредственно в объекте (не в прототипе).
+            </li>
+            <li>
+                <code>prop in obj</code> – проверяет, есть ли свойство в объекте или его прототипе.
+            </li>
+        </ul>
+
+        <pre><code>
+console.log(user.hasOwnProperty("name")); // true
+console.log(user.hasOwnProperty("sayHello")); // false
+console.log("sayHello" in user); // true
+        </code></pre>
+
+        <h2>8. Классы и прототипы</h2>
+
+        <p>
+            Современный синтаксис <code>class</code> работает на прототипах.
+        </p>
+
+        <pre><code>
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+    sayHello() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+}
+
+const user2 = new Person("Bob");
+user2.sayHello();
+console.log(user2.__proto__ === Person.prototype); // true
+        </code></pre>
+
+        <p>
+            Хотя <code>class</code> выглядит как классический ООП, он просто удобная обёртка над прототипами.
+        </p>
+
+        <h3>Вывод</h3>
+        <ul>
+            <li>Прототипы позволяют объектам наследовать свойства.</li>
+            <li><code>Object.create()</code> создаёт объект с указанным прототипом.</li>
+            <li>Конструкторы создают объекты с прототипом из <code>prototype</code>.</li>
+            <li><code>class</code> – это синтаксический сахар над прототипами.</li>
+        </ul>
+
+    </div>
+</body>
+</html>

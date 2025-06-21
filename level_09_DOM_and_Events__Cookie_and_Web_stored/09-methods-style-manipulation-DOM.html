@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Методы управления стилями в JS DOM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Подключаем стили Prism.js для подсветки кода -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/components/prism-javascript.min.js"></script> <!-- Для подсветки JS -->
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Методы управления стилями в JS DOM</h1>
+        <p>В JavaScript можно управлять стилями DOM-элементов разными способами. В основном используются три метода:</p>
+
+        <ul>
+            <li>Инлайн-стили (element.style) — изменение конкретных CSS-свойств элемента напрямую.</li>
+            <li> Классы (element.classList) — добавление/удаление/переключение классов, чтобы применять заранее заданные стили.</li>
+            <li>Правила CSS (document.styleSheets) — динамическое изменение глобальных CSS-правил.</li>
+        </ul>
+        <p>Давайте подробно рассмотрим каждый из этих способов.</p>
+
+        <h2>1. Управление инлайн-стилями (element.style)</h2>
+
+        <p>Этот способ меняет стиль только у конкретного элемента.</p>
+
+        <h4>Методы:</h4>
+        <ul>
+            <li><code>element.style.propertyName</code> — установка стиля</li>
+            <li><code>element.style.setProperty(name, value, priority)</code> — установка свойства с важностью (<code>!important</code>)</li>
+            <li><code>element.style.removeProperty(name)</code> — удаление свойства</li>
+            <li><code>element.style.cssText</code> — установка всех стилей одной строкой</li>
+        </ul>
+
+        <h4>Примеры:</h4>
+
+        <div id="box">Здесь находится элемент с id="box"</div>
+
+        <pre id="code-output-01-1" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('09-1-1-example.js', 'code-output-01-1')">Показать код</button>
+        <button class="btn-run" onclick="runScript('09-1-1-example.js', 'console-output-01-1')">Запустить код</button>
+        <pre id="console-output-01-1" class="language-javascript"></pre>
+        <hr>
+        <pre id="code-output-01-2" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('09-1-2-example.js', 'code-output-01-2')">Показать код</button>
+        <button class="btn-run" onclick="runScript('09-1-2-example.js', 'console-output-01-2')">Запустить код</button>
+        <pre id="console-output-01-2" class="language-javascript"></pre>
+        <hr>
+
+
+        <p>⏩ Минусы: не переопределяет классы, а только добавляет инлайн-стили.</p>
+
+        <h2>2. Управление классами (element.classList)</h2>
+
+        <p>Позволяет применять заранее заданные стили из CSS.</p>
+
+        <h4>Методы:</h4>
+
+        <ul>
+            <li><code>element.classList.add(className)</code> — добавить класс</li>
+            <li><code>element.classList.remove(className)</code> — удалить класс</li>
+            <li><code>element.classList.toggle(className, force)</code> — включить/выключить класс</li>
+            <li><code>element.classList.contains(className)</code> — проверить наличие класса</li>
+            <li><code>element.classList.replace(oldClass, newClass)</code> — заменить один класс на другой</li>
+        </ul>
+
+        <h4>Примеры:</h4>
+
+        <div id="box-2">Здесь находится элемент с id="box-2"</div>
+
+        <pre id="code-output-02" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('09-2-example.js', 'code-output-02')">Показать код</button>
+        <button class="btn-run" onclick="runScript('09-2-example.js', 'console-output-02')">Запустить код</button>
+        <pre id="console-output-02" class="language-javascript"></pre>
+        <hr>
+
+        <p>
+            ⏩ Плюсы: управление стилями через CSS-файлы.<br>
+            ⏩ Минусы: требует заранее заданных классов.
+        </p>
+
+        <h2>3. Управление стилями через document.styleSheets</h2>
+
+        <p>
+            Позволяет динамически менять глобальные CSS-правила.
+        </p>
+        <h4>Методы:</h4>
+
+        <ul>
+            <li>
+                <code>document.styleSheets[index]</code> — доступ к таблице стилей
+            </li>
+            <li>
+                <code>stylesheet.insertRule(rule, index)</code> — добавление нового CSS-правила
+            </li>
+            <li>
+                <code>stylesheet.deleteRule(index)</code> — удаление CSS-правила
+            </li>
+        </ul>
+
+        <h4>Примеры:</h4>
+
+        <pre id="code-output-03" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('09-3-example.js', 'code-output-03')">Показать код</button>
+        <button class="btn-run" onclick="runScript('09-3-example.js', 'console-output-03')">Запустить код</button>
+        <pre id="console-output-03" class="language-javascript"></pre>
+        <hr>
+
+        <p>
+            ⏩ Плюсы: можно менять глобальные стили.<br>
+            ⏩ Минусы: сложность работы с индексами правил.
+        </p>
+
+        <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Способ</th>
+            <th>Основные методы</th>
+            <th>Пример</th>
+            <th>Преимущества</th>
+            <th>Недостатки</th>
+        </tr>
+        </thead>
+    <tbody>
+        <tr>
+            <td><strong>Инлайн-стили</strong></td>
+            <td>
+                <ul>
+                  <li>style.property</li>
+                  <li>setProperty()</li>
+                  <li>removeProperty()</li>
+                  <li>cssText</li>
+                </ul>
+            </td>
+            <td><code>elem.style.color = "red";</code></td>
+            <td>Простой способ изменения стилей на уровне элемента</td>
+            <td>Перезаписывает существующие стили, не использует классы</td>
+        </tr>
+        <tr>
+            <td><strong>Классы</strong></td>
+            <td>
+                <ul>
+                    <li>classList.add()</li>
+                    <li>classList.remove()</li>
+                    <li>classList.toggle()</li>
+                    <li>classList.contains()</li>
+                    <li>classList.replace()</li>
+                </ul>
+            </td>
+            <td><code>
+elem.classList.add(
+    "active"
+);
+            </code></td>
+            <td>Удобное использование заранее заданных стилей через CSS</td>
+            <td>Не изменяет конкретные стили, а работает с классами</td>
+        </tr>
+        <tr>
+            <td><strong>Правила CSS</strong></td>
+            <td>
+                <ul>
+                  <li>insertRule()</li>
+                  <li>deleteRule()</li>
+                </ul>
+            </td>
+            <td><code>
+sheet.insertRule(
+    "body { color: red; }", 0
+);
+            </code></td>
+            <td>Динамическое изменение глобальных стилей на всей странице</td>
+            <td>Сложнее в управлении и требует манипуляций с CSS-правилами</td>
+        </tr>
+    </tbody>
+</table>
+        <p>Более полную информацию можно найти здесь:<br>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration" target="_blank">
+                https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+            </a><br>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule" target="_blank">
+                https://developer.mozilla.org/en-US/docs/Web/API/CSSRule
+            </a>
+        </p>
+
+        <h2>Вычисленные стили <code>getComputedStyle</code></h2>
+
+        <p>
+            Вычисленные (или итоговые) стили элемента получаются в итого всех изменений стиля (включая стили из CSS-файлов, классов и инлайн-стилей).
+        </p>
+        <p>
+            Эти стили можно только получить (для чтения!), но их нельзя изменить напрямую.
+        </p>
+
+        <h4>Примеры:</h4>
+
+        <div id="output">Здесь находится элемент с id="output"</div>
+
+        <pre id="code-output-04" class="language-javascript"></pre>
+        <button class="btn-show" onclick="displayCode('09-4-example.js', 'code-output-04')">Показать код</button>
+        <button class="btn-run" onclick="runScript('09-4-example.js', 'console-output-04')">Запустить код</button>
+        <pre id="console-output-04" class="language-javascript"></pre>
+        <hr>
+
+        <h3>Таблица сравнения методов:</h3>
+
+        <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Где задаются стили?</th>
+                    <th>Можно изменять?</th>
+                    <th>Учитывает каскадность?</th>
+                    <th>Приоритет</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>element.style</code></td>
+                    <td>Инлайн-стиль (<code>style="color: red;"</code>)</td>
+                    <td>✅ Да</td>
+                    <td>❌ Нет</td>
+                    <td><strong>Высокий</strong></td>
+                </tr>
+                <tr>
+                    <td><code>element.classList</code></td>
+                    <td>CSS-класс (<code>.button { color: blue; }</code>)</td>
+                    <td>✅ Да</td>
+                    <td>✅ Да</td>
+                    <td><strong>Средний</strong></td>
+                </tr>
+                <tr>
+                    <td><code>document.styleSheets</code></td>
+                    <td>Глобальные CSS-правила</td>
+                    <td>✅ Да</td>
+                    <td>✅ Да</td>
+                    <td><strong>Низкий</strong></td>
+                </tr>
+                <tr>
+                    <td><code>getComputedStyle</code></td>
+                    <td>Итоговый стиль после всех вычислений</td>
+                    <td>❌ Нет (только для чтения)</td>
+                    <td>✅ Да</td>
+                    <td><strong>- (показывает итог)</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>В CSS каскадность означает, что стили могут накладываться друг на друга в зависимости от специфичности и порядка подключения.</p>
+        <p>Инлайн-стили (element.style) не учитывают каскадность, потому что они:</p>
+        <ul>
+            <li>Имеют самый высокий приоритет (кроме <code>!important</code>).</li>
+            <li>Применяются непосредственно к элементу, игнорируя другие селекторы.</li>
+        </ul>
+        <p><a href="index.html">Назад</a></p>
+        <script src="js/show-and-run-code.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рамки</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .box {
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin: 10px 0;
+        }
+        .solid { border: 14px solid black; }
+        .dashed { border: 14px dashed red; }
+        .dotted { border: 14px dotted blue; }
+        .double { border: 16px double green; }
+        .groove { border: 16px groove purple; }
+        .ridge { border: 16px ridge orange; }
+        .inset { border: 16px inset brown; }
+        .outset { border: 16px outset gray; }
+        .none { border: none; }
+        .mixed { border-top: 14px solid black; border-right: 14px dashed red; border-bottom: 14px dotted blue; border-left: 14px double green; }
+        .radius { border-radius: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <a href="https://www.w3schools.com/cssref/css_border.php" target="_blank">
+               Различные виды рамок
+            </a>
+        </h1>
+        <div class="box solid">solid</div>
+        <div class="box dashed">dashed</div>
+        <div class="box dotted">dotted</div>
+        <div class="box double">double</div>
+        <div class="box groove">
+            groove (рамка выглядит как бы вдавленной внутрь, "эффект канавки")</div>
+        <div class="box ridge">
+            ridge (рамка выпуклая, противоположность groove, "эффект выступающего края")</div>
+        <div class="box inset">
+            inset (рамка делает элемент как бы "втопленным" внутрь, "эффект внутренней тени" )</div>
+        <div class="box outset">
+            outset (рамка делает элемент "выступающим" наружу, "эффект приподнятого края")</div>
+        <div class="box none">none</div>
+        <div class="box mixed">mixed</div>
+        <div class="box solid radius">рамка solid с эффектом закруглённых углов</div>
+
+    </div>
+</body>
+</html>

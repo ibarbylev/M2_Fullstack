@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image Storage Service</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+<body>
+    <div class="mt-4">
+        <h1 class="text-center fs-5"><b>Upload Photos</b></h1>
+        <h2 class="text-center fs-5">
+            Upload selfies, memes, or any fun pictures here.
+        </h2>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <a href="./upload.html" class="fs-4 text-primary text-decoration-none">Upload</a>
+        <a href="./images.html" class="fs-4 text-primary text-decoration-none ms-4"><b>Images</b></a>
+    </div>
+
+    <div class="images-container">
+        <div class="images-container-header">
+            <div class="column1">Name</div>
+            <div class="column2">Original Name</div>
+            <div class="column3">Size, kB</div>
+            <div class="column4">Uploaded at</div>
+            <div class="column5">Type</div>
+            <div class="column6">Delete</div>
+        </div>
+
+        <div class="images-container-body">
+            <div class="images-container-body-line">
+                <div class="images-container-body-item column1">
+                    <img src="/static/img/some-img.svg" alt="some-img" width="16" height="16">
+                    <span>Cat.png</span>
+                </div>
+                <div class="images-container-body-item column2">
+                    <span>https://sharefile.xyz/file.jpg</span>
+                </div>
+                <div class="images-container-body-item">
+                     <div class="column3">123</div>
+                </div>
+                <div class="images-container-body-item column4">
+                    2025-10-10 18:00:00
+                </div>
+                <div class="images-container-body-item column5">
+                    asdf
+                </div>
+
+                <div class="images-container-body-item column6">
+                    <img src="/static/img/delete.svg" alt="some-img" width="30" height="30">
+                </div>
+            </div>
+
+            <div class="images-container-body-line">
+                <div class="images-container-body-item column1">
+                    <img src="/static/img/some-img.svg" alt="some-img" width="16" height="16">
+                    <span>Cat.png</span>
+                </div>
+                <div class="images-container-body-item column2">
+                    <span>https://sharefile.xyz/file.jpg</span>
+                </div>
+                <div class="images-container-body-item">
+                     <div class="column3">123</div>
+                </div>
+                <div class="images-container-body-item column4">
+                    2025-10-10 18:00:00
+                </div>
+                <div class="images-container-body-item column5">
+                    asdf
+                </div>
+
+                <div class="images-container-body-item column6">
+                    <img src="/static/img/delete.svg" alt="some-img" width="30" height="30">
+                </div>
+            </div>
+
+            <div class="images-container-body-line">
+                <div class="images-container-body-item column1">
+                    <img src="/static/img/some-img.svg" alt="some-img" width="16" height="16">
+                    <span>Cat.png</span>
+                </div>
+                <div class="images-container-body-item column2">
+                    <span>https://sharefile.xyz/file.jpg</span>
+                </div>
+                <div class="images-container-body-item">
+                     <div class="column3">123</div>
+                </div>
+                <div class="images-container-body-item column4">
+                    2025-10-10 18:00:00
+                </div>
+                <div class="images-container-body-item column5">
+                    asdf
+                </div>
+
+                <div class="images-container-body-item column6">
+                    <img src="/static/img/delete.svg" alt="some-img" width="30" height="30">
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!--  Pagination Buttons -->
+    <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-outline-primary me-2 w-25">Previous Page</button>
+        <button class="btn btn-outline-primary w-25">Next Page</button>
+    </div>
+
+
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/api-images.js"></script>
+</body>
+</html>

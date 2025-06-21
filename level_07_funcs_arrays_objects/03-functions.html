@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Типы функций в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 17% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+        <h1>Типы функций в JavaScript</h1>
+
+    <h3>1. Обычная функция (Function Declaration)</h3>
+    <p>Такие функции "поднимаются" (hoisting), то есть их можно вызывать до объявления.</p>
+    <p>В этом принципиальное отличие JS от Python: в Python функции должна быть задекларирована или импортирована (объявлена) выше по коду, чем она будет потом вызвана.</p>
+    <p>В JS hoisting "поднимает" функции, написанные в конце кода, в самое его начало. Или о крайней мере ДО (выше по коду) мета вызова функции.</p>
+    <pre><code>
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+console.log(greet("Alice")); // "Hello, Alice!"
+    </code></pre>
+
+    <h3>2. Функциональное выражение (Function Expression)</h3>
+    <p>Такие функции нельзя вызывать до объявления, потому что они присваиваются переменной.</p>
+    <pre><code>
+const greet = function(name) {
+    return `Hello, ${name}!`;
+};
+console.log(greet("Alice")); // "Hello, Alice!"
+    </code></pre>
+
+    <h3>3. Стрелочная функция (Arrow Function)</h3>
+    <p>Стрелочные функции короче по синтаксису, но у них нет собственного <code>this</code>.</p>
+    <pre><code>
+const greet = (name) => `Hello, ${name}!`;
+console.log(greet("Alice")); // "Hello, Alice!"
+    </code></pre>
+
+    <h4>Как работает <code>this</code> в обычных и стрелочных функциях?</h4>
+    <p>В обычной функции <code>this</code> зависит от контекста вызова:</p>
+    <pre><code>
+const obj = {
+    name: "Alice",
+    regularFunc: function() {
+        console.log(this.name);
+    },
+    arrowFunc: () => {
+        console.log(this.name); // Возьмёт `this` из глобального контекста (undefined в строгом режиме)
+    }
+};
+
+obj.regularFunc(); // "Alice"
+obj.arrowFunc();   // undefined
+    </code></pre>
+    <p>В стрелочной функции <code>this</code> не привязан к объекту, он берётся из окружения.</p>
+
+    <h4>Почему нельзя использовать <code>arguments</code> в стрелочных функциях?</h4>
+    <p>В обычных функциях доступен специальный объект <code>arguments</code>:</p>
+    <pre><code>
+function example() {
+    console.log(arguments); // Выведет все переданные аргументы
+}
+example(1, 2, 3);
+    </code></pre>
+    <p>В стрелочных функциях его нет, поэтому нужно использовать <code>...rest</code>:</p>
+    <pre><code>
+const example = (...args) => {
+    console.log(args); // Выведет массив аргументов
+};
+example(1, 2, 3);
+    </code></pre>
+
+    <h3>4. Функции-конструкторы</h3>
+    <p>Используются для создания объектов. Вызываются через <code>new</code>.</p>
+    <pre><code>
+function Person(name) {
+    this.name = name;
+}
+
+const alice = new Person("Alice");
+console.log(alice.name); // "Alice"
+    </code></pre>
+
+    <h3>5. Функции-генераторы</h3>
+    <p>Позволяют приостанавливать выполнение с помощью <code>yield</code>.</p>
+    <pre><code>
+function* generator() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+const gen = generator();
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+console.log(gen.next().value); // 3
+    </code></pre>
+
+    <h3>6. Асинхронные функции (async/await)</h3>
+    <p>Возвращают <code>Promise</code>, что позволяет удобно работать с асинхронным кодом.</p>
+    <pre><code>
+async function fetchData() {
+    return "Data loaded";
+}
+fetchData().then(console.log); // "Data loaded"
+    </code></pre>
+
+    <h2>Сравнение функций в JavaScript и Python</h2>
+
+    <table>
+        <tr>
+            <th>Характеристика</th>
+            <th>Function Declaration</th>
+            <th>Function Expression</th>
+            <th>Arrow Function</th>
+            <th>Python def</th>
+            <th>Python lambda</th>
+        </tr>
+        <tr>
+            <td>Поднимается (hoisting)</td>
+            <td>✅ Да</td>
+            <td>❌ Нет</td>
+            <td>❌ Нет</td>
+            <td>✅ Да</td>
+            <td>❌ Нет</td>
+        </tr>
+        <tr>
+            <td>Имеет <code>this</code></td>
+            <td>✅ Да</td>
+            <td>✅ Да</td>
+            <td>❌ Нет</td>
+            <td>❌ Нет (self передаётся явно)</td>
+            <td>❌ Нет</td>
+        </tr>
+        <tr>
+            <td>Можно использовать <code>arguments</code></td>
+            <td>✅ Да</td>
+            <td>✅ Да</td>
+            <td>❌ Нет (используется <code>...rest</code>)</td>
+            <td>✅ Да (через <code>*args</code>)</td>
+            <td>❌ Нет</td>
+        </tr>
+        <tr>
+            <td>Генераторы</td>
+            <td>❌ Нет</td>
+            <td>❌ Нет</td>
+            <td>❌ Нет</td>
+            <td>✅ Да</td>
+            <td>❌ Нет</td>
+        </tr>
+    </table>
+
+    <p>Теперь у вас есть полный обзор функций в JavaScript и их сравнение с Python!</p>
+
+    </div>
+</body>
+</html>

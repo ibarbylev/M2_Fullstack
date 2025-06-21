@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Типы и имена DOM-узлов</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Типы и имена DOM-узлов</h1>
+
+        <p>
+            Основу структуры DOM-дерева составляют узлы, представляющие собой различные части HTML-документа. Узлы бывают разных типов, среди которых наиболее важными являются узлы-элементы, формирующие основную структуру страницы.
+Определение типа узла
+        </p>
+        <p>
+            Каждый узел в DOM обладает свойством nodeType, которое возвращает числовое значение, соответствующее типу узла. Например:
+        </p>
+
+
+        <pre><code>
+console.log(document.nodeType); // 9 (DOCUMENT_NODE)
+console.log(document.documentElement.nodeType); // 1 (ELEMENT_NODE)
+console.log(document.createTextNode("Hello").nodeType); // 3 (TEXT_NODE)
+        </code></pre>
+
+        <h2>Основные типы узлов в DOM</h2>
+        <p>
+            DOM определяет несколько типов узлов, но на практике чаще всего используются следующие:
+        </p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Значение nodeType</th>
+                    <th>Константа</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Node.ELEMENT_NODE</td>
+                    <td>Элемент (HTML или XML-тег). Основной строительный блок DOM.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Node.ATTRIBUTE_NODE</td>
+                    <td>Атрибут элемента. В современных реализациях редко используется, так как атрибуты обычно работают как свойства объекта Element.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Node.TEXT_NODE</td>
+                    <td>Текстовый узел, содержащий текст внутри элемента.</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Node.COMMENT_NODE</td>
+                    <td>Комментарий в коде (<code>&lt;!-- Комментарий --&gt;</code>).</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Node.DOCUMENT_NODE</td>
+                    <td>Сам документ (<code>document</code>). Это корневой объект DOM-дерева.</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Node.DOCUMENT_TYPE_NODE</td>
+                    <td>Узел, представляющий объявление типа документа (<code>&lt;!DOCTYPE html&gt;</code>).</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Node.DOCUMENT_FRAGMENT_NODE</td>
+                    <td>Фрагмент документа, который можно использовать для временного хранения группы узлов перед вставкой в DOM.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Разбор основных типов узлов</h2>
+
+        <h3>1. Узлы-элементы (ELEMENT_NODE)</h3>
+
+        <p>Эти узлы соответствуют HTML-тегам:</p>
+
+        <pre><code>
+&lt;div id="example"&gt;Пример&lt;/div&gt;
+        </code></pre>
+
+        <pre><code>
+let elem = document.getElementById("example");
+console.log(elem.nodeType); // 1
+console.log(elem.nodeName); // "DIV"
+        </code></pre>
+
+        <h3>2. Атрибуты (ATTRIBUTE_NODE)</h3>
+
+        <p>
+            В современном JavaScript атрибуты хранятся внутри объектов Element, но раньше они могли быть отдельными узлами:
+        </p>
+
+        <pre><code>
+&lt;input id="input1" type="text"&gt;
+        </code></pre>
+
+        <pre><code>
+let input = document.getElementById("input1");
+console.log(input.getAttributeNode("type").nodeType); // 2
+        </code></pre>
+
+        <h3>3. Текстовые узлы (TEXT_NODE)</h3>
+
+        <p>Любой текст внутри элемента является отдельным узлом:</p>
+
+        <pre><code>
+&lt;p&gt;Привет, мир!&lt;/p&gt;
+        </code></pre>
+
+        <pre><code>
+let textNode = document.querySelector("p").firstChild;
+console.log(textNode.nodeType); // 3
+console.log(textNode.nodeValue); // "Привет, мир!"
+        </code></pre>
+
+        <h3>4. Комментарии (COMMENT_NODE)</h3>
+
+        <p>Комментарии в HTML также представляют собой узлы:</p>
+
+        <pre><code>
+&lt;!-- Это комментарий --&gt;
+        </code></pre>
+
+        <pre><code>
+let comment = document.createComment("Пример комментария");
+console.log(comment.nodeType); // 8
+console.log(comment.nodeValue); // "Пример комментария"
+        </code></pre>
+
+        <h3>5. Корневой узел документа (DOCUMENT_NODE)</h3>
+
+        <p>Сам document является узлом типа 9:</p>
+
+        <pre><code>
+console.log(document.nodeType); // 9
+console.log(document.nodeName); // "#document"
+        </code></pre>
+
+        <h3>6. Тип документа (DOCUMENT_TYPE_NODE)</h3>
+
+
+        Представляет
+        <pre><code>
+&lt;!DOCTYPE html&gt;
+        </code></pre>
+
+        <pre><code>
+console.log(document.doctype.nodeType); // 10
+console.log(document.doctype.nodeName); // "html"
+        </code></pre>
+
+        <h3>7. Фрагменты документа (DOCUMENT_FRAGMENT_NODE)</h3>
+
+        <p>Это временные контейнеры для хранения групп узлов</p>
+
+        <p>
+            Представляет собой специальный тип узла ("невидимый" для браузера!), который можно использовать как контейнер для временного хранения группы узлов перед их добавлением в DOM.
+        </p>
+
+        <h4>Основные характеристики DocumentFragment:</h4>
+        <h5>1. Не является частью основного DOM-дерева</h5>
+        <p>
+            Узлы внутри DocumentFragment существуют в памяти и не отображаются на странице, пока не будут вставлены в document.
+        </p>
+
+        <h5>2. Не влияет на рендеринг до вставки</h5>
+        <p>
+            Из-за этого его использование позволяет избежать лишних перерисовок страницы и улучшает производительность.
+        </p>
+
+        <h5>3. Переносит дочерние элементы при вставке</h5>
+        <p>
+            Когда <code>DocumentFragment</code> вставляется в DOM, все его дочерние узлы перемещаются в целевой узел, а сам DocumentFragment становится пустым.
+        </p>
+
+        <h5>4. Не имеет родительского узла</h5>
+        <p>
+            Так как он не является частью DOM-дерева, у <code>DocumentFragment</code> нет родителя (parentNode всегда null).
+        </p>
+
+        <h4>Пример использования DocumentFragment</h4>
+
+        <p>
+            Допустим, мы хотим добавить в список 1000 новых элементов. Если мы будем добавлять их по одному через appendChild, браузер будет обновлять страницу после каждого добавления, что замедлит работу. Вместо этого мы можем использовать <code>DocumentFragment</code>.
+        </p>
+
+        <h5>До: Медленный способ (много перерисовок)</h5>
+
+        <pre><code>
+const list = document.getElementById("myList");
+
+for (let i = 0; i < 1000; i++) {
+  let li = document.createElement("li");
+  li.textContent = `Элемент ${i}`;
+  list.appendChild(li); // Перерисовка на каждом шаге
+}
+        </code></pre>
+
+        <p>Этот код вызывает 1000 операций обновления DOM.</p>
+
+        <h5>После: Оптимизированный способ с <code>DocumentFragment</code></h5>
+
+        <pre><code>
+const list = document.getElementById("myList");
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 1000; i++) {
+  let li = document.createElement("li");
+  li.textContent = `Элемент ${i}`;
+  fragment.appendChild(li); // Добавляем в фрагмент (без обновления DOM)
+}
+
+list.appendChild(fragment); // Вставляем всё сразу, 1 перерисовка
+        </code></pre>
+
+        <p>
+            Теперь все 1000 элементов создаются в памяти и вставляются в list за одну операцию, что значительно ускоряет процесс.
+        </p>
+
+        <p>
+            Таким образом, использование <code>DocumentFragment</code> крайне удобно там, где необходимо:
+        </p>
+
+        <ul>
+            <li>
+                Добавление или изменение большого количества элементов (списки, таблицы, динамическая генерация контента).
+            </li>
+            <li>
+                Минимизация количества ререндеров в браузере (оптимизация производительности).
+            </li>
+            <li>
+                Группировка узлов перед вставкой (например, при работе с шаблонами).
+            </li>
+        </ul>
+
+        <h3>Заключение</h3>
+
+        <p>
+            DOM-узлы бывают разных типов, но чаще всего используются элементы, текстовые узлы и комментарии. Для работы с ними удобно применять <code>nodeType</code>, <code>nodeName</code> и <code>nodeValue</code>. Понимание этих понятий помогает эффективно работать с DOM-деревом и динамически изменять структуру страницы.
+        </p>
+
+    </div>
+</body>
+</html>

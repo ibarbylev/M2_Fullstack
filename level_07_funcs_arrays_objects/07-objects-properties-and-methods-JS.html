@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа со свойствами и методами объектов в JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        h1, h2 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+        table { border-collapse: collapse; text-align: center; }
+        table, tr { width: 100% }
+        th, td { width: 33% }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">Назад</a>
+
+        <h1>Работа со свойствами и методами объектов в JavaScript (CRUD)</h1>
+
+        <h2>1. Доступ к существующим свойствам и методам</h2>
+        <p>Можно использовать:</p>
+        <ul>
+            <li><strong>Точечную нотацию</strong>: <code>object.property</code></li>
+            <li><strong>Квадратные скобки</strong>: <code>object["property"]</code></li>
+        </ul>
+        <pre><code>const user = { name: "Alice", age: 30 };
+console.log(user.name); // Alice
+console.log(user["age"]); // 30</code></pre>
+
+        <h2>2. Добавление новых свойств и объектов</h2>
+
+        <p>Свойства можно добавлять динамически:</p>
+        <pre><code>user.email = "alice@example.com";
+user["isAdmin"] = true;
+console.log(user);</code></pre>
+
+        <h2>3. Изменение существующих свойств</h2>
+        <pre><code>user.age = 31;
+console.log(user.age); // 31</code></pre>
+
+        <h2>4. Удаление свойств</h2>
+        <pre><code>delete user.email;
+console.log(user.email); // undefined</code></pre>
+
+        <h2>Прототипное наследование</h2>
+        <pre><code>const animal = { eats: true };
+const rabbit = Object.create(animal);
+rabbit.jumps = true;
+console.log(rabbit.eats); // true</code></pre>
+
+        <h2>Изменение прототипа</h2>
+        <pre><code>animal.walk = function () { return "Walking..."; };
+console.log(rabbit.walk()); // "Walking..."</code></pre>
+
+        <h3>Вывод</h3>
+        <ul>
+            <li>Свойства можно добавлять, изменять, читать и удалять динамически.</li>
+            <li>Объекты могут наследовать свойства от других объектов.</li>
+            <li>Изменения в прототипе влияют на всех наследников.</li>
+        </ul>
+
+        <h2>Таким образом, изменение свойств и методов объектов можно подразделить на два типа:</h2>
+
+        <h3>1. Изменение локального объекта</h3>
+        <p>Это когда свойство или метод добавляется или изменяется непосредственно в самом объекте. Эти изменения касаются только этого конкретного объекта, и они <strong>не затрагивают прототип</strong>.</p>
+
+        <div class="example">
+            <h3>Пример:</h3>
+            <pre><code>
+const animal = { eats: true };
+const rabbit = Object.create(animal);
+
+rabbit.eats = false; // Это локальное изменение для rabbit, не влияет на animal
+
+console.log(rabbit.eats); // false (локальное свойство)
+console.log(animal.eats); // true (прототип не изменён)
+        </code></pre>
+    </div>
+
+    <h3>2. Изменение прототипа</h3>
+    <p>Когда мы меняем свойство или метод в прототипе объекта, эти изменения отражаются на всех объектах, которые наследуют от этого прототипа. Прототип — это как "шаблон" для всех экземпляров.</p>
+    <p>Изменения, сделанные в прототипе, влияют на все объекты, наследующие от этого прототипа, даже если в них нет такого свойства.</p>
+
+    <div class="example">
+        <h3>Пример:</h3>
+        <pre><code>
+const animal = { eats: true };
+const rabbit = Object.create(animal);
+
+animal.eats = false; // Это изменение в прототипе
+
+console.log(rabbit.eats); // false (поскольку rabbit наследует от animal)
+        </code></pre>
+        </div>
+
+        <h3>Как различить?</h3>
+        <p><strong>Локальные изменения</strong> — касаются только конкретного объекта, который изменяется (например, <code>rabbit.eats = false;</code>).</p>
+        <p><strong>Изменения прототипа</strong> — касаются всех объектов, которые наследуют этот прототип (например, изменение <code>animal.eats = false;</code> затронет все объекты, наследующие от <code>animal</code>).</p>
+
+        <p>Это два различных способа управления свойствами объектов в JavaScript, и важно понимать, как они работают, чтобы корректно использовать прототипы и локальные данные.</p>    </div>
+</body>
+</html>
